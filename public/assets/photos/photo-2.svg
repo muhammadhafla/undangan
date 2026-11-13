@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="natureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E382B"/>
+      <stop offset="60%" stop-color="#2D533F"/>
+      <stop offset="100%" stop-color="#14261D"/>
+    </linearGradient>
+    <linearGradient id="streamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5B8E7D"/>
+      <stop offset="50%" stop-color="#8CB3A6"/>
+      <stop offset="100%" stop-color="#4B7768"/>
+    </linearGradient>
+  </defs>
+  <!-- Forest Background -->
+  <rect width="600" height="600" fill="url(#natureGrad)"/>
+  
+  <!-- Subtle Sunlight Rays -->
+  <polygon points="100,0 220,0 360,600 180,600" fill="#FFFFE0" opacity="0.08"/>
+  <polygon points="320,0 440,0 580,600 420,600" fill="#FFFFE0" opacity="0.06"/>
+
+  <!-- River Stream & Stones -->
+  <path d="M120,600 C180,480 150,380 240,300 C320,230 280,180 340,120 L400,120 C360,180 400,240 330,310 C250,390 280,490 220,600 Z" fill="url(#streamGrad)"/>
+  
+  <!-- Water Flow Waves -->
+  <path d="M160,560 Q210,540 200,500" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.5"/>
+  <path d="M190,460 Q240,430 230,390" stroke="#FFFFFF" stroke-width="2.5" fill="none" opacity="0.4"/>
+  <path d="M260,340 Q300,310 290,270" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  
+  <!-- Stones on bank -->
+  <ellipse cx="150" cy="530" rx="35" ry="20" fill="#404B46"/>
+  <ellipse cx="230" cy="420" rx="28" ry="16" fill="#5A6660"/>
+  <ellipse cx="320" cy="310" rx="30" ry="18" fill="#38423E"/>
+  <ellipse cx="190" cy="370" rx="20" ry="12" fill="#4B5651"/>
+
+  <!-- Pine Tree Silhouettes -->
+  <polygon points="80,180 40,260 120,260" fill="#15261D"/>
+  <polygon points="80,240 30,330 130,330" fill="#15261D"/>
+  <polygon points="520,150 480,230 560,230" fill="#15261D"/>
+  <polygon points="520,210 470,300 570,300" fill="#15261D"/>
+
+  <!-- Typography Overlay -->
+  <text x="300" y="160" font-family="'Playfair Display', Georgia, serif" font-size="28" font-style="italic" fill="#E8F4EC" text-anchor="middle" font-weight="700">Gemercik Air di Alam Terbuka</text>
+  <text x="300" y="195" font-family="'Courier New', monospace" font-size="14" fill="#A3C7B3" text-anchor="middle" letter-spacing="3">TENANG &amp; ADEM DI JIWA</text>
+  <text x="300" y="565" font-family="'Courier New', monospace" font-size="12" fill="#88A897" text-anchor="middle">ESCAPE TO SERENITY • MEMORIES</text>
+</svg>

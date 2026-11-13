@@ -1,0 +1,1726 @@
+/* ==========================================================================
+   SISTEM DESAIN & TEMA VISUAL: TOKO RITEL X J&T EXPRESS
+   Spesifikasi Performa: Ultra-Ringan, Bebas Bloatware, Pure CSS
+   ========================================================================== */
+
+:root {
+    --color-kraft-base: #D9C3A5;
+    --color-kraft-dark: #BFA482;
+    --color-kraft-accent: #9A7B58;
+    --color-kraft-shadow: rgba(46, 30, 18, 0.35);
+    
+    --color-jnt-red: #E30613;
+    --color-jnt-red-hover: #BA040F;
+    --color-jnt-red-light: #FDE8EA;
+    
+    --color-thermal-paper: #FDFBF7;
+    --color-thermal-border: #E8E0D5;
+    --color-thermal-faint: #F4EFE6;
+    
+    --color-coffee-dark: #2E1E12;
+    --color-coffee-muted: #6E5D4F;
+    --color-coffee-light: #A39181;
+    
+    --color-polaroid-frame: #FFFFFF;
+    --color-success: #16A34A;
+    --color-success-bg: #DCFCE7;
+    
+    --font-mono: 'Courier New', Courier, 'Cascadia Code', ui-monospace, monospace;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+/* Base Reset & Typography */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-coffee-dark);
+    background-color: #EFE8DC;
+    background-image: 
+        radial-gradient(#D3C8B7 1px, transparent 1px),
+        linear-gradient(135deg, #F3EDE3 0%, #E8DFC $\approx$ 100%);
+    background-size: 24px 24px, 100% 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* App Viewport Container */
+.app-viewport {
+    width: 100%;
+    max-width: 440px;
+    min-height: 100vh;
+    position: relative;
+    padding: 16px 12px 64px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Utility Monospace */
+.font-mono {
+    font-family: var(--font-mono);
+}
+
+.font-serif {
+    font-family: var(--font-serif);
+}
+
+/* ==========================================================================
+   FLOATING AUDIO AMBIENCE CONTROLLER
+   ========================================================================== */
+.audio-controller {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: rgba(253, 251, 247, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--color-thermal-border);
+    border-radius: 9999px;
+    box-shadow: 0 4px 14px rgba(46, 30, 18, 0.12);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+}
+
+.audio-controller.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.audio-controller:active {
+    transform: scale(0.96);
+}
+
+.equalizer-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 14px;
+}
+
+.eq-bar {
+    width: 2.5px;
+    background-color: var(--color-jnt-red);
+    border-radius: 2px;
+    height: 4px;
+    transition: height 0.2s ease;
+}
+
+.audio-controller.playing .eq-bar:nth-child(1) {
+    animation: eq-bounce 1s infinite alternate ease-in-out;
+}
+.audio-controller.playing .eq-bar:nth-child(2) {
+    animation: eq-bounce 0.8s 0.2s infinite alternate ease-in-out;
+}
+.audio-controller.playing .eq-bar:nth-child(3) {
+    animation: eq-bounce 1.1s 0.4s infinite alternate ease-in-out;
+}
+
+@keyframes eq-bounce {
+    0% { height: 3px; }
+    50% { height: 13px; }
+    100% { height: 6px; }
+}
+
+.audio-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-coffee-dark);
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   1. WELCOME SCREEN: AMPLOP TALI AIRMAIL RETRO & RESI J&T SEDERHANA
+   Desain Persis Amplop Manila Airmail dengan Kancing Tali Merah
+   ========================================================================== */
+.envelope-stage {
+    width: 100%;
+    margin-top: 14px;
+    perspective: 1200px;
+    position: relative;
+    transition: margin-top 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.envelope-stage.unboxed {
+    margin-top: 6px;
+}
+
+/* Amplop Airmail Retro dengan Garis Belang Diagonal Merah & Biru Tua */
+.envelope-wrapper {
+    position: relative;
+    width: 100%;
+    background: #E8D3B7;
+    border-radius: 8px;
+    box-shadow: 0 14px 34px -8px rgba(46, 30, 18, 0.38);
+    overflow: hidden;
+    padding: 10px;
+    /* Pinggiran Belang-Belang Airmail Klasik (Merah & Biru Navy) */
+    background-image: repeating-linear-gradient(
+        135deg,
+        #D32F2F 0px,
+        #D32F2F 12px,
+        #FAF7F2 12px,
+        #FAF7F2 17px,
+        #1E3A8A 17px,
+        #1E3A8A 29px,
+        #FAF7F2 29px,
+        #FAF7F2 34px
+    );
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Badan Kertas Kraft Cokelat di Dalam Border Airmail */
+.envelope-inner-body {
+    background: #E2CDAD;
+    border-radius: 4px;
+    padding: 16px 10px 16px 10px;
+    position: relative;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Tutup Amplop Atas (Top Flap dengan Sudut Melengkung) */
+.envelope-flap {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 72px;
+    background: #D8C09D;
+    border-bottom: 2px solid #BAA07D;
+    border-radius: 0 0 18px 18px;
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.3s ease;
+    z-index: 20;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+    display: flex;
+    justify-content: center;
+}
+
+.envelope-wrapper.opened .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+/* ==========================================================================
+   MEKANISME KANCING & TALI MERAH (STRING & BUTTON CLOSURE)
+   ========================================================================== */
+.string-closure-group {
+    position: absolute;
+    top: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.envelope-wrapper.opened .string-closure-group {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.7);
+}
+
+/* Kancing Bulat Merah */
+.string-button {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FF3B30 0%, #D32F2F 60%, #991B1B 100%);
+    border: 1px solid #7F1D1D;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 32;
+}
+
+/* Mata Itik / Lubang Perak di Tengah Kancing */
+.string-eyelet {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #E5E7EB;
+    border: 1.5px solid #9CA3AF;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Tali Merah Lilitan Angka 8 (Twine String) */
+.string-thread {
+    width: 3.5px;
+    height: 38px;
+    background: #991B1B;
+    border-radius: 2px;
+    margin: -4px 0;
+    position: relative;
+    z-index: 31;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Sisa Ujung Tali yang Menjuntai ke Samping */
+.string-tail {
+    position: absolute;
+    bottom: -16px;
+    left: -22px;
+    width: 34px;
+    height: 24px;
+    border-bottom: 3px solid #991B1B;
+    border-left: 3px solid #991B1B;
+    border-radius: 0 0 0 26px;
+    transform: rotate(20deg);
+    pointer-events: none;
+}
+
+/* Label Ajakan Aksi "Buka Tali Amplop" */
+.string-action-badge {
+    margin-top: 18px;
+    background: #D32F2F;
+    color: #FFFFFF;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 4px 14px rgba(211, 47, 47, 0.45);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    animation: seal-pulse 2.2s infinite;
+}
+
+@keyframes seal-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.45), 0 4px 14px rgba(211, 47, 47, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(211, 47, 47, 0), 0 6px 18px rgba(211, 47, 47, 0.45);
+    }
+}
+
+/* ==========================================================================
+   RESI J&T SEDERHANA & RINGKAS (MOBILE-FIRST & BERSIH)
+   Hanya Lembar Atas yang Ditempel ke Paket
+   ========================================================================== */
+.waybill-mobile-wrapper {
+    width: 100%;
+    margin-top: 110px;
+    transition: margin-top 0.5s ease;
+}
+
+.envelope-wrapper.opened .waybill-mobile-wrapper {
+    margin-top: 20px;
+}
+
+.jnt-waybill-label {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    font-family: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #000000;
+    font-size: 0.65rem;
+    line-height: 1.25;
+    width: 100%;
+}
+
+.jnt-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.jnt-cell {
+    border: 1px solid #000000;
+    padding: 4px 5px;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+/* Header Row Resi */
+.jnt-logo-cell {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5px 4px;
+}
+
+.jnt-brand-text {
+    font-size: 1.1rem;
+    font-weight: 900;
+    font-style: italic;
+    color: #E30613;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.jnt-brand-sub {
+    font-size: 0.52rem;
+    font-weight: 800;
+    color: #000000;
+    letter-spacing: 0.06em;
+    margin-top: 1px;
+}
+
+.jnt-barcode-cell {
+    width: 53%;
+    text-align: center;
+    padding: 3px 2px;
+}
+
+.jnt-header-barcode {
+    width: 96%;
+    height: 32px;
+    display: block;
+    margin: 0 auto;
+}
+
+.jnt-tracking-number {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-top: 1px;
+}
+
+.jnt-partner-cell {
+    width: 22%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 3px;
+}
+
+.fastpay-icon {
+    display: flex;
+    align-items: center;
+    gap: 1.5px;
+}
+
+.fastpay-circle {
+    width: 7px;
+    height: 12px;
+    border-radius: 9999px;
+    background: #555555;
+}
+.fastpay-circle.c2 {
+    background: #999999;
+}
+
+.fastpay-text {
+    font-size: 0.58rem;
+    font-weight: 800;
+    color: #444444;
+}
+
+/* Pengirim & Penerima Ringkas */
+.jnt-label-title {
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: #444444;
+    display: block;
+}
+
+.jnt-name-bold {
+    font-weight: 800;
+    font-size: 0.7rem;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.jnt-name-recipient {
+    font-weight: 900;
+    font-size: 0.88rem;
+    color: #000000;
+    text-transform: uppercase;
+    margin: 1px 0 2px 0;
+    line-height: 1.15;
+}
+
+.jnt-service-bar {
+    border-top: 1px solid #000000;
+    margin: 3px -5px -4px -5px;
+    padding: 2px 4px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.62rem;
+    background: #FAFAFA;
+}
+
+/* Baris Berat & QR Ringkas */
+.jnt-weight-data {
+    font-size: 0.6rem;
+    line-height: 1.3;
+}
+
+.jnt-qr-cell {
+    text-align: center;
+    padding: 3px;
+}
+
+.jnt-qr-svg {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto;
+    display: block;
+}
+
+.jnt-cashless-cell {
+    padding: 0 !important;
+}
+
+.jnt-cashless-header {
+    border-bottom: 1px solid #000000;
+    padding: 7px 2px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 0.6rem;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+}
+
+.jnt-page-index {
+    padding: 7px 2px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.72rem;
+}
+
+/* ==========================================================================
+   2. DOKUMEN ISI AMPLOP (CASCADING SLIDE-UP CONTENT DENGAN TACTILE PAPER FEEL)
+   ========================================================================== */
+.unboxed-content-flow {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.unboxed-content-flow.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Stagger Animation Saat Dokumen Ditarik Keluar dari Amplop */
+.unboxed-content-flow.revealed .paper-document {
+    animation: slide-out-paper 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.unboxed-content-flow.revealed .doc-story    { animation-delay: 0.1s; }
+.unboxed-content-flow.revealed .doc-receipt  { animation-delay: 0.25s; }
+.unboxed-content-flow.revealed .doc-photos   { animation-delay: 0.4s; }
+.unboxed-content-flow.revealed .doc-waybill  { animation-delay: 0.55s; }
+.unboxed-content-flow.revealed .doc-gift     { animation-delay: 0.7s; }
+.unboxed-content-flow.revealed .doc-rsvp     { animation-delay: 0.85s; }
+
+@keyframes slide-out-paper {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Base Tactile Paper Document Class */
+.paper-document {
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 
+        0 2px 4px rgba(46, 30, 18, 0.08),
+        0 8px 24px rgba(46, 30, 18, 0.18),
+        0 16px 36px -10px rgba(46, 30, 18, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paper-document:hover {
+    box-shadow: 
+        0 4px 8px rgba(46, 30, 18, 0.12),
+        0 14px 30px rgba(46, 30, 18, 0.22),
+        0 22px 45px -8px rgba(46, 30, 18, 0.2);
+}
+
+/* ==========================================================================
+   DOKUMEN A: LEMBAR SURAT CERITA (WARM STORY LETTERHEAD)
+   ========================================================================== */
+.story-letter-sheet {
+    background: #FAF6ED;
+    border: 1px solid #E2D7C3;
+    padding: 22px 18px 26px 18px;
+    font-family: var(--font-sans);
+    color: var(--color-coffee-dark);
+    transform: rotate(-0.6deg);
+    position: relative;
+}
+
+/* Stempel Merah di Pojok Surat */
+.story-letter-sheet::after {
+    content: "OFFICIAL MEMORANDUM";
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: 1.5px solid rgba(227, 6, 19, 0.4);
+    color: rgba(227, 6, 19, 0.7);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    transform: rotate(6deg);
+}
+
+.letter-header {
+    border-bottom: 2px solid var(--color-coffee-dark);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+.letter-tagline {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-jnt-red);
+    text-transform: uppercase;
+}
+
+.letter-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--color-coffee-dark);
+    line-height: 1.25;
+    margin-top: 2px;
+}
+
+.letter-greeting {
+    font-weight: 700;
+    font-size: 0.84rem;
+    margin-bottom: 10px;
+    color: var(--color-coffee-dark);
+}
+
+.letter-body {
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: #3C2B1E;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: justify;
+}
+
+.letter-body p {
+    margin: 0;
+}
+
+.letter-highlight-quote {
+    background: #F2E8D5;
+    border-left: 3px solid var(--color-jnt-red);
+    padding: 8px 12px;
+    font-style: italic;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--color-coffee-dark);
+    margin: 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.letter-closing-signature {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed #D8CBB6;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.signature-date {
+    font-size: 0.68rem;
+    color: var(--color-coffee-muted);
+}
+
+.signature-names {
+    text-align: right;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-coffee-dark);
+    line-height: 1.2;
+}
+
+.signature-role {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.62rem;
+    color: var(--color-coffee-muted);
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   ITEM 1: STRUK KASIR THERMAL (SAWTOOTH TEAR EDGES)
+   ========================================================================== */
+.receipt-wrapper {
+    position: relative;
+    width: 100%;
+    transform: rotate(0.6deg);
+}
+
+/* Cap Stempel Basah Kasir "LUNAS / SAH SEUMUR HIDUP" */
+.stamp-lunas-wrap {
+    position: absolute;
+    bottom: 95px;
+    right: 18px;
+    transform: rotate(-13deg);
+    border: 3.5px double var(--color-jnt-red);
+    border-radius: 8px;
+    padding: 5px 12px;
+    color: var(--color-jnt-red);
+    font-family: var(--font-mono);
+    text-align: center;
+    line-height: 1.1;
+    pointer-events: none;
+    opacity: 0.88;
+    background: rgba(253, 251, 247, 0.45);
+    box-shadow: 0 0 0 1px rgba(227, 6, 19, 0.25), inset 0 0 4px rgba(227, 6, 19, 0.2);
+    z-index: 10;
+}
+
+.stamp-lunas-main {
+    font-size: 1.12rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    display: block;
+    text-transform: uppercase;
+}
+
+.stamp-lunas-date {
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    border-top: 1.5px dashed var(--color-jnt-red);
+    padding-top: 3px;
+    margin-top: 2px;
+}
+
+/* Efek Sobekan Bergerigi Kasir Atas & Bawah */
+.receipt-tear-top, .receipt-tear-bottom {
+    width: 100%;
+    height: 12px;
+    background-color: var(--color-thermal-paper);
+}
+
+.receipt-tear-top {
+    clip-path: polygon(
+        0% 100%, 2% 0%, 4% 100%, 6% 0%, 8% 100%, 10% 0%, 12% 100%, 14% 0%, 16% 100%, 18% 0%, 20% 100%,
+        22% 0%, 24% 100%, 26% 0%, 28% 100%, 30% 0%, 32% 100%, 34% 0%, 36% 100%, 38% 0%, 40% 100%,
+        42% 0%, 44% 100%, 46% 0%, 48% 100%, 50% 0%, 52% 100%, 54% 0%, 56% 100%, 58% 0%, 60% 100%,
+        62% 0%, 64% 100%, 66% 0%, 68% 100%, 70% 0%, 72% 100%, 74% 0%, 76% 100%, 78% 0%, 80% 100%,
+        82% 0%, 84% 100%, 86% 0%, 88% 100%, 90% 0%, 92% 100%, 94% 0%, 96% 100%, 98% 0%, 100% 100%
+    );
+}
+
+.receipt-tear-bottom {
+    clip-path: polygon(
+        0% 0%, 2% 100%, 4% 0%, 6% 100%, 8% 0%, 10% 100%, 12% 0%, 14% 100%, 16% 0%, 18% 100%, 20% 0%,
+        22% 100%, 24% 0%, 26% 100%, 28% 0%, 30% 100%, 32% 0%, 34% 100%, 36% 0%, 38% 100%, 40% 0%,
+        42% 100%, 44% 0%, 46% 100%, 48% 0%, 50% 100%, 52% 0%, 54% 100%, 56% 0%, 58% 100%, 60% 0%,
+        62% 100%, 64% 0%, 66% 100%, 68% 0%, 70% 100%, 72% 0%, 74% 100%, 76% 0%, 78% 100%, 80% 0%,
+        82% 100%, 84% 0%, 86% 100%, 88% 0%, 90% 100%, 92% 0%, 94% 100%, 96% 0%, 98% 100%, 100% 0%
+    );
+}
+
+.receipt-content {
+    background-color: var(--color-thermal-paper);
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    color: var(--color-coffee-dark);
+}
+
+.receipt-header-center {
+    text-align: center;
+    border-bottom: 1px dashed var(--color-coffee-dark);
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+}
+
+.receipt-store-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--color-coffee-dark);
+}
+
+.receipt-store-subtitle {
+    font-size: 0.72rem;
+    color: var(--color-coffee-muted);
+    margin-top: 2px;
+}
+
+.receipt-meta {
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--color-thermal-border);
+    padding-bottom: 10px;
+}
+
+.receipt-meta-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.receipt-divider {
+    border-top: 1px dashed var(--color-coffee-dark);
+    margin: 12px 0;
+}
+
+.receipt-table {
+    width: 100%;
+    font-size: 0.76rem;
+    margin-bottom: 12px;
+}
+
+.receipt-table-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+.receipt-item-name {
+    flex: 1;
+    padding-right: 12px;
+}
+
+.receipt-item-price {
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.receipt-totals {
+    font-size: 0.8rem;
+    border-top: 1px dashed var(--color-coffee-dark);
+    border-bottom: 2px solid var(--color-coffee-dark);
+    padding: 8px 0;
+    margin-bottom: 14px;
+}
+
+.receipt-total-highlight {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--color-jnt-red);
+}
+
+/* Rincian Akad & Resepsi di Struk */
+.receipt-event-section {
+    background: #F7F2E9;
+    border: 1px dashed var(--color-coffee-muted);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+}
+
+.receipt-event-title {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--color-jnt-red);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.receipt-event-desc {
+    font-size: 0.74rem;
+    line-height: 1.45;
+    color: var(--color-coffee-dark);
+}
+
+.receipt-event-desc strong {
+    color: var(--color-coffee-dark);
+}
+
+.receipt-barcode-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--color-coffee-muted);
+}
+
+.receipt-footer-text {
+    font-size: 0.68rem;
+    text-align: center;
+    color: var(--color-coffee-muted);
+    margin-top: 6px;
+}
+
+/* ==========================================================================
+   ITEM 2: POLAROID ANALOG PHOTO-STRIP DENGAN MASKING TAPE FISIK
+   ========================================================================== */
+.polaroid-strip {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: center;
+}
+
+.polaroid-card {
+    position: relative;
+    background: var(--color-polaroid-frame);
+    padding: 12px 12px 18px 12px;
+    border-radius: 3px;
+    box-shadow: 
+        0 4px 8px rgba(46, 30, 18, 0.1),
+        0 12px 28px rgba(46, 30, 18, 0.18);
+    width: 96%;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.polaroid-card:hover {
+    transform: translateY(-4px) scale(1.02) !important;
+    box-shadow: 0 16px 36px rgba(46, 30, 18, 0.25);
+}
+
+/* Masking Tape Washi Kertas di Atas Foto */
+.polaroid-tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background: rgba(240, 230, 210, 0.85);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    border-left: 2px dashed rgba(180, 160, 130, 0.4);
+    border-right: 2px dashed rgba(180, 160, 130, 0.4);
+    z-index: 10;
+}
+
+.polaroid-card.tilt-left {
+    transform: rotate(-1.5deg);
+}
+
+.polaroid-card.tilt-right {
+    transform: rotate(2deg);
+}
+
+.polaroid-card.tilt-straight {
+    transform: rotate(-0.8deg);
+}
+
+.polaroid-photo-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 2px;
+    overflow: hidden;
+    background: #E8E0D5;
+    position: relative;
+    filter: sepia(0.08) contrast(1.05) brightness(0.98);
+}
+
+/* Tekstur Butiran Film Analog (Analog Grain & Vignette) */
+.polaroid-photo-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.22) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+    background-size: 3px 3px, 4px 4px;
+    background-position: 0 0, 1.5px 1.5px;
+    opacity: 0.45;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    box-shadow: inset 0 0 18px rgba(46, 30, 18, 0.28);
+}
+
+.polaroid-photo-box img, .polaroid-photo-box svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.polaroid-caption {
+    margin-top: 10px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-coffee-dark);
+    text-align: center;
+}
+
+.polaroid-story-text {
+    font-size: 0.74rem;
+    line-height: 1.45;
+    color: var(--color-coffee-muted);
+    text-align: center;
+    margin-top: 4px;
+    padding: 0 4px;
+}
+
+/* ==========================================================================
+   ITEM 3: LEMBAR SURAT JALAN & RENDER PETA SIMPEL (WAYBILL MAP)
+   ========================================================================== */
+.waybill-route-card {
+    background: var(--color-thermal-paper);
+    border: 2px solid var(--color-kraft-accent);
+    border-radius: 6px;
+    padding: 18px 16px;
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-0.5deg);
+}
+
+.waybill-route-card::before {
+    content: "SURAT JALAN / WAYBILL RUTE";
+    position: absolute;
+    top: 8px;
+    right: -24px;
+    background: var(--color-jnt-red);
+    color: #FFFFFF;
+    font-size: 0.55rem;
+    font-weight: 800;
+    padding: 3px 28px;
+    transform: rotate(45deg);
+    letter-spacing: 0.08em;
+}
+
+.route-card-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--color-coffee-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* Render Simple Map Container */
+.simple-map-box {
+    width: 100%;
+    background: #F4EFE6;
+    border: 1px solid var(--color-thermal-border);
+    border-radius: 6px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    position: relative;
+}
+
+.simple-map-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Live Countdown Box */
+.countdown-container {
+    background: #F4ECE1;
+    border: 1px dashed var(--color-coffee-light);
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 14px;
+}
+
+.countdown-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--color-coffee-muted);
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.countdown-unit {
+    background: #FFFFFF;
+    border: 1px solid var(--color-thermal-border);
+    border-radius: 4px;
+    padding: 6px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--color-jnt-red);
+    line-height: 1;
+}
+
+.countdown-text {
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: var(--color-coffee-muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* Quick Action Navigation Buttons */
+.nav-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.15s ease, filter 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.nav-btn:active {
+    transform: scale(0.96);
+}
+
+.nav-btn.btn-maps {
+    background: #1A73E8;
+    color: #FFFFFF;
+}
+
+.nav-btn.btn-waze {
+    background: #33CCFF;
+    color: #0E3A5A;
+}
+
+.nav-btn.btn-cal {
+    grid-column: span 2;
+    background: var(--color-coffee-dark);
+    color: #FFFFFF;
+}
+
+/* ==========================================================================
+   ITEM 4: SLIP PAKET COD KADO & TANDA KASIH DIGITAL (BEBAS NO REKENING)
+   ========================================================================== */
+.gift-slip-card {
+    background: #FAF6EE;
+    border: 2px dashed var(--color-kraft-accent);
+    border-radius: 8px;
+    padding: 18px 16px;
+    transform: rotate(0.4deg);
+}
+
+.gift-slip-header {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.gift-badge {
+    background: var(--color-jnt-red);
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    display: inline-block;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.gift-slip-title {
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: var(--color-coffee-dark);
+}
+
+.gift-slip-desc {
+    font-size: 0.74rem;
+    color: var(--color-coffee-muted);
+    margin-top: 4px;
+    line-height: 1.45;
+}
+
+/* QRIS Standar Nasional Card */
+.qris-featured-card {
+    background: #FFFFFF;
+    border: 1px solid var(--color-thermal-border);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12px 0;
+    box-shadow: 0 4px 12px rgba(46, 30, 18, 0.06);
+}
+
+.qris-header-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid #EFE8DC;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.qris-logo-tag {
+    font-weight: 900;
+    font-size: 1.15rem;
+    color: var(--color-jnt-red);
+    letter-spacing: 0.04em;
+}
+
+.qris-display-img {
+    width: 190px;
+    height: 190px;
+    display: block;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid var(--color-thermal-border);
+    transition: transform 0.2s ease;
+}
+
+.qris-display-img:hover {
+    transform: scale(1.02);
+}
+
+.qris-help-text {
+    font-size: 0.68rem;
+    color: var(--color-coffee-muted);
+    text-align: center;
+    margin-top: 8px;
+    line-height: 1.35;
+}
+
+.physical-gift-box {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--color-thermal-border);
+    font-size: 0.74rem;
+}
+
+.physical-gift-title {
+    font-weight: 700;
+    color: var(--color-coffee-dark);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.physical-gift-addr {
+    color: var(--color-coffee-muted);
+    line-height: 1.45;
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   ITEM 5: FORM RSVP & DINDING DOA RESTU
+   ========================================================================== */
+.rsvp-wishes-card {
+    background: var(--color-thermal-paper);
+    border: 2px solid var(--color-kraft-accent);
+    border-radius: 10px;
+    padding: 18px 16px;
+    box-shadow: 0 10px 24px rgba(46, 30, 18, 0.12);
+}
+
+.section-form-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-coffee-dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.section-form-desc {
+    font-size: 0.74rem;
+    color: var(--color-coffee-muted);
+    margin-bottom: 14px;
+}
+
+.rsvp-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.rsvp-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--color-coffee-dark);
+}
+
+.rsvp-input, .rsvp-select, .rsvp-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-thermal-border);
+    border-radius: 6px;
+    background: #FFFFFF;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-coffee-dark);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rsvp-input:focus, .rsvp-select:focus, .rsvp-textarea:focus {
+    border-color: var(--color-jnt-red);
+    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.12);
+}
+
+.radio-attendance-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.radio-attendance-card {
+    border: 1px solid var(--color-thermal-border);
+    border-radius: 6px;
+    padding: 9px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: #FFFFFF;
+    transition: all 0.2s ease;
+}
+
+.radio-attendance-card input[type="radio"] {
+    accent-color: var(--color-jnt-red);
+}
+
+.radio-attendance-card.active {
+    border-color: var(--color-jnt-red);
+    background: var(--color-jnt-red-light);
+    color: var(--color-jnt-red);
+}
+
+.btn-submit-rsvp {
+    width: 100%;
+    padding: 12px;
+    background: var(--color-jnt-red);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(227, 6, 19, 0.3);
+    transition: background 0.2s ease, transform 0.15s ease;
+    margin-top: 6px;
+}
+
+.btn-submit-rsvp:hover {
+    background: var(--color-jnt-red-hover);
+}
+
+.btn-submit-rsvp:active {
+    transform: scale(0.98);
+}
+
+/* Dinding Doa Restu */
+.wishes-wall-container {
+    margin-top: 24px;
+    border-top: 1px dashed var(--color-coffee-light);
+    padding-top: 16px;
+}
+
+.wishes-wall-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.wishes-wall-title {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--color-coffee-dark);
+}
+
+.wishes-count-pill {
+    background: #F4ECE1;
+    color: var(--color-coffee-dark);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 9999px;
+}
+
+.wishes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 380px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Custom Minimal Scrollbar */
+.wishes-list::-webkit-scrollbar {
+    width: 4px;
+}
+.wishes-list::-webkit-scrollbar-thumb {
+    background: var(--color-kraft-dark);
+    border-radius: 4px;
+}
+
+.wish-item-card {
+    background: #FFFFFF;
+    border: 1px solid var(--color-thermal-border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 0.76rem;
+}
+
+.wish-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.wish-sender-name {
+    font-weight: 700;
+    color: var(--color-coffee-dark);
+}
+
+.wish-badge-status {
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.wish-badge-status.attending {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.wish-badge-status.declined {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.wish-message-body {
+    color: var(--color-coffee-muted);
+    line-height: 1.4;
+    white-space: pre-line;
+}
+
+.wish-time-ago {
+    font-size: 0.62rem;
+    color: var(--color-coffee-light);
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* ==========================================================================
+   MODAL LIGHTBOX (POLAROID & QRIS ZOOM)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(46, 30, 18, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open,
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.open .modal-box,
+.modal-overlay.active .modal-box {
+    transform: scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: #F4EFE6;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--color-coffee-dark);
+    cursor: pointer;
+}
+
+.modal-image-view {
+    width: 100%;
+    border-radius: 4px;
+    margin-top: 14px;
+}
+
+.modal-caption-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-coffee-dark);
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   MODAL TIKET PAS MASUK DIGITAL (GUEST PASS SETELAH RSVP)
+   ========================================================================== */
+.guest-pass-card {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    padding: 18px 16px;
+    position: relative;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #000000;
+}
+
+.guest-pass-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.guest-pass-badge {
+    background: #E30613;
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+}
+
+.guest-pass-confirmed-tag {
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: #16A34A;
+    background: #DCFCE7;
+    border: 1px solid #16A34A;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.guest-pass-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px dashed #000000;
+    padding-bottom: 14px;
+    margin-bottom: 12px;
+}
+
+.guest-pass-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #666666;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.guest-pass-name {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #000000;
+    margin: 4px 0;
+    text-transform: uppercase;
+}
+
+.guest-pass-pax {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #E30613;
+    background: #FDE8EA;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    margin-bottom: 10px;
+}
+
+.guest-pass-qr-box {
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+.guest-pass-qr-svg {
+    width: 140px;
+    height: 140px;
+    display: block;
+}
+
+.guest-pass-code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #000000;
+}
+
+.guest-pass-footer-note {
+    font-size: 0.66rem;
+    line-height: 1.4;
+    color: #555555;
+    text-align: center;
+}
+
+.btn-screenshot-pass {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    background: #000000;
+    color: #FFFFFF;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background 0.2s ease;
+}
+
+.btn-screenshot-pass:hover {
+    background: #333333;
+}
+
+/* Toast Notification */
+.toast-notice {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(40px);
+    background: var(--color-coffee-dark);
+    color: #FFFFFF;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    z-index: 1001;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-notice.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

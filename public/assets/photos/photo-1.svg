@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="coffeeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B2616"/>
+      <stop offset="50%" stop-color="#5A3D28"/>
+      <stop offset="100%" stop-color="#23150B"/>
+    </linearGradient>
+    <linearGradient id="warmLight" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#FFEED9" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Cafe Warmth -->
+  <rect width="600" height="600" fill="url(#coffeeGrad)"/>
+  <rect width="600" height="600" fill="url(#warmLight)"/>
+  
+  <!-- Subtle Bokeh Circles -->
+  <circle cx="120" cy="140" r="50" fill="#FFDFC0" opacity="0.15"/>
+  <circle cx="480" cy="180" r="70" fill="#FFCE99" opacity="0.12"/>
+  <circle cx="350" cy="90" r="35" fill="#FFE8D1" opacity="0.18"/>
+
+  <!-- Wooden Table -->
+  <path d="M0,420 L600,420 L600,600 L0,600 Z" fill="#2E1C0F"/>
+  <line x1="0" y1="420" x2="600" y2="420" stroke="#4A301D" stroke-width="4"/>
+
+  <!-- Coffee Cups Duo -->
+  <!-- Cup 1 (Groom) -->
+  <ellipse cx="230" cy="460" rx="65" ry="32" fill="#E8D8C3"/>
+  <ellipse cx="230" cy="455" rx="52" ry="24" fill="#3D2110"/>
+  <ellipse cx="230" cy="454" rx="42" ry="18" fill="#543019"/>
+  <!-- Latte Art Heart -->
+  <path d="M220,448 C215,442 220,436 226,442 C232,448 230,455 220,462 C210,455 208,448 214,442 C220,436 225,442 220,448 Z" fill="#FDFBF7" opacity="0.85" transform="scale(1.4) translate(-75,-130)"/>
+  <path d="M295,450 C325,450 325,475 295,475" stroke="#E8D8C3" stroke-width="8" fill="none"/>
+
+  <!-- Cup 2 (Bride) -->
+  <ellipse cx="370" cy="480" rx="55" ry="28" fill="#E30613"/>
+  <ellipse cx="370" cy="476" rx="44" ry="20" fill="#2E1508"/>
+  <!-- Foam Texture -->
+  <circle cx="370" cy="476" r="12" fill="#F4E8D5" opacity="0.7"/>
+  <path d="M425,472 C450,472 450,494 425,494" stroke="#E30613" stroke-width="7" fill="none"/>
+
+  <!-- Steam Whispers -->
+  <path d="M230,420 Q220,380 235,340 Q250,300 230,260" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M370,440 Q380,400 365,360 Q350,320 370,280" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.25" stroke-linecap="round"/>
+
+  <!-- Typography Overlay -->
+  <text x="300" y="180" font-family="'Playfair Display', Georgia, serif" font-size="28" font-style="italic" fill="#FDFBF7" text-anchor="middle" font-weight="700">Coffee Shop Hopping</text>
+  <text x="300" y="215" font-family="'Courier New', monospace" font-size="14" fill="#D9C3A5" text-anchor="middle" letter-spacing="3">100+ CANGKIR KOPI DI KEDAI BARU</text>
+  <text x="300" y="565" font-family="'Courier New', monospace" font-size="12" fill="#8C7A6B" text-anchor="middle">RIAN &amp; NISA • POLAROID MOMENT</text>
+</svg>

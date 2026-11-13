@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gamingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141824"/>
+      <stop offset="50%" stop-color="#1F2438"/>
+      <stop offset="100%" stop-color="#0E111A"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#0080FF"/>
+    </linearGradient>
+    <linearGradient id="neonPink" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF007F"/>
+      <stop offset="100%" stop-color="#E30613"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Dark Room -->
+  <rect width="600" height="600" fill="url(#gamingGrad)"/>
+
+  <!-- TV Glow Aura in Center -->
+  <ellipse cx="300" cy="200" rx="180" ry="100" fill="#00E5FF" opacity="0.12"/>
+  <ellipse cx="300" cy="200" rx="120" ry="60" fill="#FF007F" opacity="0.1"/>
+
+  <!-- Controller 1 (Groom - Player 1) -->
+  <g transform="translate(140, 340) rotate(-12)">
+    <!-- Controller Body -->
+    <rect x="-80" y="-45" width="160" height="90" rx="30" fill="#2E3440" stroke="#00F0FF" stroke-width="3"/>
+    <path d="M-80,20 C-90,65 -50,85 -30,65 L-15,45" fill="#2E3440" stroke="#00F0FF" stroke-width="3"/>
+    <path d="M80,20 C90,65 50,85 30,65 L15,45" fill="#2E3440" stroke="#00F0FF" stroke-width="3"/>
+    <!-- D-Pad -->
+    <rect x="-55" y="-18" width="10" height="26" rx="2" fill="#4C566A"/>
+    <rect x="-63" y="-10" width="26" height="10" rx="2" fill="#4C566A"/>
+    <!-- Buttons -->
+    <circle cx="50" cy="-14" r="5" fill="#FF5252"/>
+    <circle cx="62" cy="-2" r="5" fill="#00E676"/>
+    <circle cx="38" cy="-2" r="5" fill="#FFD700"/>
+    <circle cx="50" cy="10" r="5" fill="#448AFF"/>
+    <!-- Thumbsticks -->
+    <circle cx="-18" cy="12" r="14" fill="#1E222A" stroke="#4C566A" stroke-width="2"/>
+    <circle cx="18" cy="12" r="14" fill="#1E222A" stroke="#4C566A" stroke-width="2"/>
+    <!-- P1 Badge -->
+    <rect x="-18" y="-35" width="36" height="14" rx="4" fill="#00F0FF"/>
+    <text x="0" y="-24" font-family="'Courier New', monospace" font-size="10" font-weight="900" fill="#0E111A" text-anchor="middle">P1</text>
+  </g>
+
+  <!-- Controller 2 (Bride - Player 2) -->
+  <g transform="translate(440, 360) rotate(15)">
+    <!-- Controller Body -->
+    <rect x="-80" y="-45" width="160" height="90" rx="30" fill="#2E3440" stroke="#FF007F" stroke-width="3"/>
+    <path d="M-80,20 C-90,65 -50,85 -30,65 L-15,45" fill="#2E3440" stroke="#FF007F" stroke-width="3"/>
+    <path d="M80,20 C90,65 50,85 30,65 L15,45" fill="#2E3440" stroke="#FF007F" stroke-width="3"/>
+    <!-- D-Pad -->
+    <rect x="-55" y="-18" width="10" height="26" rx="2" fill="#4C566A"/>
+    <rect x="-63" y="-10" width="26" height="10" rx="2" fill="#4C566A"/>
+    <!-- Buttons -->
+    <circle cx="50" cy="-14" r="5" fill="#FF5252"/>
+    <circle cx="62" cy="-2" r="5" fill="#00E676"/>
+    <circle cx="38" cy="-2" r="5" fill="#FFD700"/>
+    <circle cx="50" cy="10" r="5" fill="#448AFF"/>
+    <!-- Thumbsticks -->
+    <circle cx="-18" cy="12" r="14" fill="#1E222A" stroke="#4C566A" stroke-width="2"/>
+    <circle cx="18" cy="12" r="14" fill="#1E222A" stroke="#4C566A" stroke-width="2"/>
+    <!-- P2 Badge -->
+    <rect x="-18" y="-35" width="36" height="14" rx="4" fill="#FF007F"/>
+    <text x="0" y="-24" font-family="'Courier New', monospace" font-size="10" font-weight="900" fill="#FFFFFF" text-anchor="middle">P2</text>
+  </g>
+
+  <!-- Connected Hearts Cable -->
+  <path d="M140,320 C180,220 250,260 300,280 C350,260 400,220 440,340" stroke="#E30613" stroke-width="3" stroke-dasharray="6,4" fill="none"/>
+  <circle cx="300" cy="280" r="8" fill="#E30613"/>
+
+  <!-- Typography Overlay -->
+  <text x="300" y="140" font-family="'Playfair Display', Georgia, serif" font-size="28" font-style="italic" fill="#FFFFFF" text-anchor="middle" font-weight="700">50+ Jam di Rental PS</text>
+  <text x="300" y="175" font-family="'Courier New', monospace" font-size="14" fill="#00F0FF" text-anchor="middle" letter-spacing="3">CO-OP DUO PLAYER 1 &amp; PLAYER 2</text>
+  <text x="300" y="555" font-family="'Courier New', monospace" font-size="12" fill="#8892B0" text-anchor="middle">MISSION: PERNIKAHAN SEUMUR HIDUP</text>
+</svg>

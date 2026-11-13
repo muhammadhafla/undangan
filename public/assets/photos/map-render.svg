@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+  <defs>
+    <style>
+      .map-road { stroke: #FFFFFF; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; }
+      .map-road-border { stroke: #D8CEBC; stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .map-small-road { stroke: #FFFFFF; stroke-width: 7; stroke-linecap: round; fill: none; }
+      .map-small-border { stroke: #E0D6C5; stroke-width: 9; stroke-linecap: round; fill: none; }
+      .map-text { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 11px; fill: #6E5D4F; font-weight: 700; }
+    </style>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background Map Grid -->
+  <rect width="600" height="360" fill="#F4EFE6"/>
+  
+  <!-- Subtle Park/Green Area -->
+  <path d="M400,20 C460,20 540,60 560,140 C520,180 440,150 410,100 Z" fill="#E2EAD9" opacity="0.9"/>
+  <text x="470" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#6B8E5F" font-weight="700">Taman Budaya</text>
+
+  <!-- River Stream -->
+  <path d="M0,80 Q150,110 300,70 T600,100" stroke="#D1E3DC" stroke-width="22" fill="none" opacity="0.8"/>
+  <path d="M0,80 Q150,110 300,70 T600,100" stroke="#E2EFEA" stroke-width="12" fill="none"/>
+
+  <!-- Road Borders -->
+  <path d="M-20,240 Q160,240 280,180 T620,180" class="map-road-border"/>
+  <path d="M120,-10 L120,370" class="map-road-border"/>
+  <path d="M460,-10 L460,370" class="map-road-border"/>
+  <path d="M280,180 L280,370" class="map-road-border"/>
+
+  <path d="M120,120 L460,120" class="map-small-border"/>
+  <path d="M280,260 L620,260" class="map-small-border"/>
+
+  <!-- Road Inners -->
+  <path d="M-20,240 Q160,240 280,180 T620,180" class="map-road" fill="none"/>
+  <path d="M120,-10 L120,370" class="map-road" fill="none"/>
+  <path d="M460,-10 L460,370" class="map-road" fill="none"/>
+  <path d="M280,180 L280,370" class="map-road" fill="none"/>
+  <path d="M120,120 L460,120" class="map-small-road"/>
+  <path d="M280,260 L620,260" class="map-small-road"/>
+
+  <!-- Street Names -->
+  <text x="135" y="40" class="map-text">Jl. Kasir Ritel</text>
+  <text x="320" y="170" class="map-text">Jl. Raya Kemenangan</text>
+  <text x="475" y="320" class="map-text">Jl. Flamboyan</text>
+
+  <!-- Route Line (Akad Nikah to Resepsi) -->
+  <path d="M120,240 Q200,240 280,180 L460,180 L460,240" stroke="#E30613" stroke-width="4" stroke-dasharray="8,6" fill="none" opacity="0.85"/>
+
+  <!-- PIN 1: Akad Nikah (Masjid Raya Baiturrahman) -->
+  <g transform="translate(120, 240)" filter="url(#shadow)">
+    <!-- Pulse Circle -->
+    <circle cx="0" cy="0" r="18" fill="#16A34A" opacity="0.2"/>
+    <circle cx="0" cy="0" r="10" fill="#16A34A"/>
+    <!-- Mosque Icon -->
+    <path d="M-4,-2 L0,-7 L4,-2 L4,4 L-4,4 Z" fill="#FFFFFF"/>
+    <circle cx="0" cy="-8" r="1" fill="#FFFFFF"/>
+    <!-- Label Card -->
+    <rect x="-70" y="-48" width="140" height="34" rx="5" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.5"/>
+    <text x="0" y="-34" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#16A34A" text-anchor="middle">AKAD NIKAH (08:00)</text>
+    <text x="0" y="-21" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="600" fill="#2E1E12" text-anchor="middle">Masjid Baiturrahman</text>
+  </g>
+
+  <!-- PIN 2: Resepsi (Gedung Sasana Kriya Ballroom) -->
+  <g transform="translate(460, 240)" filter="url(#shadow)">
+    <!-- Pulse Circle -->
+    <circle cx="0" cy="0" r="22" fill="#E30613" opacity="0.25"/>
+    <circle cx="0" cy="0" r="12" fill="#E30613"/>
+    <!-- Ring / Heart Icon -->
+    <circle cx="0" cy="0" r="5" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+    <!-- Label Card -->
+    <rect x="-75" y="-52" width="150" height="38" rx="5" fill="#FFFFFF" stroke="#E30613" stroke-width="1.5"/>
+    <text x="0" y="-37" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="900" fill="#E30613" text-anchor="middle">RESEPSI (11:00 - 14:00)</text>
+    <text x="0" y="-23" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#2E1E12" text-anchor="middle">Sasana Kriya Ballroom</text>
+  </g>
+
+  <!-- North Compass Rose -->
+  <g transform="translate(555, 45)">
+    <circle cx="0" cy="0" r="16" fill="#FFFFFF" stroke="#D8CEBC" stroke-width="1.5"/>
+    <polygon points="0,-12 4,0 0,2 -4,0" fill="#E30613"/>
+    <polygon points="0,12 4,0 0,-2 -4,0" fill="#BFA482"/>
+    <text x="0" y="-14" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="900" fill="#E30613" text-anchor="middle">U</text>
+  </g>
+
+  <!-- Scale Indicator -->
+  <g transform="translate(30, 335)">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#6E5D4F" stroke-width="2"/>
+    <line x1="0" y1="-3" x2="0" y2="3" stroke="#6E5D4F" stroke-width="2"/>
+    <line x1="60" y1="-3" x2="60" y2="3" stroke="#6E5D4F" stroke-width="2"/>
+    <text x="30" y="-5" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#6E5D4F" text-anchor="middle">± 1.8 KM (5 Menit)</text>
+  </g>
+</svg>
