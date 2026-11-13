@@ -46,5 +46,5 @@
   <!-- Typography Overlay -->
   <text x="300" y="180" font-family="'Playfair Display', Georgia, serif" font-size="28" font-style="italic" fill="#FDFBF7" text-anchor="middle" font-weight="700">Coffee Shop Hopping</text>
   <text x="300" y="215" font-family="'Courier New', monospace" font-size="14" fill="#D9C3A5" text-anchor="middle" letter-spacing="3">100+ CANGKIR KOPI DI KEDAI BARU</text>
-  <text x="300" y="565" font-family="'Courier New', monospace" font-size="12" fill="#8C7A6B" text-anchor="middle">RIAN &amp; NISA • POLAROID MOMENT</text>
+  <text x="300" y="565" font-family="'Courier New', monospace" font-size="12" fill="#8C7A6B" text-anchor="middle">HAFLA &amp; FIFI • POLAROID MOMENT</text>
 </svg>

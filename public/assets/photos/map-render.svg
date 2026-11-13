@@ -1,93 +1,271 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%" text-rendering="geometricPrecision" shape-rendering="geometricPrecision">
   <defs>
     <style>
-      .map-road { stroke: #FFFFFF; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; }
-      .map-road-border { stroke: #D8CEBC; stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; fill: none; }
-      .map-small-road { stroke: #FFFFFF; stroke-width: 7; stroke-linecap: round; fill: none; }
-      .map-small-border { stroke: #E0D6C5; stroke-width: 9; stroke-linecap: round; fill: none; }
-      .map-text { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 11px; fill: #6E5D4F; font-weight: 700; }
+      .bg-canvas { fill: #F4F6F8; }
+      .water { fill: #5BC3DB; }
+      
+      /* Pantura Highway (National Road) */
+      .pantura-border { stroke: #CCD5DF; stroke-width: 26; stroke-linecap: square; fill: none; }
+      .pantura-surface { stroke: #FFFFFF; stroke-width: 20; stroke-linecap: square; fill: none; }
+      .pantura-center { stroke: #F59E0B; stroke-width: 2; stroke-dasharray: 8,6; fill: none; }
+
+      /* Base Roads */
+      .road-base-wide { stroke: #DCE3EB; stroke-width: 20; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .road-base-med { stroke: #DEE4EA; stroke-width: 13; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .road-base-sm { stroke: #E2E7ED; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      
+      /* Active Route (Thick Vibrant Electric Blue) */
+      .route-border { stroke: #100870; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .route-core { stroke: #260CE8; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      
+      /* Railroad */
+      .rail-track { stroke: #BDC7D3; stroke-width: 5; fill: none; }
+      .rail-ties { stroke: #A7B4C2; stroke-width: 12; stroke-dasharray: 2,5; fill: none; }
+      
+      /* Typography with High Precision & Clear Scaling */
+      .txt-pantura { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 10px; font-weight: 900; fill: #0F172A; letter-spacing: 0.5px; }
+      .txt-road { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 10px; font-weight: 700; fill: #475569; }
+      
+      /* Center-aligned text inside active roads */
+      .txt-road-halo { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 900; stroke: #100870; stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; fill: #100870; }
+      .txt-road-fill { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 900; fill: #FFFFFF; }
+      
+      .txt-bold { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; }
     </style>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.25"/>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.18"/>
     </filter>
+    <filter id="pinShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#BE123C" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Path Khusus untuk textPath (Persis di Tengah Jalan Garis Biru) -->
+    <path id="path-abdul-rahman" d="M115,220 L395,302"/>
+    <path id="path-mashuri" d="M438,330 L452,210"/>
+    <path id="path-usman" d="M445,212 L505,220"/>
   </defs>
 
-  <!-- Background Map Grid -->
-  <rect width="600" height="360" fill="#F4EFE6"/>
+  <!-- 1. Background Peta Terang (Light Mode) -->
+  <rect width="600" height="450" class="bg-canvas"/>
+
+  <!-- Sungai / Water di Kiri Atas (Mengalir di Bawah Jembatan Pantura) -->
+  <path d="M-10,110 L80,-10 L-10,-10 Z" class="water"/>
+  <text x="14" y="65" class="txt-road" font-size="9" font-weight="800" fill="#FFFFFF" transform="rotate(-48, 14, 65)">Yani</text>
+
+  <!-- Jl. Raya Mulyo Rejo (Utara Pantura) -->
+  <path d="M-10,95 L145,55" class="road-base-med"/>
+  <text x="35" y="80" class="txt-road" transform="rotate(-15, 35, 80)">Jl. Raya Mulyo Rejo</text>
+
+  <!-- Gang-gang Utara Pantura -->
+  <path d="M210,0 L240,110" class="road-base-sm"/>
+  <text x="215" y="45" class="txt-road" transform="rotate(70, 215, 45)">Gg. 1B</text>
+
+  <path d="M380,0 L380,105" class="road-base-sm"/>
+  <text x="365" y="25" class="txt-road">Gg. 1B</text>
+
+  <!-- ======================================================== -->
+  <!-- 2. JALAN RAYA PANTURA (MEMBENTANG PENUH DARI UJUNG KE UJUNG) -->
+  <!-- ======================================================== -->
+  <path d="M-20,128 L620,112" class="pantura-border"/>
+  <path d="M-20,128 L620,112" class="pantura-surface"/>
+  <path d="M-20,128 L620,112" class="pantura-center"/>
+
+  <!-- Label Jalan Raya Pantura -->
+  <g transform="translate(185, 102)" filter="url(#shadow)">
+    <rect x="0" y="0" width="220" height="18" rx="4" fill="#FFFFFF"/>
+    <text x="110" y="13" class="txt-pantura" text-anchor="middle">
+      JL. RAYA PANTURA (JL. RAYA PACAR)
+    </text>
+  </g>
   
-  <!-- Subtle Park/Green Area -->
-  <path d="M400,20 C460,20 540,60 560,140 C520,180 440,150 410,100 Z" fill="#E2EAD9" opacity="0.9"/>
-  <text x="470" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#6B8E5F" font-weight="700">Taman Budaya</text>
+  <!-- Petunjuk Arah Pantura -->
+  <text x="8" y="146" class="txt-road" font-size="8.5" font-weight="800">← Arah Pemalang / Jakarta</text>
+  <text x="475" y="100" class="txt-road" font-size="8.5" font-weight="800">Arah Pekalongan Kota →</text>
 
-  <!-- River Stream -->
-  <path d="M0,80 Q150,110 300,70 T600,100" stroke="#D1E3DC" stroke-width="22" fill="none" opacity="0.8"/>
-  <path d="M0,80 Q150,110 300,70 T600,100" stroke="#E2EFEA" stroke-width="12" fill="none"/>
-
-  <!-- Road Borders -->
-  <path d="M-20,240 Q160,240 280,180 T620,180" class="map-road-border"/>
-  <path d="M120,-10 L120,370" class="map-road-border"/>
-  <path d="M460,-10 L460,370" class="map-road-border"/>
-  <path d="M280,180 L280,370" class="map-road-border"/>
-
-  <path d="M120,120 L460,120" class="map-small-border"/>
-  <path d="M280,260 L620,260" class="map-small-border"/>
-
-  <!-- Road Inners -->
-  <path d="M-20,240 Q160,240 280,180 T620,180" class="map-road" fill="none"/>
-  <path d="M120,-10 L120,370" class="map-road" fill="none"/>
-  <path d="M460,-10 L460,370" class="map-road" fill="none"/>
-  <path d="M280,180 L280,370" class="map-road" fill="none"/>
-  <path d="M120,120 L460,120" class="map-small-road"/>
-  <path d="M280,260 L620,260" class="map-small-road"/>
-
-  <!-- Street Names -->
-  <text x="135" y="40" class="map-text">Jl. Kasir Ritel</text>
-  <text x="320" y="170" class="map-text">Jl. Raya Kemenangan</text>
-  <text x="475" y="320" class="map-text">Jl. Flamboyan</text>
-
-  <!-- Route Line (Akad Nikah to Resepsi) -->
-  <path d="M120,240 Q200,240 280,180 L460,180 L460,240" stroke="#E30613" stroke-width="4" stroke-dasharray="8,6" fill="none" opacity="0.85"/>
-
-  <!-- PIN 1: Akad Nikah (Masjid Raya Baiturrahman) -->
-  <g transform="translate(120, 240)" filter="url(#shadow)">
-    <!-- Pulse Circle -->
-    <circle cx="0" cy="0" r="18" fill="#16A34A" opacity="0.2"/>
-    <circle cx="0" cy="0" r="10" fill="#16A34A"/>
-    <!-- Mosque Icon -->
-    <path d="M-4,-2 L0,-7 L4,-2 L4,4 L-4,4 Z" fill="#FFFFFF"/>
-    <circle cx="0" cy="-8" r="1" fill="#FFFFFF"/>
-    <!-- Label Card -->
-    <rect x="-70" y="-48" width="140" height="34" rx="5" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.5"/>
-    <text x="0" y="-34" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#16A34A" text-anchor="middle">AKAD NIKAH (08:00)</text>
-    <text x="0" y="-21" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="600" fill="#2E1E12" text-anchor="middle">Masjid Baiturrahman</text>
+  <!-- Icon Restoran (Orange Fork/Spoon) di Jl. Raya Pantura -->
+  <g transform="translate(435, 120)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="11" fill="#EA580C"/>
+    <path d="M-4,-2 C-4,2 4,2 4,-2 Z" fill="#FFFFFF"/>
+    <line x1="-3" y1="-5" x2="-3" y2="-3" stroke="#FFFFFF" stroke-width="1.2"/>
+    <line x1="0" y1="-5" x2="0" y2="-3" stroke="#FFFFFF" stroke-width="1.2"/>
+    <line x1="3" y1="-5" x2="3" y2="-3" stroke="#FFFFFF" stroke-width="1.2"/>
   </g>
 
-  <!-- PIN 2: Resepsi (Gedung Sasana Kriya Ballroom) -->
-  <g transform="translate(460, 240)" filter="url(#shadow)">
-    <!-- Pulse Circle -->
-    <circle cx="0" cy="0" r="22" fill="#E30613" opacity="0.25"/>
-    <circle cx="0" cy="0" r="12" fill="#E30613"/>
-    <!-- Ring / Heart Icon -->
-    <circle cx="0" cy="0" r="5" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-    <!-- Label Card -->
-    <rect x="-75" y="-52" width="150" height="38" rx="5" fill="#FFFFFF" stroke="#E30613" stroke-width="1.5"/>
-    <text x="0" y="-37" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="900" fill="#E30613" text-anchor="middle">RESEPSI (11:00 - 14:00)</text>
-    <text x="0" y="-23" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#2E1E12" text-anchor="middle">Sasana Kriya Ballroom</text>
+  <!-- Icon Hotel (Pink Bed) di Jl. Raya Pantura -->
+  <g transform="translate(565, 116)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="11" fill="#DB2777"/>
+    <path d="M-5,2 L-5,-3 L-3,-3 L-3,0 L3,0 L3,-3 L5,-3 L5,2 Z" fill="#FFFFFF"/>
+    <circle cx="-2" cy="-1" r="1.2" fill="#FFFFFF"/>
   </g>
 
-  <!-- North Compass Rose -->
-  <g transform="translate(555, 45)">
-    <circle cx="0" cy="0" r="16" fill="#FFFFFF" stroke="#D8CEBC" stroke-width="1.5"/>
-    <polygon points="0,-12 4,0 0,2 -4,0" fill="#E30613"/>
-    <polygon points="0,12 4,0 0,-2 -4,0" fill="#BFA482"/>
-    <text x="0" y="-14" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="900" fill="#E30613" text-anchor="middle">U</text>
+  <!-- ========================================== -->
+  <!-- 3. JALUR REL KERETA API                    -->
+  <!-- ========================================== -->
+  <path d="M-10,175 L610,158" class="rail-ties"/>
+  <path d="M-10,175 L610,158" class="rail-track"/>
+  <text x="25" y="168" class="txt-road" font-size="8" fill="#64748B" font-weight="700">Rel Kereta Api</text>
+
+  <!-- ========================================== -->
+  <!-- 4. JALAN PENGHUBUNG DARI PANTURA KE TITIK A -->
+  <!-- ========================================== -->
+  <path d="M120,126 L115,220 L55,440" class="road-base-wide"/>
+
+  <!-- Panah Masuk Belok dari Pantura -->
+  <polygon points="116,165 110,152 122,152" fill="#260CE8" opacity="0.9"/>
+  <polygon points="116,195 110,182 122,182" fill="#260CE8" opacity="0.9"/>
+
+  <!-- ========================================== -->
+  <!-- 5. JALAN-JALAN LINGKUNGAN SELATAN          -->
+  <!-- ========================================== -->
+
+  <!-- Jl. Ky. Khoeron (Cabang Barat) -->
+  <path d="M170,250 L85,320" class="road-base-sm"/>
+  <text x="88" y="335" class="txt-road" transform="rotate(-38, 88, 335)">Jl. Ky. Khoeron</text>
+
+  <!-- Gang-gang kecil di Selatan Jl. Ky. Khoeron -->
+  <path d="M30,380 L60,450" class="road-base-sm"/>
+  <path d="M80,385 L100,450" class="road-base-sm"/>
+  <path d="M150,370 L180,450" class="road-base-sm"/>
+  <path d="M210,385 L245,450" class="road-base-sm"/>
+  <text x="215" y="445" class="txt-road" transform="rotate(-65, 215, 445)">Ali</text>
+
+  <!-- Jl. Tohir -->
+  <path d="M350,295 L335,370" class="road-base-sm"/>
+  <text x="345" y="345" class="txt-road" transform="rotate(-80, 345, 345)">Jl. Tohir</text>
+
+  <!-- Jl. H. Mashuri (Membentang Utara-Selatan) -->
+  <path d="M430,360 L410,450" class="road-base-med"/>
+  <text x="408" y="435" class="txt-road" transform="rotate(-78, 408, 435)">Jl. H. Mashuri</text>
+
+  <!-- Jl. H. Abu Bakar (Sisi Tenggara) -->
+  <path d="M440,345 L610,365" class="road-base-sm"/>
+  <text x="525" y="358" class="txt-road">Jl. H. Abu Bakar</text>
+
+  <!-- Bengkel Dono (Tenggara) -->
+  <text x="480" y="440" class="txt-road" font-size="9.5" font-weight="800">Bengkel Dono</text>
+
+  <!-- ========================================== -->
+  <!-- 6. JALUR DASAR RUTE RESMI                  -->
+  <!-- ========================================== -->
+
+  <!-- 1. Jl. H. Abdul Rahman -->
+  <path d="M115,220 L395,302" class="road-base-wide"/>
+
+  <!-- 2. Belokan Jl. H. Mashuri -->
+  <path d="M395,302 L390,326 Q390,342 410,342 L422,342 Q434,342 438,330 L452,210" class="road-base-wide"/>
+  <text x="410" y="235" class="txt-road" font-size="9" transform="rotate(-78, 410, 235)">Jl. H. Mashuri</text>
+
+  <!-- 3. Jl. H. Usman -->
+  <path d="M445,212 L505,220" class="road-base-wide"/>
+  <path d="M505,220 L570,227" class="road-base-sm"/>
+  <path d="M570,180 L570,250" class="road-base-sm"/>
+
+  <!-- ========================================== -->
+  <!-- 7. RUTE AKTIF (ELECTRIC BLUE/PURPLE BOLD)  -->
+  <!-- ========================================== -->
+
+  <!-- Garis Pinggir Gelap Rute -->
+  <path d="M115,220 L395,302 L390,326 Q390,342 410,342 L422,342 Q434,342 438,330 L452,212 L495,218" class="route-border"/>
+
+  <!-- Garis Inti Biru/Ungu Terang Rute -->
+  <path d="M115,220 L395,302 L390,326 Q390,342 410,342 L422,342 Q434,342 438,330 L452,212 L495,218" class="route-core"/>
+
+  <!-- ========================================================================= -->
+  <!-- TEKS NAMA JALAN TEPAT DI TENGAH-TENGAH GARIS BIRU MENGGUNAKAN textPath    -->
+  <!-- ========================================================================= -->
+  <!-- 1. Jl. H. Abdul Rahman (Halo + Fill tepat di tengah-tengah garis biru) -->
+  <text>
+    <textPath href="#path-abdul-rahman" startOffset="50%" text-anchor="middle" dominant-baseline="central" class="txt-road-halo">
+      Jl. H. Abdul Rahman
+    </textPath>
+  </text>
+  <text>
+    <textPath href="#path-abdul-rahman" startOffset="50%" text-anchor="middle" dominant-baseline="central" class="txt-road-fill">
+      Jl. H. Abdul Rahman
+    </textPath>
+  </text>
+
+  <!-- 2. Jl. H. Usman (Halo + Fill tepat di tengah-tengah garis biru) -->
+  <text>
+    <textPath href="#path-usman" startOffset="48%" text-anchor="middle" dominant-baseline="central" class="txt-road-halo" font-size="9.5px">
+      Jl. H. Usman
+    </textPath>
+  </text>
+  <text>
+    <textPath href="#path-usman" startOffset="48%" text-anchor="middle" dominant-baseline="central" class="txt-road-fill" font-size="9.5px">
+      Jl. H. Usman
+    </textPath>
+  </text>
+
+  <!-- Badge Navigasi "2 mnt | 600 m" -->
+  <g transform="translate(434, 342)" filter="url(#shadow)">
+    <rect x="0" y="0" width="76" height="44" rx="6" fill="#0028E8"/>
+    <!-- Car icon -->
+    <g transform="translate(10, 17)">
+      <path d="M1,5 L3,1 L11,1 L13,5 L13,9 L1,9 Z" fill="#FFFFFF"/>
+      <circle cx="3.5" cy="9.5" r="1.5" fill="#0028E8"/>
+      <circle cx="10.5" cy="9.5" r="1.5" fill="#0028E8"/>
+    </g>
+    <text x="32" y="17" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="900" fill="#FFFFFF">2 mnt</text>
+    <text x="10" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">600 m</text>
   </g>
 
-  <!-- Scale Indicator -->
-  <g transform="translate(30, 335)">
-    <line x1="0" y1="0" x2="60" y2="0" stroke="#6E5D4F" stroke-width="2"/>
-    <line x1="0" y1="-3" x2="0" y2="3" stroke="#6E5D4F" stroke-width="2"/>
-    <line x1="60" y1="-3" x2="60" y2="3" stroke="#6E5D4F" stroke-width="2"/>
-    <text x="30" y="-5" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#6E5D4F" text-anchor="middle">± 1.8 KM (5 Menit)</text>
+  <!-- ========================================== -->
+  <!-- 8. TITIK A: TOKO RAK MADURA (START MASUK)  -->
+  <!-- ========================================== -->
+  <g transform="translate(115, 220)">
+    <!-- Circle target marker persis gambar -->
+    <circle cx="0" cy="0" r="11" fill="#F8FAFC" stroke="#1E293B" stroke-width="3" filter="url(#shadow)"/>
+    <circle cx="0" cy="0" r="5" fill="#1E293B"/>
+
+    <!-- Teks Toko Rak Madura (Ditaruh Bersih di Kanan Atas dengan Badge Jelas) -->
+    <g transform="translate(16, -10)" filter="url(#shadow)">
+      <rect x="-6" y="-14" width="135" height="22" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+      <text x="0" y="2" class="txt-bold" font-size="11.5" fill="#0F172A">
+        Toko Rak Madura
+      </text>
+    </g>
+
+    <!-- Tag Badge Titik A -->
+    <g transform="translate(16, -34)" filter="url(#shadow)">
+      <rect x="-6" y="-10" width="145" height="18" rx="4" fill="#DC2626"/>
+      <text x="66" y="3" class="txt-bold" font-size="8.5" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">
+        ★ TITIK A: PINTU MASUK ★
+      </text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 9. TITIK B: KEDIAMAN (DESTINASI AKHIR)     -->
+  <!-- ========================================== -->
+  <g transform="translate(495, 218)" filter="url(#pinShadow)">
+    <path d="M0,0 C-8,-8 -12,-16 -12,-24 C-12,-32 -6,-37 0,-37 C6,-37 12,-32 12,-24 C12,-16 8,-8 0,0 Z" fill="#E11D48"/>
+    <circle cx="0" cy="-24" r="6" fill="#FFFFFF"/>
+    <circle cx="4" cy="-16" r="9" fill="#F43F5E" stroke="#FFFFFF" stroke-width="1.8"/>
+    <!-- Heart Symbol -->
+    <path d="M4,-18.5 C2.6,-20.2 0.5,-19 0.5,-17 C0.5,-15.2 3.1,-13.2 4,-12.4 C4.9,-13.2 7.5,-15.2 7.5,-17 C7.5,-19 5.4,-20.2 4,-18.5 Z" fill="#FFFFFF"/>
+
+    <!-- Label Lokasi Acara di Kanan Atas -->
+    <g transform="translate(18, -28)" filter="url(#shadow)">
+      <rect x="-4" y="-14" width="95" height="30" rx="5" fill="#FFFFFF" stroke="#E11D48" stroke-width="1.2"/>
+      <text x="0" y="-1" class="txt-bold" font-size="8.5" fill="#BE123C">LOKASI ACARA</text>
+      <text x="0" y="11" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#475569">Kediaman Mempelai</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 10. FOOTER BANNER: PANDUAN MASUK DARI PANTURA -->
+  <!-- ========================================== -->
+  <g transform="translate(15, 395)">
+    <rect x="0" y="0" width="570" height="42" rx="6" fill="#FFFFFF" stroke="#0028E8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="6" height="42" rx="3" fill="#0028E8"/>
+    
+    <text x="18" y="16" class="txt-bold" font-size="10" fill="#0028E8">
+      📍 PANDUAN: DARI JALUR PANTURA ➔ BELOK MASUK DI TITIK A (TOKO RAK MADURA)
+    </text>
+    <text x="18" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#475569">
+      Dari Jalur Pantura belok ke arah selatan ➔ Titik A ➔ Jl. H. Abdul Rahman ➔ Jl. H. Mashuri ➔ Jl. H. Usman (600 m).
+    </text>
   </g>
 </svg>

@@ -1,56 +1,56 @@
 /**
  * File Konfigurasi Data Acara Pernikahan
- * Tema: Toko Ritel x J&T Express (Transaksi Cinta & Tukar Uang Pecahan)
+ * Tema: Toko Sandal & Sepatu x Ekspedisi Pengiriman (Memori Perjalanan & Ikrar Suci)
  */
 export const WEDDING_CONFIG = {
     groom: {
-        nickname: "Rian",
-        fullName: "Rian Pratama, S.Kom.",
-        role: "Kasir & Pengelola Toko Ritel",
+        nickname: "Hafla",
+        fullName: "Hafla Maulana",
+        role: "Pengelola Toko Sandal & Sepatu",
         parents: "Putra tercinta dari Bpk. H. Bambang & Ibu Hj. Sri Hartati"
     },
     bride: {
-        nickname: "Nisa",
-        fullName: "Annisa Rahmawati, S.E.",
-        role: "Staff Drop Point COD J&T Express",
-        parents: "Putri tercinta dari Bpk. Joko Santoso & Ibu Nur Aini"
+        nickname: "Fifi",
+        fullName: "Fifi Maghfiroh",
+        role: "Admin Kantor Ekspedisi Pengiriman",
+        parents: "Putri tercinta dari Almarhum Bpk. Joko Santoso & Ibu Nur Aini"
     },
     story: {
-        title: "Pertukaran Uang Pecahan Berujung Janji Seumur Hidup",
-        origin: "Bermula dari meja kasir toko ritel yang kehabisan uang kembalian pecahan dua ribu dan lima ribu rupiah, dan kantor Drop Point J&T Express di seberang jalan yang selalu penuh uang tunai dari kurir COD. Dari sapaan ramah bertukar uang receh, tumbuh obrolan santai, janji mencicipi kedai kopi baru, bermain game co-op di rental PS, hingga menikmati syahdunya gemercik air di alam terbuka."
+        title: "Pertukaran Pecahan & Sepasang Sandal Menuju Janji Seumur Hidup",
+        origin: "Bermula dari meja kasir toko sandal & sepatu yang membutuhkan uang pecahan untuk kembalian, dan salah satu kantor ekspedisi pengiriman tempat Fifi bertugas. Dari sapaan ramah bertukar receh dan sandal yang terjatuh di kala hujan, tumbuh obrolan hangat, jawaban manis di atas bianglala, hingga ketabahan saling menguatkan dalam duka menuju ikrar suci seumur hidup."
     },
     event: {
-        date: "2026-11-28", // Target hari H
-        dateFormatted: "Sabtu, 28 November 2026",
+        date: "2026-05-23", // Target hari H di bulan Mei
+        dateFormatted: "Sabtu, 23 Mei 2026",
         akad: {
             time: "08:00 - 10:00 WIB",
-            venue: "Masjid Raya Baiturrahman",
-            address: "Jl. Kemenangan Utama No. 18, Jakarta Selatan"
+            venue: "Kediaman Mempelai Putri",
+            address: "Pacar Barat, Tirto, Kab. Pekalongan (Wajib Masuk dari Titik A: Toko Rak Madura)"
         },
         resepsi: {
             time: "11:00 - 14:00 WIB",
-            venue: "Gedung Serbaguna Sasana Kriya",
-            address: "Komplek Taman Budaya, Jl. Flamboyan No. 25, Jakarta Selatan"
+            venue: "Kediaman Mempelai Putri",
+            address: "Pacar Barat, Tirto, Kab. Pekalongan (Wajib Masuk dari Titik A: Toko Rak Madura)"
         },
-        mapsUrl: "https://maps.google.com/?q=-6.2088,106.8456",
-        wazeUrl: "https://waze.com/ul?ll=-6.2088,106.8456&navigate=yes",
+        mapsUrl: "https://www.google.com/maps/dir/?api=1&waypoints=-6.891577%2C109.637651&destination=-6.891444%2C109.641833&travelmode=driving",
+        wazeUrl: "https://waze.com/ul?ll=-6.891444,109.641833&navigate=yes",
         calendarEvent: {
-            title: "Pernikahan Rian & Nisa (Transaksi Cinta Toko Ritel x J&T)",
-            description: "Undangan Pernikahan Rian Pratama & Annisa Rahmawati di Sasana Kriya",
-            location: "Gedung Serbaguna Sasana Kriya, Jakarta Selatan",
-            startDate: "20261128T080000",
-            endDate: "20261128T140000"
+            title: "Pernikahan Hafla Maulana & Fifi Maghfiroh",
+            description: "Undangan Pernikahan Hafla Maulana & Fifi Maghfiroh",
+            location: "Kediaman Mempelai Putri, Pacar, Tirto, Kab. Pekalongan (Akses Barat)",
+            startDate: "20260523T080000",
+            endDate: "20260523T140000"
         }
     },
     digitalGift: {
         bankName: "Bank Central Asia (BCA)",
         accountNumber: "8420198273",
-        accountHolder: "Rian Pratama",
+        accountHolder: "Hafla Maulana",
         bankNameSecond: "Bank Syariah Indonesia (BSI)",
         accountNumberSecond: "7192830192",
-        accountHolderSecond: "Annisa Rahmawati",
+        accountHolderSecond: "Fifi Maghfiroh",
         qrisImage: "assets/photos/qris.svg",
-        physicalGiftAddress: "Drop Point J&T Express Palmerah (u.p. Annisa / Rian), Jl. Palmerah Barat No. 88, Palmerah, Jakarta Barat 11480 (Telp: 0812-3456-7890)"
+        physicalGiftAddress: "Kantor Ekspedisi Pengiriman (u.p. Fifi Maghfiroh / Hafla Maulana), Jl. Palmerah Barat No. 88, Palmerah, Jakarta Barat 11480 (Telp: 0812-3456-7890)"
     },
     admin: {
         pin: "202620"

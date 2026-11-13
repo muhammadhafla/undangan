@@ -277,6 +277,15 @@ export function initUnboxing() {
         });
     }
 
+    // Kunci event scroll sebelum amplop dibuka
+    const preventScroll = (e) => {
+        if (document.body.classList.contains('envelope-locked')) {
+            e.preventDefault();
+        }
+    };
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+    window.addEventListener('wheel', preventScroll, { passive: false });
+
     // 3. Tombol Segel Merah "Buka Segel Amplop"
     const sealBtn = document.getElementById('envelope-seal-btn');
     const envelopeWrapper = document.getElementById('envelope-wrapper');
@@ -300,17 +309,26 @@ export function initUnboxing() {
                 if (audioStatusLabel) audioStatusLabel.textContent = 'Musik';
             }
 
-            // C. Keluarkan Dokumen Isi Amplop
+            // C. Buka Kunci Scroll & Keluarkan Dokumen Isi Amplop
             setTimeout(() => {
+                document.documentElement.classList.remove('envelope-locked');
+                document.body.classList.remove('envelope-locked');
+                window.removeEventListener('touchmove', preventScroll);
+                window.removeEventListener('wheel', preventScroll);
+
                 if (unboxedFlow) {
-                    unboxedFlow.classList.add('revealed');
-                    // Scroll perlahan menuju dokumen pertama: Surat Cerita
-                    const storyEl = document.getElementById('story-section');
-                    if (storyEl) {
-                        storyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+                    requestAnimationFrame(() => {
+                        unboxedFlow.classList.add('revealed');
+                        // Scroll perlahan menuju dokumen pertama: Surat Cerita
+                        setTimeout(() => {
+                            const storyEl = document.getElementById('story-section');
+                            if (storyEl) {
+                                storyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }, 120);
+                    });
                 }
-            }, 600);
+            }, 500);
         });
     }
 

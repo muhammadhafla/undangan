@@ -5,23 +5,23 @@ const INITIAL_WISHES = [
     {
         id: '1',
         guest_name: 'Budi Santoso',
-        message: 'Selamat Rian & Nisa! Masih ingat dulu Rian sering mondar-mandir Drop Point J&T cuma buat nukar receh dua ribuan, ternyata jodoh beneran! Samawa ya bro!',
+        message: 'Selamat Aflan & Fifi! Masih ingat dulu Aflan sering ke Drop Point J&T buat tukar receh, sampai momen sandal putus pas pagi hujan. Ternyata jodoh sejati! Sakinah mawaddah warahmah ya bro!',
         attendance_badge: 'Hadir',
-        created_at: '2026-11-12T10:30:00Z'
+        created_at: '2026-05-12T10:30:00Z'
     },
     {
         id: '2',
         guest_name: 'Siti Sarah & Suami',
-        message: 'Barakallah Nisa sayang! Teman seperjuangan COD akhirnya checkout seumur hidup sama mas kasir ritel idaman. Semoga sakinah mawaddah warahmah.',
+        message: 'Barakallah Fifi sayang! Dari obrolan di Drop Point J&T hingga ikrar suci pelaminan bersama Mas Aflan. Semoga sakinah mawaddah warahmah selalu.',
         attendance_badge: 'Hadir',
-        created_at: '2026-11-12T09:15:00Z'
+        created_at: '2026-05-12T09:15:00Z'
     },
     {
         id: '3',
-        guest_name: 'Andra (Rental PS Squad)',
-        message: 'Player 1 dan Player 2 resmi coop di real life! Happy wedding Rian & Nisa! Nanti kalau udah sah jangan lupa mampir rental lagi yaa.',
+        guest_name: 'Dimas (Sahabat Semarang)',
+        message: 'Masya Allah, dari jawaban manis di bianglala Semarang akhirnya sah bersanding di pelaminan. Berkah dan bahagia selalu untuk Hafla & Fifi!',
         attendance_badge: 'Hadir',
-        created_at: '2026-11-12T08:00:00Z'
+        created_at: '2026-05-12T08:00:00Z'
     }
 ];
 
