@@ -715,11 +715,11 @@ function initLightboxModals() {
         });
     });
 
-    // Pasang listener pada QRIS trigger
+    // Pasang listener pada QRIS trigger (Otomatis mengikuti sumber gambar .png / .svg)
     const qrisTrigger = document.getElementById('qris-zoom-trigger');
     if (qrisTrigger) {
         qrisTrigger.addEventListener('click', () => {
-            openModal('assets/photos/qris.svg', 'Pindai QRIS untuk Tanda Kasih / Angpao Digital');
+            openModal(qrisTrigger.src || 'assets/photos/qris.svg', 'Pindai QRIS untuk Tanda Kasih / Angpao Digital');
         });
     }
 }
