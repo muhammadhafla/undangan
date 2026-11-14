@@ -39,152 +39,170 @@
                 <!-- Badan Kertas Kraft Dalam -->
                 <div class="envelope-inner-body">
                     
-                    <!-- 3D Airmail Envelope Flap (Tutup Amplop Atas) -->
-                    <div class="envelope-flap" aria-hidden="true"></div>
+                    <!-- Flap Tutup Kardus Paket (Mentok Kanan-Kiri Sesuai Template) -->
+                    <div class="envelope-flap" aria-hidden="true">
+                        <div class="flap-crease-line"></div>
+                    </div>
 
-                    <!-- Interactive String & Button Closure (Kancing & Tali Merah) -->
-                    <div id="envelope-seal-btn" class="string-closure-group" role="button" aria-label="Buka Tali Amplop" tabindex="0">
-                        <!-- Kancing Atas (pada Flap) -->
-                        <div class="string-button">
-                            <span class="string-eyelet"></span>
-                        </div>
-                        
-                        <!-- Lilitan Tali Merah -->
-                        <div class="string-thread"></div>
-                        
-                        <!-- Kancing Bawah (pada Badan Amplop) & Sisa Tali -->
-                        <div class="string-button">
-                            <span class="string-eyelet"></span>
-                            <div class="string-tail"></div>
-                        </div>
+                    <!-- Perforated Tear-Strip Zipper (Membentang Penuh Mentok Kanan-Kiri) -->
+                    <div id="envelope-seal-btn" class="kraft-perforated-strip" role="button" aria-label="Tarik Perforasi untuk Membuka Amplop" tabindex="0">
+                        <div class="perforation-track">
+                            <!-- Rongga Sobekan Karton Gelap Mentok Kanan-Kiri (Otentik & Realistis) -->
+                            <div class="tear-open-cavity" aria-hidden="true">
+                                <div class="cavity-torn-teeth-top"></div>
+                                <div class="cavity-interior">
+                                    <!-- Satu Berkas Dokumen Utama yang Menyembul & Melesat Keluar dari Celah Sobekan Cokelat Gelap -->
+                                    <div id="ejecting-document-card" class="ejecting-document-card">
+                                        <div class="eject-doc-inner">
+                                            <div class="eject-doc-header">
+                                                <span class="eject-doc-tagline">CATATAN KECIL DARI KAMI BERDUA</span>
+                                                <span class="eject-doc-stamp">OFFICIAL MEMO</span>
+                                            </div>
+                                            <h3 class="eject-doc-title">Tentang Sepasang Langkah yang Bertaut</h3>
+                                            <div class="eject-doc-preview-text">
+                                                Tuhan kerap menyembunyikan takdir terindahnya di balik hal-hal yang paling bersahaja...
+                                            </div>
+                                            <div class="eject-doc-footer-meta">
+                                                <span class="eject-doc-page">LEMBAR 01 DARI 02</span>
+                                                <span class="eject-doc-badge">BERKAS UTAMA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cavity-torn-teeth-bottom"></div>
+                                <div class="torn-paper-stub-end" aria-hidden="true"></div>
+                            </div>
 
-                        <!-- Badge Ajakan Interaktif -->
-                        <div class="string-action-badge">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="6" cy="6" r="3"></circle>
-                                <circle cx="6" cy="18" r="3"></circle>
-                                <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
-                                <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
-                                <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
-                            </svg>
-                            <span>TARIK TALI PAKET</span>
+                            <!-- Lapisan Pita Kardus yang Terkelupas dengan Benang Merah -->
+                            <div class="peeling-strip-layer">
+                                <span class="pull-tab-grip" aria-hidden="true">
+                                    <span class="pull-tab-red-liner"></span>
+                                </span>
+                                <div class="perforation-dashed-line top-line"></div>
+                                <div class="perforation-content">
+                                    <svg class="perforation-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="6" cy="6" r="3"></circle>
+                                        <circle cx="6" cy="18" r="3"></circle>
+                                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                                    </svg>
+                                    <span class="perforation-text">TARIK UNTUK MEMBUKA</span>
+                                    <span class="perforation-arrows">▸▸▸</span>
+                                </div>
+                                <div class="perforation-dashed-line bottom-line"></div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Resi Pengiriman J&T Ringkas & Bersih (Hanya Lembar Paket) -->
+                    <!-- Resi Pengiriman H&F Express Ringkas & Autentik -->
                     <div class="waybill-mobile-wrapper">
                         <article class="jnt-waybill-label" aria-label="Resi Pengiriman H&amp;F Express">
-                            <table class="jnt-table">
-                                <!-- Baris 1: Header (Logo H&F Express & Barcode Resi) -->
-                                <tr>
-                                    <td class="jnt-cell hf-logo-cell">
-                                        <svg class="hf-logo-svg" viewBox="0 0 150 42" style="width: 100%; height: auto; max-height: 38px; display: block;" aria-label="Logo H&amp;F Express">
-                                            <text x="2" y="28" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-style="italic" font-size="28" fill="#E30613" letter-spacing="-1">H&amp;F</text>
-                                            <path d="M 68,12 Q 112,12 134,18" stroke="#E30613" stroke-width="2.5" stroke-linecap="round" fill="none" />
-                                            <circle cx="134" cy="18" r="2" fill="#E30613" />
-                                            <text x="70" y="26" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-style="italic" font-size="9.5" fill="#E30613" letter-spacing="1.5">EXPRESS</text>
-                                            <text x="3" y="38" font-family="'Courier New', monospace" font-weight="700" font-size="6.5" fill="#6E5D4F" letter-spacing="0.4">KABAR BAHAGIA COURIER</text>
-                                        </svg>
-                                    </td>
-                                    <td class="jnt-cell jnt-barcode-cell">
-                                        <svg class="jnt-header-barcode" viewBox="0 0 240 28" preserveAspectRatio="none">
-                                            <rect x="0" y="0" width="4" height="28" fill="#000"/>
-                                            <rect x="7" y="0" width="2" height="28" fill="#000"/>
-                                            <rect x="13" y="0" width="5" height="28" fill="#000"/>
-                                            <rect x="22" y="0" width="2" height="28" fill="#000"/>
-                                            <rect x="28" y="0" width="7" height="28" fill="#000"/>
-                                            <rect x="39" y="0" width="3" height="28" fill="#000"/>
-                                            <rect x="46" y="0" width="5" height="28" fill="#000"/>
-                                            <rect x="56" y="0" width="2" height="28" fill="#000"/>
-                                            <rect x="62" y="0" width="6" height="28" fill="#000"/>
-                                            <rect x="73" y="0" width="3" height="28" fill="#000"/>
-                                            <rect x="80" y="0" width="6" height="28" fill="#000"/>
-                                            <rect x="91" y="0" width="2" height="28" fill="#000"/>
-                                            <rect x="97" y="0" width="4" height="28" fill="#000"/>
-                                            <rect x="106" y="0" width="7" height="28" fill="#000"/>
-                                            <rect x="117" y="0" width="2" height="28" fill="#000"/>
-                                            <rect x="123" y="0" width="5" height="28" fill="#000"/>
-                                            <rect x="133" y="0" width="3" height="28" fill="#000"/>
-                                            <rect x="140" y="0" width="6" height="28" fill="#000"/>
-                                            <rect x="151" y="0" width="2" height="28" fill="#000"/>
-                                            <rect x="157" y="0" width="5" height="28" fill="#000"/>
-                                            <rect x="166" y="0" width="3" height="28" fill="#000"/>
-                                            <rect x="173" y="0" width="7" height="28" fill="#000"/>
-                                            <rect x="185" y="0" width="2" height="28" fill="#000"/>
-                                            <rect x="191" y="0" width="6" height="28" fill="#000"/>
-                                            <rect x="201" y="0" width="3" height="28" fill="#000"/>
-                                            <rect x="208" y="0" width="5" height="28" fill="#000"/>
-                                            <rect x="217" y="0" width="3" height="28" fill="#000"/>
-                                            <rect x="224" y="0" width="6" height="28" fill="#000"/>
-                                            <rect x="234" y="0" width="4" height="28" fill="#000"/>
-                                        </svg>
-                                        <div id="barcode-text-display" class="jnt-tracking-number">200417537039</div>
-                                    </td>
-                                </tr>
+                            
+                            <!-- Header: Logo & Barcode (Bersatu tanpa border kotak pemisah) -->
+                            <div class="waybill-header-row">
+                                <div class="hf-logo-area">
+                                    <svg class="hf-logo-svg" viewBox="0 0 150 42" aria-label="Logo H&amp;F Express">
+                                        <text x="2" y="28" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-style="italic" font-size="28" fill="#E30613" letter-spacing="-1">H&amp;F</text>
+                                        <path d="M 68,12 Q 112,12 134,18" stroke="#E30613" stroke-width="2.5" stroke-linecap="round" fill="none" />
+                                        <circle cx="134" cy="18" r="2" fill="#E30613" />
+                                        <text x="70" y="26" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-style="italic" font-size="9.5" fill="#E30613" letter-spacing="1.5">EXPRESS</text>
+                                        <text x="3" y="38" font-family="'Courier New', monospace" font-weight="700" font-size="6.5" fill="#6E5D4F" letter-spacing="0.4">KABAR BAHAGIA COURIER</text>
+                                    </svg>
+                                </div>
+                                <div class="jnt-barcode-area">
+                                    <svg class="jnt-header-barcode" viewBox="0 0 240 28" preserveAspectRatio="none">
+                                        <rect x="0" y="0" width="4" height="28" fill="#000"/>
+                                        <rect x="7" y="0" width="2" height="28" fill="#000"/>
+                                        <rect x="13" y="0" width="5" height="28" fill="#000"/>
+                                        <rect x="22" y="0" width="2" height="28" fill="#000"/>
+                                        <rect x="28" y="0" width="7" height="28" fill="#000"/>
+                                        <rect x="39" y="0" width="3" height="28" fill="#000"/>
+                                        <rect x="46" y="0" width="5" height="28" fill="#000"/>
+                                        <rect x="56" y="0" width="2" height="28" fill="#000"/>
+                                        <rect x="62" y="0" width="6" height="28" fill="#000"/>
+                                        <rect x="73" y="0" width="3" height="28" fill="#000"/>
+                                        <rect x="80" y="0" width="6" height="28" fill="#000"/>
+                                        <rect x="91" y="0" width="2" height="28" fill="#000"/>
+                                        <rect x="97" y="0" width="4" height="28" fill="#000"/>
+                                        <rect x="106" y="0" width="7" height="28" fill="#000"/>
+                                        <rect x="117" y="0" width="2" height="28" fill="#000"/>
+                                        <rect x="123" y="0" width="5" height="28" fill="#000"/>
+                                        <rect x="133" y="0" width="3" height="28" fill="#000"/>
+                                        <rect x="140" y="0" width="6" height="28" fill="#000"/>
+                                        <rect x="151" y="0" width="2" height="28" fill="#000"/>
+                                        <rect x="157" y="0" width="5" height="28" fill="#000"/>
+                                        <rect x="166" y="0" width="3" height="28" fill="#000"/>
+                                        <rect x="173" y="0" width="7" height="28" fill="#000"/>
+                                        <rect x="185" y="0" width="2" height="28" fill="#000"/>
+                                        <rect x="191" y="0" width="6" height="28" fill="#000"/>
+                                        <rect x="201" y="0" width="3" height="28" fill="#000"/>
+                                        <rect x="208" y="0" width="5" height="28" fill="#000"/>
+                                        <rect x="217" y="0" width="3" height="28" fill="#000"/>
+                                        <rect x="224" y="0" width="6" height="28" fill="#000"/>
+                                        <rect x="234" y="0" width="4" height="28" fill="#000"/>
+                                    </svg>
+                                    <div id="barcode-text-display" class="jnt-tracking-number">200417537039</div>
+                                </div>
+                            </div>
 
-                                <!-- Baris 2: Pengirim & Penerima (Simetris 50% : 50%, Padat & Rapi) -->
-                                <tr>
-                                    <td class="jnt-cell waybill-sender-cell">
-                                        <span class="jnt-label-title">DARI (PENGIRIM):</span>
-                                        <div class="jnt-name-bold">HAFLA &amp; FIFI</div>
-                                        <div class="waybill-subtext">Toko Sandal × Loket Ekspedisi</div>
-                                        <div class="waybill-subtext">Kabar Bahagia &amp; Doa Restu</div>
-                                        <div class="waybill-city-tag">Semarang - Jakarta</div>
-                                    </td>
-                                    <td class="jnt-cell waybill-receiver-cell">
-                                        <span class="jnt-label-title">KEPADA YTH:</span>
-                                        <div id="waybill-recipient-name" class="jnt-name-recipient">INDIL</div>
-                                        <div class="waybill-subtext">Tamu Undangan Terhormat</div>
-                                        <div class="jnt-service-bar">IKHTIAR-SUCI (WALIMAH)</div>
-                                        <div class="waybill-status-note">✓ Undangan Resmi Terkirim</div>
-                                    </td>
-                                </tr>
+                            <!-- Baris Kontak: Pengirim & Penerima (Dua Kolom Bersih) -->
+                            <div class="waybill-parties-row">
+                                <div class="party-col sender-col">
+                                    <span class="waybill-micro-title">DARI (PENGIRIM):</span>
+                                    <div class="party-name">HAFLA &amp; FIFI</div>
+                                    <div class="party-desc">Keluarga Calon Mempelai</div>
+                                    <div class="party-location">Pekalongan, Jawa Tengah</div>
+                                </div>
+                                <div class="party-col receiver-col">
+                                    <span class="waybill-micro-title">KEPADA YTH:</span>
+                                    <div id="waybill-recipient-name" class="party-name recipient-name">Sahabat &amp; Kerabat Tercinta</div>
+                                    <div class="party-desc">Tamu Undangan Terhormat</div>
+                                    <div class="party-location">Di Tempat</div>
+                                </div>
+                            </div>
 
-                                <!-- Baris 3: Spesifikasi Acara, QR Code Check-in & Tamu VIP -->
-                                <tr>
-                                    <td class="jnt-cell jnt-weight-data">
-                                        <div>Acara: <strong>Walimatul 'Ursy</strong></div>
-                                        <div>Muatan: <strong>Ikrar &amp; Doa</strong></div>
-                                        <div>Waktu: <strong>Mei 2026</strong></div>
-                                    </td>
-                                    <td class="jnt-cell jnt-qr-cell">
-                                        <svg class="jnt-qr-svg" viewBox="0 0 100 100">
-                                            <rect width="100" height="100" fill="#FFF"/>
-                                            <rect x="5" y="5" width="26" height="26" fill="#000"/>
-                                            <rect x="9" y="9" width="18" height="18" fill="#FFF"/>
-                                            <rect x="13" y="13" width="10" height="10" fill="#000"/>
-                                            <rect x="69" y="5" width="26" height="26" fill="#000"/>
-                                            <rect x="73" y="9" width="18" height="18" fill="#FFF"/>
-                                            <rect x="77" y="13" width="10" height="10" fill="#000"/>
-                                            <rect x="5" y="69" width="26" height="26" fill="#000"/>
-                                            <rect x="9" y="73" width="18" height="18" fill="#FFF"/>
-                                            <rect x="13" y="77" width="10" height="10" fill="#000"/>
-                                            <rect x="36" y="8" width="8" height="8" fill="#000"/>
-                                            <rect x="50" y="8" width="6" height="14" fill="#000"/>
-                                            <rect x="42" y="24" width="12" height="6" fill="#000"/>
-                                            <rect x="8" y="38" width="12" height="6" fill="#000"/>
-                                            <rect x="25" y="42" width="6" height="10" fill="#000"/>
-                                            <rect x="38" y="38" width="24" height="24" rx="4" fill="#E30613"/>
-                                            <path d="M50,56 C46,52 43,49 43,45 C43,42 45,40 48,40 C49.5,40 50,41 50,42 C50,41 50.5,40 52,40 C55,40 57,42 57,45 C57,49 54,52 50,56 Z" fill="#FFF"/>
-                                            <rect x="68" y="38" width="8" height="14" fill="#000"/>
-                                            <rect x="82" y="44" width="10" height="6" fill="#000"/>
-                                            <rect x="38" y="68" width="14" height="8" fill="#000"/>
-                                            <rect x="58" y="74" width="8" height="16" fill="#000"/>
-                                            <rect x="74" y="68" width="18" height="8" fill="#000"/>
-                                            <rect x="44" y="82" width="10" height="10" fill="#000"/>
-                                            <rect x="72" y="82" width="18" height="10" fill="#000"/>
-                                        </svg>
-                                        <div class="qr-checkin-caption">Scan QR Check-in</div>
-                                    </td>
-                                    <td class="jnt-cell jnt-cashless-cell">
-                                        <div class="jnt-vip-header">TAMU VIP</div>
-                                        <div class="jnt-vip-access">AKSES RESMI</div>
-                                        <div class="jnt-vip-status">STATUS: SAH ✓</div>
-                                        <div class="jnt-page-index">1 / 1</div>
-                                    </td>
-                                </tr>
-                            </table>
+                            <!-- Baris Detail: Spesifikasi Acara & Layanan Pengiriman -->
+                            <div class="waybill-footer-row">
+                                <div class="footer-col event-col">
+                                    <span class="waybill-micro-title">SPESIFIKASI ACARA:</span>
+                                    <div class="footer-detail-line">Acara: <strong>Resepsi Pernikahan</strong></div>
+                                    <div class="footer-detail-line">Waktu: <strong>7 Mei 2027 • 14.00 WIB</strong></div>
+                                </div>
+                                <div class="footer-col service-col">
+                                    <span class="waybill-micro-title">LAYANAN PENGIRIMAN:</span>
+                                    <div class="courier-service-row">
+                                        <span class="courier-noncod-badge">NON-COD</span>
+                                        <span class="courier-service-name">EXPRESS</span>
+                                    </div>
+                                    <div class="postage-note">Biaya: <strong>Doa Restu &amp; Kehadiran</strong></div>
+                                </div>
+                            </div>
+
                         </article>
+                    </div>
+
+                    <!-- Cap & Stempel Otentik Kurir di Bagian Bawah Kardus (Estetik & Realistis) -->
+                    <div class="envelope-footer-stamp-area">
+                        <!-- Cap Pos Otentik: Loket Pekalongan & Tanggal Acara -->
+                        <div class="courier-postmark-stamp" aria-hidden="true">
+                            <div class="postmark-circle">
+                                <span class="postmark-city">PEKALONGAN</span>
+                                <span class="postmark-date">07 MEI 2027</span>
+                                <span class="postmark-branch">H&amp;F EXPRESS</span>
+                            </div>
+                        </div>
+
+                        <!-- Stempel Cap Merah FRAGILE -->
+                        <div class="waybill-stamp fragile-stamp" aria-hidden="true">
+                            <span class="stamp-top">FRAGILE</span>
+                            <span class="stamp-bot">HANDLE WITH LOVE ♥</span>
+                        </div>
+                    </div>
+
+                    <!-- Watermark Tipis Segel Dokumen Resmi di Ujung Bawah Kardus -->
+                    <div class="envelope-bottom-seal-notice">
+                        <span>★ DOKUMEN RESMI RESEPSI PERNIKAHAN • H&amp;F COURIER SPECIAL DELIVERY ★</span>
                     </div>
 
                 </div>
@@ -206,20 +224,20 @@
                  ---------------------------------------------------------------- -->
             <section id="story-section" class="paper-document doc-story story-letter-sheet page-1" aria-label="Surat Pengantar & Kisah Perjalanan (Lembar 1)">
                 <header class="letter-header">
-                    <div class="letter-tagline">SURAT RESMI DARI MEJA KASIR &amp; DROP POINT</div>
-                    <h1 class="letter-title">Pertukaran Pecahan &amp; Sepasang Sandal Menuju Janji Seumur Hidup</h1>
+                    <div class="letter-tagline">CATATAN KECIL DARI KAMI BERDUA</div>
+                    <h1 class="letter-title">Tentang Sepasang Langkah yang Bertaut</h1>
                 </header>
 
                 <div class="letter-greeting">
-                    Salam hangat teruntuk Sahabat, Kerabat, dan Keluarga Tercinta,
+                    Salam hangat dan rasa syukur teruntuk Sahabat, Kerabat, serta Keluarga Tercinta,
                 </div>
 
                 <div class="letter-body">
                     <!-- Babak I -->
                     <div class="story-chapter-block">
                         <div class="story-chapter-header">
-                            <div class="story-chapter-title">Babak I: Lembaran Pecahan, Gerimis Pagi, dan Sepasang Sandal</div>
-                            <div class="story-chapter-date">Mei — Awal Mula Takdir Mengetuk</div>
+                            <div class="story-chapter-title">Babak I: Lembaran Pecahan &amp; Gerimis Pagi</div>
+                            <div class="story-chapter-date">Mei — Ketika Takdir Mengetuk Langkah Kami</div>
                         </div>
 
                         <!-- Polaroid Tucked Kanan (Interaktif) -->
@@ -233,16 +251,16 @@
                         </aside>
 
                         <p>
-                            Semua bermula dari meja kasir toko sandal dan sepatu milik Aflan yang kerap kehabisan uang pecahan kembalian. Salah satu kantor ekspedisi pengiriman tempat Fifi bekerja menjadi tempat langganan Aflan menukar receh. Sapaan ramah <em>"Ada uang receh nggak, Mbak?"</em> atau tawaran hangat dari Fifi <em>"Mas, ada pecahan segini, mau ditukar?"</em> menjadi rutinitas kecil yang diam-diam dinanti.
+                            Tuhan kerap menyembunyikan takdir terindahnya di balik hal-hal yang paling bersahaja. Bagi kami berdua, cerita ini bermula dari rutinitas kecil di sela jam kerja: meja kasir toko sepatu yang kerap kehabisan uang pecahan, dan loket ekspedisi tempat sapaan ramah itu selalu menyambut.
                         </p>
                         <p>
-                            Sejak awal melihat Fifi, hati Aflan sejujurnya sudah terpikat. Namun rasa ragu menahannya: <em>"Ah, palingan juga sudah ada yang punya. Nggak mungkin perempuan secantik ini belum berpasangan."</em>
+                            Dari sekadar bertukar lembaran kembalian, ada rasa kagum yang diam-diam tumbuh di antara kami—meski saat itu, kami berdua masih sama-sama memilih menyimpannya rapi dalam diam.
                         </p>
                         <div class="letter-highlight-quote">
                             "Mas, ada sandal cewek nggak?"
                         </div>
                         <p>
-                            Hingga suatu pagi yang basah oleh hujan, sebuah pesan tak terduga itu masuk dari Fifi. Karena terburu-buru berangkat kerja di tengah guyuran gerimis, sandal yang ia kenakan terjatuh dan hilang di jalan. Dari sepasang sandal pengganti dan obrolan kecil di pagi yang dingin itu, dinding kecanggungan runtuh. Percakapan mereka mulai mengalir panjang, bertukar cerita tentang hari-hari, hingga tak pernah lagi menemukan jeda.
+                            Hingga suatu pagi di bulan Mei, gerimis turun menorehkan cerita yang tak pernah kami sangka. Langkah yang tergesa menembus basahnya jalan membuat sepasang sandal terlepas dan hilang. Sebuah pesan singkat pun terkirim, dan dari sepasang sandal pengganti yang diantarkan pagi itu, sekat kecanggungan di antara kami luruh seketika. Dinginnya sisa hujan perlahan berganti menjadi hangatnya obrolan yang kian panjang—sebuah percakapan akrab yang seakan enggan menemukan kata usai.
                         </p>
                     </div>
 
@@ -251,28 +269,28 @@
                     <!-- Babak II -->
                     <div class="story-chapter-block">
                         <div class="story-chapter-header">
-                            <div class="story-chapter-title">Babak II: Jawaban Manis di Langit Semarang</div>
-                            <div class="story-chapter-date">Agustus — Di Antara Putaran Bianglala &amp; Doa yang Terjawab</div>
+                            <div class="story-chapter-title">Babak II: Menggantung Harap di Kabin Bianglala</div>
+                            <div class="story-chapter-date">Agustus — Jawaban Manis di Puncak Putaran</div>
                         </div>
 
                         <!-- Polaroid Tucked Kiri (Interaktif) -->
-                        <aside class="story-polaroid-aside float-left polaroid-card tilt-left" role="button" tabindex="0" aria-label="Lihat foto bianglala di Semarang">
+                        <aside class="story-polaroid-aside float-left polaroid-card tilt-left" role="button" tabindex="0" aria-label="Lihat foto bianglala">
                             <div class="polaroid-tape" aria-hidden="true"></div>
                             <div class="polaroid-photo-box">
                                 <img src="assets/photos/photo-2.svg" alt="Cakrawala di Atas Bianglala" loading="lazy">
                             </div>
-                            <div class="polaroid-caption">"Bianglala Semarang"</div>
+                            <div class="polaroid-caption">"Kabin Bianglala"</div>
                             <div class="polaroid-tap-hint">Ketuk foto ↗</div>
                         </aside>
 
                         <p>
-                            Waktu bergulir membawa langkah mereka kian dekat. Akhir Juni menjadi kali pertama mereka jalan berdua. Rasa nyaman yang tumbuh kian meyakinkan Aflan, hingga tibalah tanggal 26 Juli—bertepatan dengan hari ulang tahun Fifi. Hari itu, Aflan memberanikan diri mengutarakan niat tulus: ia ingin serius mengenalnya dan menjalin masa depan bersama. Namun hari itu, Fifi belum memberikan jawaban; ia butuh waktu untuk menimbang dan meyakinkan hatinya.
+                            Waktu perlahan menuntun kedekatan kami menjadi rasa yang kian nyata. Di sebuah hari yang istimewa, niat tulus untuk membangun masa depan bersama mulai diutarakan. Namun kami belajar bahwa cinta yang dewasa tahu caranya bersabar; ada hati yang perlu dimantapkan dengan bijak, dan ada ketulusan yang setia dirawat dalam penantian.
                         </p>
                         <p>
-                            Aflan memilih setia menunggu dengan ketulusan.
+                            Jawaban yang dinantikan itu akhirnya berlabuh di bulan Agustus.
                         </p>
                         <p>
-                            Bulan Agustus tiba, menjadi saksi perjalanan luar kota pertama mereka menuju sebuah taman bermain di Kabupaten Semarang. Di sana, mereka menaiki bianglala raksasa. Di ketinggian kabin yang berputar perlahan membelah langit perbukitan, di antara semilir angin dan pemandangan luas yang terbentang, Fifi menatap Aflan dan melabuhkan keputusannya. Dengan senyum manis, Fifi menerima Aflan untuk berjalan beriringan.
+                            Di dalam sebuah kabin bianglala yang berputar perlahan mengitari ketinggian, ditemani semilir angin dan pemandangan luas yang membentang di bawah naungan langit sore, senyum tulus itu terkembang membawa kepastian. Di puncak putaran bianglala itulah, dua hati sepakat untuk mulai melangkah beriringan.
                         </p>
                     </div>
                 </div>
@@ -292,32 +310,28 @@
                  ---------------------------------------------------------------- -->
             <section id="story-section-2" class="paper-document doc-story story-letter-sheet page-2" aria-label="Kisah Perjalanan & Ikrar Suci (Lembar 2)">
                 <header class="letter-header">
-                    <div class="letter-tagline">LEMBAR KEDUA: KETABAHAN &amp; IKRAR SUCI</div>
-                    <h2 class="letter-title" style="font-size: 1.15rem;">Janji Satu Tahun Menuju Pelaminan</h2>
+                    <div class="letter-tagline">LEMBAR KEDUA: NIAT BAIK &amp; IKRAR SUCI</div>
+                    <h2 class="letter-title" style="font-size: 1.15rem;">Janji yang Menjaga, Doa yang Bermuara</h2>
                 </header>
 
                 <div class="letter-body">
                     <!-- Babak III -->
                     <div class="story-chapter-block">
                         <div class="story-chapter-header">
-                            <div class="story-chapter-title">Babak III: Janji Satu Tahun &amp; Ketabahan Melewati Badai</div>
-                            <div class="story-chapter-date">Agustus — Menguatkan dalam Duka, Meneguhkan Ikrar</div>
+                            <div class="story-chapter-title">Babak III: Meneguhkan Niat &amp; Restu Keluarga</div>
+                            <div class="story-chapter-date">Agustus — Langkah Pasti Menuju Ikrar</div>
                         </div>
                         <div class="letter-highlight-quote">
-                            "Aku harus menunggu berapa lama sampai pernikahan?" tanya Fifi.<br>
-                            Dengan mantap dan tanpa ragu, Aflan menjawab: <strong>"Satu tahun."</strong>
+                            "Cinta yang tulus tak membiarkan rasa berjalan tanpa arah; ia hadir bersama keteguhan niat dan ikhtiar yang nyata."
                         </div>
                         <p>
-                            Aflan memegang teguh kata-katanya. Selepas Idulfitri 2026, Aflan bersama keluarga besarnya datang bertamu ke rumah Fifi untuk pertama kalinya. Sebuah pertemuan hangat yang penuh tawa dan harapan, dengan rencana melangsungkan lamaran resmi di bulan Mei—tepat satu tahun sejak pertama kali mereka saling mengenal.
+                            Sejak awal, kebersamaan kami dibangun dengan satu tujuan yang pasti: melangkah bersama menuju ikatan suci pernikahan. Rasa saling percaya yang telah tumbuh dengan sabar kini siap kami bawa ke hadapan keluarga besar.
                         </p>
                         <p>
-                            Namun, takdir Allah menuliskan skenario yang menggetarkan dada. Tepat sehari setelah menyambut kedatangan keluarga Aflan, ayahanda tercinta dari Fifi dipanggil menghadap Sang Khalik.
+                            Pada bulan Agustus, niat baik itu kami wujudkan dalam acara lamaran resmi.
                         </p>
                         <p>
-                            Duka mendalam menyelimuti. Namun di sanalah cinta sejati membuktikan bentuk terbaiknya: bukan hanya ada di kala bahagia, melainkan menjadi pundak terkokoh tempat Fifi bersandar di titik terendah hidupnya. Aflan mendampingi, menghibur, dan menjaga hati sang pujaan.
-                        </p>
-                        <p>
-                            Dengan penuh takzim dan menghormati masa berkabung keluarga, rencana lamaran diundur hingga bulan Agustus. Bulan yang begitu sarat makna—bulan di mana dahulu Fifi menerimanya sebagai kekasih di atas bianglala, kini di bulan yang sama kembali menjadi saksi Fifi menerimanya sebagai calon imam dan pelindung hidupnya.
+                            Dikelilingi kehangatan keluarga besar dan doa-doa tulus yang dipanjatkan, hari itu menjadi saksi kesungguhan kami berdua. Langkah yang dahulu bermula dari sapaan sederhana, kini telah menemukan restu utuh untuk bersiap mengarungi kehidupan baru bersama.
                         </p>
                     </div>
 
@@ -326,32 +340,29 @@
                     <!-- Babak IV -->
                     <div class="story-chapter-block">
                         <div class="story-chapter-header">
-                            <div class="story-chapter-title">Babak IV: Satu Lingkaran Penuh Menuju Ijab Kabul</div>
-                            <div class="story-chapter-date">Mei — Muara Takdir yang Dituliskan-Nya</div>
+                            <div class="story-chapter-title">Babak IV: Lingkaran Takdir yang Menggenap</div>
+                            <div class="story-chapter-date">Mei — Berlabuh dalam Ridho Ilahi</div>
                         </div>
 
                         <!-- Polaroid Tucked Kanan (Interaktif) -->
                         <aside class="story-polaroid-aside float-right polaroid-card tilt-right" role="button" tabindex="0" aria-label="Lihat foto satu lingkaran sempurna">
                             <div class="polaroid-tape" aria-hidden="true"></div>
                             <div class="polaroid-photo-box">
-                                <img src="assets/photos/photo-3.svg" alt="Satu Lingkaran Sempurna Menuju Akad" loading="lazy">
+                                <img src="assets/photos/photo-3.svg" alt="Satu Lingkaran Sempurna Menuju Resepsi" loading="lazy">
                             </div>
                             <div class="polaroid-caption">"Lingkaran Takdir"</div>
                             <div class="polaroid-tap-hint">Ketuk foto ↗</div>
                         </aside>
 
                         <p>
-                            Sejak Agustus, persiapan demi persiapan mereka jalani dengan doa dan saling melengkapi. Hingga akhirnya, tibalah bulan Mei 2026.
+                            Hari berganti hari, musim berganti waktu. Setiap doa yang kami panjatkan perlahan membuka jalan menuju hari yang dinantikan ini.
                         </p>
                         <p>
-                            Satu lingkaran takdir kini tertutup dengan sempurna. Tepat di bulan yang sama ketika sepasang sandal yang hilang mempertemukan dua manusia asing di pagi berhujan, Aflan duduk di hadapan wali dan saksi untuk mengucap kalimat suci: ijab kabul.
+                            Kini, roda waktu telah menggenapkan putarannya. Tepat di bulan Mei—bulan yang sama ketika aroma gerimis dan sepasang sandal pertama kali menautkan cerita kami—kami bersiap duduk dengan keteguhan hati di hadapan wali dan para saksi untuk melafalkan ikrar suci: ijab kabul.
                         </p>
                         <p>
-                            Perjalanan yang diawali dari lembaran uang pecahan, diuji oleh duka, dan diteguhkan oleh kesabaran, kini bermuara pada dermaga yang halal dan diridhai Allah SWT.
+                            Bagi kami, hari ini bukan tentang bermewah-mewah janji, melainkan tentang kesahajaan meniti langkah bersama: menikmati hidup yang cukup, merawat hati yang lapang untuk bersyukur, dan menabung bekal kebaikan untuk kelak kami bawa pulang.
                         </p>
-                        <div class="letter-highlight-quote" style="text-align: center; font-weight: 600; margin-top: 10px;">
-                            "Dua hati, satu tujuan; melangkah bersama menapaki dunia, hingga kelak berkumpul kembali di surga-Nya."
-                        </div>
                     </div>
                 </div>
 
@@ -359,7 +370,7 @@
 
                 <footer class="letter-closing-signature">
                     <div class="signature-date">
-                        <div>Mei 2026</div>
+                        <div>07 Mei 2027</div>
                         <div style="font-size: 0.58rem; color: var(--color-coffee-muted); margin-top: 2px;">LEMBAR 02 DARI 02 (SELESAI)</div>
                     </div>
                     <div class="signature-names">
@@ -371,161 +382,89 @@
 
 
             <!-- ----------------------------------------------------------------
-                 DOKUMEN 2: STRUK KASIR THERMAL ("Memori Perjalanan & Ikrar Suci")
+                 DOKUMEN 2: LEMBAR SURAT JALAN & JADWAL RESEPSI LENGKAP
                  ---------------------------------------------------------------- -->
-            <section id="receipt-section" class="paper-document doc-receipt receipt-wrapper" aria-label="Struk Kasir Thermal">
-                <!-- Tear Edge Top -->
-                <div class="receipt-tear-top" aria-hidden="true"></div>
-
-                <div class="receipt-content">
-                    
-                    <!-- Header Struk -->
-                    <div class="receipt-header-center">
-                        <h2 class="receipt-store-title">TOKO SANDAL &amp; SEPATU</h2>
-                        <p class="receipt-store-subtitle">MEMORI PERJALANAN &amp; KANTOR EKSPEDISI</p>
-                        <p style="font-size: 0.65rem; color: var(--color-coffee-muted); margin-top: 2px;">Jl. Langkah Bahagia, Menuju Sakinah</p>
-                        <div style="margin-top: 8px; font-weight: 800; font-size: 0.8rem; color: var(--color-jnt-red);">
-                            *** CATATAN PERJALANAN &amp; IKRAR SUCI ***
-                        </div>
-                    </div>
-
-                    <!-- Meta Catatan -->
-                    <div class="receipt-meta">
-                        <div class="receipt-meta-row">
-                            <span>TANGGAL: MEI 2026</span>
-                            <span>JAM: SEPANJANG MASA</span>
-                        </div>
-                        <div class="receipt-meta-row">
-                            <span>PRIA: Hafla Maulana (Aflan)</span>
-                            <span>WANITA: Fifi Maghfiroh</span>
-                        </div>
-                        <div class="receipt-meta-row">
-                            <span>STATUS: MENUJU SAKINAH</span>
-                            <span>LANDASAN: LILLAHI TA'ALA</span>
-                        </div>
-                    </div>
-
-                    <!-- Rincian Item Perjalanan -->
-                    <div class="receipt-table">
-                        <div class="receipt-table-row">
-                            <span class="receipt-item-name">1x Tukar Uang Pecahan Kasir</span>
-                            <span class="receipt-item-price">Awal Kenal (Mei)</span>
-                        </div>
-                        <div class="receipt-table-row">
-                            <span class="receipt-item-name">1x Sepasang Sandal di Pagi Hujan</span>
-                            <span class="receipt-item-price">Titik Balik Rasa</span>
-                        </div>
-                        <div class="receipt-table-row">
-                            <span class="receipt-item-name">1x Tiket Bianglala Semarang</span>
-                            <span class="receipt-item-price">Jawaban Manis (Agustus)</span>
-                        </div>
-                        <div class="receipt-table-row">
-                            <span class="receipt-item-name">1x Ketabahan Saling Menguatkan</span>
-                            <span class="receipt-item-price">Lamaran Penuh Restu</span>
-                        </div>
-                    </div>
-
-                    <!-- Ikhtiar & Doa Restu -->
-                    <div class="receipt-totals">
-                        <div class="receipt-table-row">
-                            <span>PERJALANAN HATI:</span>
-                            <span>Saling Melengkapi</span>
-                        </div>
-                        <div class="receipt-table-row">
-                            <span>RESTU &amp; RIDHO:</span>
-                            <span>100% Penuh Keikhlasan</span>
-                        </div>
-                        <div class="receipt-table-row receipt-total-highlight" style="margin-top: 4px;">
-                            <span>IKRAR AKAD:</span>
-                            <span>JANJI SUCI SEUMUR HIDUP</span>
-                        </div>
-                    </div>
-
-                    <!-- Rincian Acara Pernikahan -->
-                    <div class="receipt-event-section">
-                        <div class="receipt-event-title">
-                            <span>💍</span>
-                            <span>AKAD NIKAH</span>
-                        </div>
-                        <div class="receipt-event-desc">
-                            <div><strong>Hari &amp; Tanggal:</strong> Sabtu, 23 Mei 2026</div>
-                            <div><strong>Pukul:</strong> 08:00 - 10:00 WIB</div>
-                            <div><strong>Lokasi:</strong> Kediaman Mempelai Putri</div>
-                            <div style="font-size: 0.68rem; color: var(--color-coffee-muted); margin-top: 2px;">
-                                Pacar, Tirto, Kab. Pekalongan, Jawa Tengah (Masuk dari Arah Barat via Jl. Tangkil)
-                            </div>
-                        </div>
-
-                        <div class="receipt-divider" style="margin: 10px 0;"></div>
-
-                        <div class="receipt-event-title">
-                            <span>🎉</span>
-                            <span>RESEPSI PERNIKAHAN</span>
-                        </div>
-                        <div class="receipt-event-desc">
-                            <div><strong>Hari &amp; Tanggal:</strong> Sabtu, 23 Mei 2026</div>
-                            <div><strong>Pukul:</strong> 11:00 - 14:00 WIB</div>
-                            <div><strong>Lokasi:</strong> Kediaman Mempelai Putri (Lokasi Sama)</div>
-                            <div style="font-size: 0.68rem; color: var(--color-coffee-muted); margin-top: 2px;">
-                                Pacar, Tirto, Kab. Pekalongan, Jawa Tengah (Masuk dari Arah Barat via Jl. Tangkil)
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cap Stempel Basah Merah "SAH & BARAKALLAH" -->
-                    <div class="stamp-lunas-wrap" aria-hidden="true">
-                        <span class="stamp-lunas-main">★ SAH &amp; BARAKALLAH ★</span>
-                        <div class="stamp-lunas-date">IKATAN SUCI • MEI 2026</div>
-                    </div>
-
-                    <!-- Barcode Footer Struk -->
-                    <div class="receipt-barcode-footer">
-                        <svg class="barcode-svg" style="height: 30px; max-width: 190px;" viewBox="0 0 200 30" preserveAspectRatio="none">
-                            <rect x="0" y="0" width="3" height="30" fill="#2E1E12"/>
-                            <rect x="6" y="0" width="2" height="30" fill="#2E1E12"/>
-                            <rect x="12" y="0" width="6" height="30" fill="#2E1E12"/>
-                            <rect x="22" y="0" width="3" height="30" fill="#2E1E12"/>
-                            <rect x="30" y="0" width="5" height="30" fill="#2E1E12"/>
-                            <rect x="40" y="0" width="2" height="30" fill="#2E1E12"/>
-                            <rect x="48" y="0" width="6" height="30" fill="#2E1E12"/>
-                            <rect x="60" y="0" width="4" height="30" fill="#2E1E12"/>
-                            <rect x="70" y="0" width="2" height="30" fill="#2E1E12"/>
-                            <rect x="78" y="0" width="7" height="30" fill="#2E1E12"/>
-                            <rect x="90" y="0" width="3" height="30" fill="#2E1E12"/>
-                            <rect x="98" y="0" width="5" height="30" fill="#2E1E12"/>
-                            <rect x="110" y="0" width="2" height="30" fill="#2E1E12"/>
-                            <rect x="118" y="0" width="6" height="30" fill="#2E1E12"/>
-                            <rect x="130" y="0" width="3" height="30" fill="#2E1E12"/>
-                            <rect x="138" y="0" width="7" height="30" fill="#2E1E12"/>
-                            <rect x="150" y="0" width="2" height="30" fill="#2E1E12"/>
-                            <rect x="160" y="0" width="6" height="30" fill="#2E1E12"/>
-                            <rect x="172" y="0" width="3" height="30" fill="#2E1E12"/>
-                            <rect x="180" y="0" width="5" height="30" fill="#2E1E12"/>
-                            <rect x="194" y="0" width="4" height="30" fill="#2E1E12"/>
+            <section class="paper-document doc-waybill waybill-route-card" aria-label="Surat Jalan, Jadwal Resepsi &amp; Rute Navigasi">
+                
+                <!-- Header Lembar Surat Jalan -->
+                <div class="waybill-route-header">
+                    <h2 class="route-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-jnt-red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
                         </svg>
-                        <p class="receipt-footer-text">
-                            DUA HATI YANG SUDAH BERJANJI, TAK KAN BERPALING KARENA CINTA SUDAH TERIKAT SELAMANYA ❤️
-                        </p>
-                    </div>
-
+                        <span>SURAT JALAN &amp; JADWAL RESEPSI</span>
+                    </h2>
+                    <span class="route-header-tag">SPECIAL DELIVERY</span>
                 </div>
 
-                <!-- Tear Edge Bottom -->
-                <div class="receipt-tear-bottom" aria-hidden="true"></div>
-            </section>
+                <!-- Hero Section: Waktu & Tanggal Resepsi Pernikahan -->
+                <div class="waybill-event-hero">
+                    <div class="event-hero-date-row">
+                        <div class="calendar-card">
+                            <div class="calendar-month">MEI • 2027</div>
+                            <div class="calendar-day-num">07</div>
+                            <div class="calendar-day-name">JUMAT</div>
+                        </div>
+                        <div class="event-time-hero">
+                            <div class="time-badge">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>PUKUL 14.00 WIB</span>
+                            </div>
+                            <div class="time-sub">Selesai s/d Doa Bersama Selesai</div>
+                            <div class="status-pill-pulse">
+                                <span class="pulse-dot"></span>
+                                <span>Waktu Utama Resepsi</span>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Countdown Timer Pelaminan -->
+                    <div class="countdown-container">
+                        <div class="countdown-label">ESTIMASI TIBA DI HARI BAHAGIA</div>
+                        <div class="countdown-grid">
+                            <div class="countdown-unit">
+                                <span id="count-days" class="countdown-number">00</span>
+                                <span class="countdown-text">Hari</span>
+                            </div>
+                            <div class="countdown-colon-unit">:</div>
+                            <div class="countdown-unit">
+                                <span id="count-hours" class="countdown-number">00</span>
+                                <span class="countdown-text">Jam</span>
+                            </div>
+                            <div class="countdown-colon-unit">:</div>
+                            <div class="countdown-unit">
+                                <span id="count-mins" class="countdown-number">00</span>
+                                <span class="countdown-text">Menit</span>
+                            </div>
+                            <div class="countdown-colon-unit">:</div>
+                            <div class="countdown-unit">
+                                <span id="count-secs" class="countdown-number">00</span>
+                                <span class="countdown-text">Detik</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- ----------------------------------------------------------------
-                 DOKUMEN 4: LEMBAR SURAT JALAN & RENDER PETA SIMPEL
-                 ---------------------------------------------------------------- -->
-            <section class="paper-document doc-waybill waybill-route-card" aria-label="Rute Pengiriman & Navigasi Lokasi">
-                
-                <h2 class="route-card-title">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-jnt-red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
-                    </svg>
-                    <span>SURAT JALAN &amp; DENAH RUTE ACARA</span>
-                </h2>
+                    <!-- Tombol Tambah ke Google Calendar -->
+                    <button id="btn-save-calendar" type="button" class="btn-hero-calendar">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span>Simpan Jadwal ke Google Calendar</span>
+                    </button>
+                </div>
+
+                <!-- Divider Antara Jadwal & Denah Peta -->
+                <div class="route-section-divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-text">DENAH RUTE PENGIRIMAN TAMU</span>
+                    <span class="divider-line"></span>
+                </div>
 
                 <!-- Render Map Simple SVG (Inline SVG: 100% Anti-Pecah & Anti-Broken Image) -->
                 <div class="simple-map-box">
@@ -720,7 +659,7 @@
                         <rect x="0" y="0" width="570" height="42" rx="6" fill="#FFFFFF" stroke="#0028E8" stroke-width="1.5" filter="url(#mapShadowBox)"/>
                         <rect x="0" y="0" width="6" height="42" rx="3" fill="#0028E8"/>
                         <text x="18" y="16" class="txt-bold" font-size="10" fill="#0028E8">
-                          📍 PANDUAN: DARI JALUR PANTURA ➔ BELOK MASUK DI TITIK A (TOKO RAK MADURA)
+                          📍 PANDUAN: DARI JALUR PANTURA ➔ BELOK MASUK DI TITIK A (Gg. 1)
                         </text>
                         <text x="18" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#475569">
                           Dari Jalur Pantura belok ke arah selatan ➔ Titik A ➔ Jl. H. Abdul Rahman ➔ Jl. H. Mashuri ➔ Jl. H. Usman (600 m).
@@ -729,135 +668,122 @@
                     </svg>
                 </div>
 
-                <!-- Live Countdown Timer -->
-                <div class="countdown-container">
-                    <div class="countdown-label">WAKTU MENUJU CHECKOUT PELAMINAN</div>
-                    <div class="countdown-grid">
-                        <div class="countdown-unit">
-                            <span id="count-days" class="countdown-number">00</span>
-                            <span class="countdown-text">Hari</span>
+                <!-- Detail Lokasi & Alamat -->
+                <div class="waybill-venue-details">
+                    <div class="venue-title-row">
+                        <span class="venue-pin-icon">📍</span>
+                        <div class="venue-info-text">
+                            <strong class="venue-title-text">Kediaman Mempelai Putri (Lokasi Resepsi)</strong>
+                            <p class="venue-address-text">
+                                Jl. H. Usman, Pacar Barat, Tirto, Kab. Pekalongan
+                            </p>
                         </div>
-                        <div class="countdown-unit">
-                            <span id="count-hours" class="countdown-number">00</span>
-                            <span class="countdown-text">Jam</span>
-                        </div>
-                        <div class="countdown-unit">
-                            <span id="count-mins" class="countdown-number">00</span>
-                            <span class="countdown-text">Menit</span>
-                        </div>
-                        <div class="countdown-unit">
-                            <span id="count-secs" class="countdown-number">00</span>
-                            <span class="countdown-text">Detik</span>
-                        </div>
+                    </div>
+                    <div class="venue-gate-notice">
+                        <span class="gate-tag">PINTU MASUK RESEPSI:</span>
+                        <span>WAJIB MASUK DARI <strong>TITIK A (Gg. 1, Jl. H. Abdul Rahman)</strong></span>
                     </div>
                 </div>
 
-                <div style="font-size: 0.78rem; line-height: 1.45; color: var(--color-coffee-dark); margin-bottom: 12px;">
-                    <strong>Kediaman Mempelai Putri (Lokasi Akad &amp; Resepsi)</strong><br>
-                    <span style="font-size: 0.72rem; color: var(--color-coffee-muted);">
-                        Area Gabriella Garden / Jl. H. Usman, Pacar Barat, Tirto, Kab. Pekalongan<br>
-                        <span style="color: var(--color-jnt-red); font-weight: 800; display: inline-block; margin-top: 4px; background: #FEF2F2; padding: 4px 8px; border-radius: 4px; border: 1px solid #FECACA;">
-                            📍 WAJIB MASUK DARI TITIK A (Toko Rak Madura, Jl. H. Abdul Rahman)
-                        </span>
-                    </span>
-                </div>
-
-                <!-- Navigation Action Buttons -->
-                <div class="nav-actions-grid">
-                    <a href="https://www.google.com/maps/dir/?api=1&amp;waypoints=-6.891577%2C109.637651&amp;destination=-6.891444%2C109.641833&amp;travelmode=driving" target="_blank" rel="noopener noreferrer" class="nav-btn btn-maps">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
+                <!-- Tombol Navigasi Google Maps Tunggal & Menonjol -->
+                <div class="nav-single-action">
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;waypoints=-6.891577%2C109.637651&amp;destination=-6.891444%2C109.641833&amp;travelmode=driving" target="_blank" rel="noopener noreferrer" class="nav-btn-hero-maps">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
                         </svg>
                         <span>Mulai Rute dari Titik A (Google Maps)</span>
                     </a>
-
-                    <a href="https://waze.com/ul?ll=-6.891444,109.641833&amp;navigate=yes" target="_blank" rel="noopener noreferrer" class="nav-btn btn-waze">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        <span>Buka di Waze</span>
-                    </a>
-
-                    <button id="btn-save-calendar" type="button" class="nav-btn btn-cal">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        <span>Simpan ke Kalender (Google Calendar)</span>
-                    </button>
                 </div>
 
             </section>
 
 
             <!-- ----------------------------------------------------------------
-                 DOKUMEN 5: SLIP TITIPAN KADO DIGITAL (QRIS & ALAMAT PAKET FISIK)
-                 (BEBAS NOMOR REKENING - SESUAI PERMINTAAN USER)
+                 DOKUMEN 3: SLIP TITIPAN KHUSUS & TANDA KASIH DIGITAL (QRIS & PAKET)
                  ---------------------------------------------------------------- -->
-            <section class="paper-document doc-gift gift-slip-card" aria-label="Titipan Kado Digital & Paket Fisik">
+            <section class="paper-document doc-gift gift-slip-card" aria-label="Slip Titipan Khusus &amp; Tanda Kasih">
                 
-                <header class="gift-slip-header">
-                    <span class="gift-badge">SLIP TITIPAN KADO &amp; COD CINTA</span>
-                    <h2 class="gift-slip-title">Tanda Kasih &amp; Kado Pernikahan</h2>
-                    <p class="gift-slip-desc">
-                        Kehadiran dan doa restu Anda adalah kado paling berharga bagi kami. Namun apabila Anda berkehendak menitipkan tanda kasih, Anda dapat memindai QRIS Nasional atau mengirimkan paket kado fisik berikut:
-                    </p>
-                </header>
-
-                <!-- QRIS Nasional Card (Bebas No Rekening) -->
-                <div class="qris-featured-card">
-                    <div class="qris-header-row">
-                        <span class="qris-logo-tag">QRIS</span>
-                        <span style="font-size: 0.62rem; font-weight: 700; color: #6E5D4F;">PEMBAYARAN DIGITAL NASIONAL</span>
+                <!-- Header Lembar Slip Titipan -->
+                <div class="gift-slip-paper-header">
+                    <div class="slip-meta-left">
+                        <span class="slip-doc-tag">★ DOKUMEN 03: SLIP TITIPAN KHUSUS</span>
+                        <span class="slip-serial-num">NO. SLIP: KADO-20270507</span>
                     </div>
-
-                    <img id="qris-zoom-trigger" src="assets/photos/qris.svg" alt="Kode QRIS Kado Digital Hafla &amp; Fifi" class="qris-display-img">
-                    
-                    <p class="qris-help-text">
-                        Dapat dipindai langsung menggunakan <strong>BCA Mobile, Livin', GoPay, OVO, ShopeePay, DANA</strong>, atau aplikasi perbankan lainnya.<br>
-                        <span style="color: var(--color-jnt-red); font-weight: 700; cursor: pointer;">Ketuk kode QRIS untuk memperbesar ↗</span>
-                    </p>
+                    <span class="slip-status-badge">CASHLESS &amp; DROPOFF</span>
                 </div>
 
-                <!-- Pengiriman Kado Fisik ke Drop Point J&T -->
-                <div class="physical-gift-box">
-                    <div class="physical-gift-title">
-                        <span>📦</span>
-                        <span>Alamat Pengiriman Paket Kado Fisik:</span>
+                <div class="gift-slip-inner">
+                    <header class="gift-slip-header">
+                        <h2 class="gift-slip-title">Tanda Kasih &amp; Kado Pernikahan</h2>
+                        <p class="gift-slip-desc">
+                            Kehadiran dan doa restu Anda adalah kado paling berharga bagi kami. Namun apabila Anda berkehendak menitipkan tanda kasih, Anda dapat memindai QRIS Nasional atau mengirimkan paket kado fisik berikut:
+                        </p>
+                    </header>
+
+                    <!-- QRIS Nasional Card (Bebas No Rekening) -->
+                    <div class="qris-featured-card">
+                        <div class="qris-header-row">
+                            <span class="qris-logo-tag">QRIS</span>
+                            <span style="font-size: 0.62rem; font-weight: 700; color: #6E5D4F;">PEMBAYARAN DIGITAL NASIONAL</span>
+                        </div>
+
+                        <img id="qris-zoom-trigger" src="assets/photos/qris.svg" alt="Kode QRIS Kado Digital Hafla &amp; Fifi" class="qris-display-img">
+                        
+                        <p class="qris-help-text">
+                            Dapat dipindai langsung menggunakan <strong>BCA Mobile, Livin', GoPay, OVO, ShopeePay, DANA</strong>, atau aplikasi perbankan lainnya.<br>
+                            <span style="color: var(--color-jnt-red); font-weight: 700; cursor: pointer;">Ketuk kode QRIS untuk memperbesar ↗</span>
+                        </p>
                     </div>
-                    <div class="physical-gift-addr">
-                        <strong>Kantor Ekspedisi Pengiriman</strong> (u.p. Fifi Maghfiroh / Hafla Maulana)<br>
-                        Jl. Palmerah Barat No. 88, Palmerah, Jakarta Barat 11480<br>
-                        <span style="font-size: 0.68rem; color: #555;">No. Kontak: 0812-3456-7890</span>
+
+                    <!-- Pengiriman Kado Fisik -->
+                    <div class="physical-gift-box">
+                        <div class="physical-gift-title">
+                            <span>📦</span>
+                            <span>Alamat Pengiriman Paket Kado Fisik:</span>
+                        </div>
+                        <div class="physical-gift-addr">
+                            <strong>Kediaman Mempelai Putri</strong> (u.p. Fifi Maghfiroh / Hafla Maulana)<br>
+                            Jl. H. Usman, Pacar Barat, Tirto, Kab. Pekalongan
+                        </div>
+                        <button id="btn-copy-address" type="button" class="btn-copy-acc" style="width: 100%; justify-content: center;">
+                            Salin Alamat Lengkap Pengiriman
+                        </button>
                     </div>
-                    <button id="btn-copy-address" type="button" class="btn-copy-acc" style="width: 100%; justify-content: center;">
-                        Salin Alamat Lengkap Pengiriman
-                    </button>
                 </div>
 
             </section>
 
 
             <!-- ----------------------------------------------------------------
-                 DOKUMEN 6: KARTU KONFIRMASI KEHADIRAN (RSVP) & DINDING DOA
+                 DOKUMEN 4: LEMBAR BERITA ACARA PENERIMAAN (POD) & BUKU TAMU
                  ---------------------------------------------------------------- -->
-            <section class="paper-document doc-rsvp rsvp-wishes-card" aria-label="Konfirmasi Kehadiran & Doa Restu">
+            <section class="paper-document doc-rsvp rsvp-wishes-card" aria-label="Berita Acara Penerimaan &amp; Doa Restu">
                 
-                <h2 class="section-form-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-jnt-red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    <span>KARTU KONFIRMASI KEHADIRAN (RSVP)</span>
-                </h2>
-                <p class="section-form-desc">
-                    Mohon konfirmasikan kehadiran Anda untuk membantu kami menyiapkan tempat duduk dan jamuan dengan sebaik-baiknya.
-                </p>
+                <!-- Header Lembar Berita Acara (POD) -->
+                <div class="pod-paper-header">
+                    <div class="pod-meta-left">
+                        <span class="pod-doc-tag">★ DOKUMEN 04: BUKTI TANDA TERIMA (POD)</span>
+                        <span class="pod-serial-num">FORM NO: POD-20270507</span>
+                    </div>
+                    <span class="pod-stamp-tag">OFFICIAL FORM</span>
+                </div>
 
-                <form id="rsvp-form">
+                <div class="pod-paper-inner">
+                    <h2 class="section-form-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-jnt-red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span>LEMBAR KONFIRMASI KEHADIRAN (RSVP)</span>
+                    </h2>
+                    <p class="section-form-desc">
+                        Mohon konfirmasikan kehadiran Anda sebagai tanda terima paket undangan resmi serta mempermudah kami dalam menyiapkan jamuan terbaik.
+                    </p>
+
+                    <form id="rsvp-form">
                     
                     <div class="rsvp-form-group">
                         <label for="rsvp-input-name" class="rsvp-label">Nama Tamu Undangan</label>
@@ -909,12 +835,14 @@
                     </div>
                 </div>
 
+                </div>
+
             </section>
 
             <!-- Footer Closing Note -->
             <footer style="text-align: center; margin: 24px 0 12px 0; font-size: 0.72rem; color: var(--color-coffee-muted);">
                 <p style="font-weight: 700; color: var(--color-coffee-dark);">Hafla Maulana &amp; Fifi Maghfiroh</p>
-                <p>#HaflaFifiMenujuSakinah • Walimatul 'Ursy</p>
+                <p>#HaflaFifiMenujuSakinah • Resepsi Pernikahan</p>
             </footer>
 
         </div>

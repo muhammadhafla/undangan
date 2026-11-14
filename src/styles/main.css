@@ -79,12 +79,12 @@ body.envelope-locked .app-viewport {
     min-height: 100dvh;
     max-height: 100vh;
     max-height: 100dvh;
-    padding: 12px;
+    padding: 24px 12px 12px 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
 }
 
 body.envelope-locked .envelope-stage {
@@ -96,7 +96,8 @@ body.envelope-locked .envelope-stage {
 }
 
 body.envelope-locked .envelope-wrapper {
-    max-height: 94dvh;
+    max-height: 92dvh;
+    max-width: 340px;
     width: 100%;
     margin: auto;
 }
@@ -131,24 +132,25 @@ body.envelope-locked .unboxed-content-flow {
    ========================================================================== */
 .audio-controller {
     position: fixed;
-    top: 16px;
-    right: 16px;
+    bottom: 24px;
+    right: 20px;
+    top: auto;
     z-index: 99;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 12px;
-    background: rgba(253, 251, 247, 0.9);
+    padding: 7px 13px;
+    background: rgba(253, 251, 247, 0.94);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--color-thermal-border);
+    border: 1.5px solid var(--color-coffee-dark);
     border-radius: 9999px;
-    box-shadow: 0 4px 14px rgba(46, 30, 18, 0.12);
+    box-shadow: 0 4px 12px rgba(46, 30, 18, 0.18);
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-8px);
+    transform: translateY(10px);
 }
 
 .audio-controller.visible {
@@ -201,8 +203,8 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 /* ==========================================================================
-   1. WELCOME SCREEN: AMPLOP TALI AIRMAIL RETRO & RESI J&T SEDERHANA
-   Desain Persis Amplop Manila Airmail dengan Kancing Tali Merah
+   1. WELCOME SCREEN: KARDUS KRAFT PARCEL & RESI PENGIRIMAN H&F EXPRESS
+   Desain Kardus Paket Kurir Realistis dengan Lakban Segel Full-Width & Resi Thermal
    ========================================================================== */
 .envelope-stage {
     width: 100%;
@@ -216,221 +218,601 @@ body.envelope-locked .unboxed-content-flow {
     margin-top: 6px;
 }
 
-/* Amplop Airmail Retro dengan Garis Belang Diagonal Merah & Biru Tua */
+/* Paket Kardus Kraft Cokelat Realistis (Permukaan Tunggal Format Amplop Dokumen Tegak) */
 .envelope-wrapper {
     position: relative;
     width: 100%;
-    background: #E8D3B7;
+    max-width: 340px;
+    margin: 0 auto;
+    background: linear-gradient(165deg, #D6B995 0%, #C4A278 100%);
+    border: 1px solid #B5936B;
     border-radius: 8px;
-    box-shadow: 0 14px 34px -8px rgba(46, 30, 18, 0.38);
+    box-shadow: 0 16px 38px -6px rgba(45, 25, 10, 0.32), 0 2px 6px rgba(0, 0, 0, 0.06);
     overflow: hidden;
-    padding: 10px;
-    /* Pinggiran Belang-Belang Airmail Klasik (Merah & Biru Navy) */
-    background-image: repeating-linear-gradient(
-        135deg,
-        #D32F2F 0px,
-        #D32F2F 12px,
-        #FAF7F2 12px,
-        #FAF7F2 17px,
-        #1E3A8A 17px,
-        #1E3A8A 29px,
-        #FAF7F2 29px,
-        #FAF7F2 34px
-    );
+    padding: 0;
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Badan Kertas Kraft Cokelat di Dalam Border Airmail */
-.envelope-inner-body {
-    background: #E2CDAD;
-    border-radius: 4px;
-    padding: 16px 10px 16px 10px;
-    position: relative;
-    min-height: 380px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.08);
+.envelope-wrapper.tearing,
+.envelope-wrapper.peeking,
+.envelope-wrapper.ejected,
+.envelope-wrapper.landing,
+.envelope-wrapper.opened {
+    overflow: visible !important;
 }
 
-/* Tutup Amplop Atas (Top Flap dengan Sudut Melengkung) */
-.envelope-flap {
+/* Animasi Hentakan Halus Saat Dokumen Dimuntahkan Keluar (Recoil Kick) */
+.envelope-wrapper.ejected {
+    animation: envelope-recoil 0.75s cubic-bezier(0.25, 1, 0.4, 1) forwards;
+}
+
+@keyframes envelope-recoil {
+    0%   { transform: translateY(0) scale(1); }
+    30%  { transform: translateY(14px) scale(0.985); }
+    65%  { transform: translateY(4px) scale(0.995); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Tekstur Serat Karton Kraft Paket Kurir */
+.envelope-wrapper::before {
+    content: "";
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    height: 72px;
-    background: #D8C09D;
-    border-bottom: 2px solid #BAA07D;
-    border-radius: 0 0 18px 18px;
-    transform-origin: top center;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.3s ease;
-    z-index: 20;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
-    display: flex;
-    justify-content: center;
-}
-
-.envelope-wrapper.opened .envelope-flap {
-    transform: rotateX(180deg);
+    inset: 0;
+    pointer-events: none;
     z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='kraftNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23kraftNoise)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    opacity: 0.65;
 }
 
-/* ==========================================================================
-   MEKANISME KANCING & TALI MERAH (STRING & BUTTON CLOSURE)
-   ========================================================================== */
-.string-closure-group {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 30;
+.envelope-wrapper > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Badan Kertas Kraft - Bersatu Mulus dengan Kardus (Rasio Persegi Panjang Dokumen) */
+.envelope-inner-body {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 12px 0;
+    position: relative;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
-    transition: opacity 0.4s ease, transform 0.3s ease;
-}
-
-.envelope-wrapper.opened .string-closure-group {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(-50%) scale(0.7);
-}
-
-/* Kancing Bulat Merah */
-.string-button {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #FF3B30 0%, #D32F2F 60%, #991B1B 100%);
-    border: 1px solid #7F1D1D;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 32;
-}
-
-/* Mata Itik / Lubang Perak di Tengah Kancing */
-.string-eyelet {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #E5E7EB;
-    border: 1.5px solid #9CA3AF;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-/* Tali Merah Lilitan Angka 8 (Twine String) */
-.string-thread {
-    width: 3.5px;
-    height: 28px;
-    background: #991B1B;
-    border-radius: 2px;
-    margin: -4px 0;
-    position: relative;
-    z-index: 31;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-/* Sisa Ujung Tali yang Menjuntai ke Samping */
-.string-tail {
-    position: absolute;
-    bottom: -16px;
-    left: -22px;
-    width: 34px;
-    height: 24px;
-    border-bottom: 3px solid #991B1B;
-    border-left: 3px solid #991B1B;
-    border-radius: 0 0 0 26px;
-    transform: rotate(20deg);
-    pointer-events: none;
-}
-
-/* Label Ajakan Aksi "Buka Tali Amplop" */
-.string-action-badge {
-    margin-top: 10px;
-    background: #D32F2F;
-    color: #FFFFFF;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    padding: 6px 14px;
-    border-radius: 9999px;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 4px 14px rgba(211, 47, 47, 0.45);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    animation: seal-pulse 2.2s infinite;
-}
-
-@keyframes seal-pulse {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.45), 0 4px 14px rgba(211, 47, 47, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 0 10px rgba(211, 47, 47, 0), 0 6px 18px rgba(211, 47, 47, 0.45);
-    }
-}
-
-/* ==========================================================================
-   RESI PENGIRIMAN H&F EXPRESS (MOBILE-FIRST, BERSIH & TANPA SPACE TERBUANG)
-   ========================================================================== */
-.waybill-mobile-wrapper {
+    box-shadow: none;
     width: 100%;
-    margin-top: 148px;
-    transition: margin-top 0.5s ease;
-}
-
-.envelope-wrapper.opened .waybill-mobile-wrapper {
-    margin-top: 20px;
-}
-
-.jnt-waybill-label {
-    background: #FFFFFF;
-    border: 2px solid #000000;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-    font-family: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #000000;
-    font-size: 0.65rem;
-    line-height: 1.25;
-    width: 100%;
-}
-
-.jnt-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.jnt-cell {
-    border: 1px solid #000000;
-    padding: 5px 6px;
-    vertical-align: top;
     box-sizing: border-box;
 }
 
-/* Header Row Resi */
-.hf-logo-cell {
-    width: 44%;
-    padding: 6px 8px;
-    vertical-align: middle;
-    background: #FFFFFF;
+/* Tutup Lipatan Amplop Paket Atas (Permukaan Datar Amplop Dokumen - Tetap Rapat & Datar, Tidak Ada Flap 3D Membuka ke Atas) */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(180deg, #D2B38E 0%, #C4A278 100%);
+    border-radius: 8px 8px 0 0;
+    z-index: 5;
+    pointer-events: none;
+    box-shadow: none;
+    transform: none !important;
 }
 
-.jnt-barcode-cell {
-    width: 56%;
+.envelope-wrapper.peeking .envelope-flap,
+.envelope-wrapper.ejected .envelope-flap,
+.envelope-wrapper.landing .envelope-flap,
+.envelope-wrapper.opened .envelope-flap {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ==========================================================================
+   DOKUMEN MENYEMBUL & MELESAT KELUAR DARI CELAH SOBEKAN COKELAT GELAP
+   ========================================================================== */
+.cavity-interior {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+}
+
+.ejecting-document-card {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 2px;
+    height: 185px;
+    background: #FAF6ED;
+    border: 1px solid #E2D7C3;
+    border-top: 3px solid #D8CBB6;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+    box-sizing: border-box;
+    padding: 12px 14px;
+    transform-origin: center bottom;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    pointer-events: none;
+}
+
+/* Bagian Dalam Kartu Dokumen Utama */
+.eject-doc-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.eject-doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(110, 93, 79, 0.3);
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+}
+
+.eject-doc-tagline {
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #8C6F56;
+    text-transform: uppercase;
+}
+
+.eject-doc-stamp {
+    font-family: 'Courier New', monospace;
+    font-size: 0.48rem;
+    font-weight: 900;
+    padding: 1px 4px;
+    border: 1px solid #DC2626;
+    color: #DC2626;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+}
+
+.eject-doc-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-style: italic;
+    color: #2E1E12;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+}
+
+.eject-doc-preview-text {
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    font-size: 0.62rem;
+    line-height: 1.35;
+    color: #5C4A3A;
+    font-style: italic;
+    margin-bottom: auto;
+}
+
+.eject-doc-footer-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed rgba(110, 93, 79, 0.25);
+    padding-top: 4px;
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    color: #8C6F56;
+}
+
+.eject-doc-badge {
+    background: #E30613;
+    color: #FFFFFF;
+    font-size: 0.48rem;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+/* FASE 1: DOKUMEN MENYEMBUL DARI DALAM CELAH SOBEKAN COKELAT GELAP (.peeking) */
+.envelope-wrapper.peeking .ejecting-document-card {
+    opacity: 1;
+    transform: translateY(-20px) scale(0.98);
+}
+
+/* FASE 2: DOKUMEN MELESAT, MELAYANG & MENDARAT DALAM 1 LINTASAN LENGKUNG FLUID TERPADU (.ejected) */
+.envelope-wrapper.ejected .ejecting-document-card {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: pointer;
+    animation: eject-fluid-arc 1.25s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
+}
+
+@keyframes eject-fluid-arc {
+    0% {
+        transform: translateY(-20px) scale(0.98) rotate(0deg);
+        opacity: 1;
+        box-shadow: 0 4px 16px rgba(46, 30, 18, 0.2);
+    }
+    22% {
+        transform: translateY(-130px) scale(1.02) rotate(-1deg);
+        opacity: 1;
+        box-shadow: 0 16px 32px rgba(46, 30, 18, 0.28);
+    }
+    44% {
+        transform: translateY(-210px) scale(1.03) rotate(-1.8deg);
+        opacity: 1;
+        box-shadow: 0 24px 44px rgba(46, 30, 18, 0.35);
+    }
+    56% {
+        transform: translateY(-195px) scale(1.025) rotate(-1.4deg);
+        opacity: 1;
+        box-shadow: 0 20px 38px rgba(46, 30, 18, 0.3);
+    }
+    75% {
+        transform: translateY(-40px) scale(1.015) rotate(-0.5deg);
+        opacity: 0.95;
+        box-shadow: 0 14px 28px rgba(46, 30, 18, 0.22);
+    }
+    88% {
+        transform: translateY(45px) scale(1.005) rotate(0deg);
+        opacity: 0.8;
+        box-shadow: 0 8px 18px rgba(46, 30, 18, 0.16);
+    }
+    100% {
+        transform: translateY(115px) scale(1) rotate(0deg);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Fallback untuk kompatibilitas jika state landing dipanggil */
+.envelope-wrapper.landing .ejecting-document-card {
+    opacity: 1;
+    pointer-events: auto;
+    animation: eject-fluid-arc 1.25s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
+}
+
+/* SAAT KELUAR SEMUA / AMPLOP DIBUKA: BERSIH TOTAL TANPA SISA KERTAS MENGGANTUNG */
+.envelope-wrapper.opened:not(.ejected):not(.landing) .ejecting-document-card {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* ==========================================================================
+   PERFORATED TEAR-STRIP ZIPPER PADA FLAP AMPLOP (MENTOK KANAN-KIRI)
+   Pita Kardus dengan Pita Merah di Dalamnya yang Terkelupas Nyata
+   ========================================================================== */
+.kraft-perforated-strip {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 30;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.envelope-wrapper.dragging .kraft-perforated-strip {
+    cursor: grabbing;
+}
+
+.envelope-wrapper.opened .kraft-perforated-strip {
+    opacity: 1;
+    pointer-events: none;
+    cursor: default;
+}
+
+.perforation-track {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    border-radius: 0;
+    overflow: visible;
+}
+
+/* 1. Rongga Sobekan Karton Gelap Mentok Kanan-Kiri (Otentik, Kedalaman Realistis) */
+.tear-open-cavity {
+    position: absolute;
+    inset: 0;
+    height: 20px;
+    background: #3B230E;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    overflow: visible;
+    clip-path: inset(-600px 0px 0px 0px);
+    transition: opacity 0.2s ease;
+}
+
+.envelope-wrapper.dragging .tear-open-cavity {
+    transition: none !important;
+}
+
+.envelope-wrapper.tearing .tear-open-cavity,
+.envelope-wrapper.peeking .tear-open-cavity,
+.envelope-wrapper.ejected .tear-open-cavity,
+.envelope-wrapper.landing .tear-open-cavity,
+.envelope-wrapper.opened .tear-open-cavity {
+    opacity: 1 !important;
+}
+
+/* Lepaskan clip-path saat kartu melesat dan meluncur turun agar tidak terpotong */
+.envelope-wrapper.ejected .tear-open-cavity,
+.envelope-wrapper.landing .tear-open-cavity,
+.envelope-wrapper.opened .tear-open-cavity {
+    clip-path: none !important;
+}
+
+/* Gigi-Gigi Serat Karton yang Koyak di Garis Perforasi Atas & Bawah */
+.cavity-torn-teeth-top,
+.cavity-torn-teeth-bottom {
+    width: 100%;
+    height: 2px;
+    border-top: 1.5px dashed #201104;
+    background: repeating-linear-gradient(90deg, #573417, #573417 3px, #3B230E 3px, #3B230E 6px);
+    opacity: 0.85;
+    flex-shrink: 0;
+}
+
+.cavity-torn-teeth-bottom {
+    border-top: none;
+    border-bottom: 1.5px dashed #201104;
+}
+
+.cavity-interior {
+    width: 100%;
+    height: 100%;
+}
+
+/* Sisa Potongan Kecil Kertas Robek di Ujung Kanan Tempat Akhir Tarikan */
+.torn-paper-stub-end {
+    position: absolute;
+    right: 0;
+    top: -1px;
+    width: 7px;
+    height: 22px;
+    background: #BF9E73;
+    border-left: 1.5px dashed #6D4C28;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    z-index: 32;
+}
+
+.envelope-wrapper.ejected .peeling-strip-layer,
+.envelope-wrapper.landing .peeling-strip-layer,
+.envelope-wrapper.opened .peeling-strip-layer {
+    opacity: 0 !important;
+    display: none !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+/* 2. Lapisan Pita Kertas Kardus yang Terkelupas Mentok Kanan-Kiri */
+.peeling-strip-layer {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(180deg, #D6B995 0%, #C4A278 100%);
+    border-radius: 0;
+    padding: 3px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    transform-origin: left center;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.envelope-wrapper.dragging .peeling-strip-layer {
+    transition: none !important;
+}
+
+.kraft-perforated-strip:hover .peeling-strip-layer {
+    filter: brightness(1.04);
+    transform: translateY(-1px);
+}
+
+/* Tab Tarik di Ujung Kiri Flap */
+.pull-tab-grip {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 24px;
+    background: #BF9E73;
+    border: 1.5px dashed #7D5C3B;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2px;
+    z-index: 5;
+    animation: pull-tab-pulse 2s infinite ease-in-out;
+}
+
+.envelope-wrapper.dragging .pull-tab-grip,
+.envelope-wrapper.tearing .pull-tab-grip,
+.envelope-wrapper.opened .pull-tab-grip {
+    animation: none;
+}
+
+@keyframes pull-tab-pulse {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+        box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.12);
+        box-shadow: 3px 2px 8px rgba(220, 38, 38, 0.35);
+    }
+}
+
+.pull-tab-red-liner {
+    width: 4px;
+    height: 12px;
+    background: #DC2626;
+    border-radius: 0 2px 2px 0;
+    display: block;
+    animation: red-liner-glow 2s infinite ease-in-out;
+}
+
+.envelope-wrapper.dragging .pull-tab-red-liner,
+.envelope-wrapper.tearing .pull-tab-red-liner,
+.envelope-wrapper.opened .pull-tab-red-liner {
+    animation: none;
+}
+
+@keyframes red-liner-glow {
+    0%, 100% {
+        opacity: 0.85;
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 3px rgba(220, 38, 38, 0.7));
+    }
+}
+
+/* Garis Gerigi / Perforasi Putus-Putus Atas & Bawah Mentok Kanan-Kiri */
+.perforation-dashed-line {
+    width: 100%;
+    height: 0;
+    border-top: 1.5px dashed #7D5C3B;
+    opacity: 0.85;
+}
+
+.perforation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 3px 0;
+    color: #4A331D;
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.perforation-icon {
+    flex-shrink: 0;
+    color: #7D5C3B;
+}
+
+.perforation-arrows {
+    color: #DC2626;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    animation: arrows-nudge 1.4s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   ANIMASI SOBEKAN PERFORASI (TACTILE UNZIP ANIMATION)
+   Saat Di-Klik: Pita Terkelupas dari Kiri ke Kanan Memperlihatkan Pita Merah
+   ========================================================================== */
+.envelope-wrapper.tearing .tear-open-cavity {
+    opacity: 1;
+}
+
+.envelope-wrapper.tearing .peeling-strip-layer {
+    animation: tear-strip-unzip 0.55s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+    pointer-events: none;
+}
+
+@keyframes tear-strip-unzip {
+    0% {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        transform: rotate(0deg);
+        filter: brightness(1);
+    }
+    30% {
+        clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 30% 100%);
+        transform: rotate(-3deg) translateY(-2px);
+    }
+    60% {
+        clip-path: polygon(65% 0%, 100% 0%, 100% 100%, 65% 100%);
+        transform: rotate(-6deg) translateY(-5px);
+        filter: brightness(1.08);
+    }
+    85% {
+        clip-path: polygon(90% 0%, 100% 0%, 100% 100%, 90% 100%);
+        transform: rotate(-10deg) translateY(-8px) scale(0.95);
+        opacity: 0.9;
+    }
+    100% {
+        clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+        transform: rotate(-14deg) translateY(-12px) translateX(20px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes arrows-nudge {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+/* ==========================================================================
+   RESI PENGIRIMAN H&F EXPRESS (AUTENTIK THERMAL LABEL - POSISI KONSISTEN)
+   ========================================================================== */
+.waybill-mobile-wrapper {
+    width: 100%;
+    margin-top: 64px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+}
+
+.jnt-waybill-label {
+    position: relative;
+    background: #FAF8F5;
+    border: 1.5px solid #1F2937;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.04);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #111827;
+    font-size: 0.65rem;
+    line-height: 1.25;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Baris 1: Header Logo & Barcode (Bersatu Bersih) */
+.waybill-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #FFFFFF;
+    border-bottom: 1.5px dashed #4B5563;
+}
+
+.hf-logo-area {
+    width: 44%;
+}
+
+.jnt-barcode-area {
+    width: 52%;
     text-align: center;
-    padding: 5px 6px;
-    vertical-align: middle;
 }
 
 .jnt-header-barcode {
-    width: 96%;
-    height: 28px;
+    width: 100%;
+    height: 26px;
     display: block;
     margin: 0 auto;
 }
@@ -441,148 +823,230 @@ body.envelope-locked .unboxed-content-flow {
     font-weight: 800;
     letter-spacing: 0.08em;
     margin-top: 2px;
+    color: #111827;
 }
 
-/* Pengirim & Penerima Ringkas (50% : 50%) */
-.waybill-sender-cell {
-    width: 50%;
-    padding: 6px 8px;
-    vertical-align: top;
+/* Baris 2: Kolom Pengirim & Penerima (Dua Kolom Bersih) */
+.waybill-parties-row {
+    display: flex;
+    background: #FAF8F5;
+    border-bottom: 1.5px dashed #9CA3AF;
 }
 
-.waybill-receiver-cell {
-    width: 50%;
-    padding: 6px 8px;
-    vertical-align: top;
+.party-col {
+    flex: 1;
+    padding: 8px 10px;
+    box-sizing: border-box;
 }
 
-.jnt-label-title {
-    font-size: 0.56rem;
+.sender-col {
+    border-right: 1.5px dashed #D1D5DB;
+}
+
+.waybill-micro-title {
+    font-size: 0.52rem;
     font-weight: 700;
-    color: #555555;
+    color: #6B7280;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
     display: block;
-    letter-spacing: 0.02em;
 }
 
-.jnt-name-bold {
-    font-weight: 900;
-    font-size: 0.74rem;
-    color: #000000;
-    text-transform: uppercase;
-    margin-top: 1px;
+.party-name {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.2;
 }
 
-.jnt-name-recipient {
-    font-weight: 900;
-    font-size: 0.88rem;
-    color: #000000;
-    text-transform: uppercase;
-    margin: 1px 0 2px 0;
-    line-height: 1.15;
+.recipient-name {
+    color: #B91C1C;
+    font-size: 0.84rem;
 }
 
-.waybill-subtext {
+.party-desc {
     font-size: 0.58rem;
-    color: #333333;
+    color: #4B5563;
+    margin-top: 2px;
     line-height: 1.3;
 }
 
-.waybill-city-tag {
-    font-size: 0.54rem;
+.party-location {
+    font-size: 0.58rem;
     font-weight: 700;
-    color: #6E5D4F;
+    color: #15803D;
     margin-top: 3px;
-    letter-spacing: 0.02em;
 }
 
-.jnt-service-bar {
-    border: 1px solid #E30613;
-    color: #E30613;
-    background: #FFF5F5;
-    padding: 2px 4px;
-    margin: 4px 0 3px 0;
-    text-align: center;
+/* Baris 3: Footer Detail Spesifikasi & Biaya Kirim */
+.waybill-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #F3F4F6;
+}
+
+.footer-col {
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.footer-detail-line {
+    font-size: 0.58rem;
+    color: #374151;
+    line-height: 1.35;
+}
+
+.courier-service-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
+}
+
+.courier-noncod-badge {
+    display: inline-block;
+    background: #374151;
+    color: #F9FAFB;
+    border: 1px solid #1F2937;
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
     font-weight: 800;
-    font-size: 0.6rem;
     letter-spacing: 0.04em;
+    padding: 1.5px 5px;
     border-radius: 2px;
+    line-height: 1.15;
 }
 
-.waybill-status-note {
-    font-size: 0.55rem;
-    color: #16A34A;
-    font-weight: 700;
-    margin-top: 2px;
+.courier-service-name {
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 900;
+    font-style: italic;
+    color: #111827;
+    letter-spacing: 0.05em;
 }
 
-/* Baris Berat & QR Ringkas */
-.jnt-weight-data {
-    width: 38%;
-    font-size: 0.6rem;
-    line-height: 1.4;
-    padding: 6px 8px;
-    vertical-align: middle;
+.postage-note {
+    font-size: 0.52rem;
+    color: #6B7280;
+    line-height: 1.25;
 }
 
-.jnt-qr-cell {
-    width: 34%;
+/* ==========================================================================
+   AREA STEMPEL & CAP DI BAWAH RESI PADA KARDUS (ESTETIK, PROPORSI PAS & UTUH)
+   ========================================================================== */
+.envelope-footer-stamp-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 14px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* Cap Pos Bulat Otentik (Vintage Postmark Pekalongan 07 Mei 2027) */
+.courier-postmark-stamp {
+    position: relative;
+    transform: rotate(6deg);
+    border: 1.5px solid #1E3A8A;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+.postmark-circle {
+    border: 1px dashed #1E3A8A;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 4px 2px;
-    vertical-align: middle;
+    color: #1E3A8A;
+    line-height: 1.1;
 }
 
-.jnt-qr-svg {
-    width: 54px;
-    height: 54px;
-    margin: 0 auto;
+.postmark-city {
+    font-size: 0.44rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+}
+
+.postmark-date {
+    font-size: 0.46rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    border-top: 1px solid #1E3A8A;
+    border-bottom: 1px solid #1E3A8A;
+    padding: 1px 0;
+    margin: 1px 0;
+    width: 90%;
     display: block;
 }
 
-.qr-checkin-caption {
-    font-size: 0.5rem;
+.postmark-branch {
+    font-size: 0.40rem;
     font-weight: 700;
-    color: #555555;
-    margin-top: 2px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
 }
 
-.jnt-cashless-cell {
-    width: 28%;
-    padding: 0 !important;
-    vertical-align: middle;
+.fragile-stamp {
+    position: relative;
+    transform: rotate(-5deg);
+    border: 2px dashed #DC2626;
+    border-radius: 4px;
+    padding: 5px 12px;
+    background: rgba(254, 242, 242, 0.95);
+    color: #DC2626;
     text-align: center;
+    line-height: 1.15;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.18);
+    display: inline-block;
+    margin-right: 2px;
 }
 
-.jnt-vip-header {
-    background: #000000;
-    color: #FFFFFF;
-    padding: 4px 2px;
+.fragile-stamp .stamp-top {
+    font-size: 0.74rem;
     font-weight: 900;
-    font-size: 0.64rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.12em;
+    display: block;
 }
 
-.jnt-vip-access {
-    font-size: 0.55rem;
+.fragile-stamp .stamp-bot {
+    font-size: 0.48rem;
     font-weight: 800;
-    color: #E30613;
-    padding-top: 4px;
     letter-spacing: 0.03em;
+    display: block;
+    margin-top: 1px;
 }
 
-.jnt-vip-status {
-    font-size: 0.54rem;
-    font-weight: 700;
-    color: #16A34A;
-    padding: 1px 0 3px 0;
-}
-
-.jnt-page-index {
-    border-top: 1px solid #000000;
-    padding: 3px 2px;
+/* Watermark Tipis Segel Dokumen Resmi di Ujung Bawah */
+.envelope-bottom-seal-notice {
+    width: 100%;
     text-align: center;
-    font-weight: 800;
-    font-size: 0.64rem;
+    margin-top: 10px;
+    padding: 0 10px 4px 10px;
+    box-sizing: border-box;
+}
+
+.envelope-bottom-seal-notice span {
+    font-size: 0.46rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(74, 51, 29, 0.65);
+    display: block;
 }
 
 /* ==========================================================================
@@ -608,24 +1072,23 @@ body.envelope-locked .unboxed-content-flow {
 
 /* Stagger Animation Saat Dokumen Ditarik Keluar dari Amplop */
 .unboxed-content-flow.revealed .paper-document {
-    animation: slide-out-paper 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: slide-out-paper 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.unboxed-content-flow.revealed .doc-story    { animation-delay: 0.1s; }
-.unboxed-content-flow.revealed .doc-receipt  { animation-delay: 0.25s; }
-.unboxed-content-flow.revealed .doc-photos   { animation-delay: 0.4s; }
-.unboxed-content-flow.revealed .doc-waybill  { animation-delay: 0.55s; }
-.unboxed-content-flow.revealed .doc-gift     { animation-delay: 0.7s; }
-.unboxed-content-flow.revealed .doc-rsvp     { animation-delay: 0.85s; }
+.unboxed-content-flow.revealed .story-letter-sheet.page-1 { animation-delay: 0.1s; }
+.unboxed-content-flow.revealed .story-letter-sheet.page-2 { animation-delay: 0.22s; }
+.unboxed-content-flow.revealed .doc-waybill               { animation-delay: 0.36s; }
+.unboxed-content-flow.revealed .doc-gift                  { animation-delay: 0.50s; }
+.unboxed-content-flow.revealed .doc-rsvp                  { animation-delay: 0.64s; }
 
 @keyframes slide-out-paper {
     0% {
         opacity: 0;
-        transform: translateY(60px) scale(0.96);
+        transform: translateY(70px) scale(0.96) rotate(var(--doc-tilt, 0deg));
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1) rotate(var(--doc-tilt, 0deg));
     }
 }
 
@@ -639,6 +1102,38 @@ body.envelope-locked .unboxed-content-flow {
         0 8px 24px rgba(46, 30, 18, 0.18),
         0 16px 36px -10px rgba(46, 30, 18, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: rotate(var(--doc-tilt, 0deg));
+    overflow: hidden;
+}
+
+/* Tekstur Serat Kertas Fisik (Tactile Paper Grain, Pulp & Laid Fibers) */
+.paper-document::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    /* Layer 1: Ambient paper vignette */
+    box-shadow: inset 0 0 35px rgba(110, 93, 79, 0.06), inset 0 0 10px rgba(110, 93, 79, 0.04);
+    /* Layer 2: Tactile SVG paper grain noise */
+    background-image: 
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.35 0 0 0 0 0.28 0 0 0 0 0.20 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)'/%3E%3C/svg%3E"),
+        /* Layer 3: Subtle vertical paper laid fibers */
+        repeating-linear-gradient(
+            0deg,
+            rgba(110, 93, 79, 0.012) 0px,
+            rgba(110, 93, 79, 0.012) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    mix-blend-mode: multiply;
+    opacity: 0.85;
+}
+
+.paper-document > * {
+    position: relative;
+    z-index: 2;
 }
 
 .paper-document:hover {
@@ -646,6 +1141,7 @@ body.envelope-locked .unboxed-content-flow {
         0 4px 8px rgba(46, 30, 18, 0.12),
         0 14px 30px rgba(46, 30, 18, 0.22),
         0 22px 45px -8px rgba(46, 30, 18, 0.2);
+    transform: translateY(-2px) rotate(var(--doc-tilt, 0deg));
 }
 
 /* ==========================================================================
@@ -657,7 +1153,7 @@ body.envelope-locked .unboxed-content-flow {
     padding: 22px 18px 26px 18px;
     font-family: var(--font-sans);
     color: var(--color-coffee-dark);
-    transform: rotate(-0.6deg);
+    --doc-tilt: -0.6deg;
     position: relative;
 }
 
@@ -676,6 +1172,7 @@ body.envelope-locked .unboxed-content-flow {
     padding: 2px 6px;
     border-radius: 3px;
     transform: rotate(6deg);
+    z-index: 3;
 }
 
 .letter-header {
@@ -776,7 +1273,7 @@ body.envelope-locked .unboxed-content-flow {
    POLAROID TUCKED INSIDE LETTER SHEETS (INTERAKTIF & ORGANIK)
    ========================================================================== */
 .story-letter-sheet.page-1 {
-    transform: rotate(-0.8deg);
+    --doc-tilt: -0.6deg;
 }
 
 .story-letter-sheet.page-1::after {
@@ -784,7 +1281,7 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 .story-letter-sheet.page-2 {
-    transform: rotate(0.9deg);
+    --doc-tilt: 0.5deg;
     margin-top: 28px;
 }
 
@@ -818,9 +1315,10 @@ body.envelope-locked .unboxed-content-flow {
     gap: 4px;
 }
 
-/* Polaroid yang Diselipkan di Sisi Kanan / Kiri Cerita */
-.story-polaroid-aside {
-    width: 140px;
+/* Polaroid yang Diselipkan di Sisi Kanan / Kiri Cerita (Compact Floating) */
+.story-polaroid-aside.polaroid-card {
+    width: 130px !important;
+    max-width: 44%;
     background: #FFFFFF;
     padding: 8px 8px 12px 8px;
     border-radius: 3px;
@@ -829,7 +1327,8 @@ body.envelope-locked .unboxed-content-flow {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     z-index: 5;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 .story-polaroid-aside:hover {
@@ -839,14 +1338,14 @@ body.envelope-locked .unboxed-content-flow {
 
 .story-polaroid-aside.float-right {
     float: right;
-    margin-left: 14px;
-    transform: rotate(2.5deg);
+    margin-left: 12px;
+    transform: rotate(2deg);
 }
 
 .story-polaroid-aside.float-left {
     float: left;
-    margin-right: 14px;
-    transform: rotate(-2.5deg);
+    margin-right: 12px;
+    transform: rotate(-2deg);
 }
 
 .story-polaroid-aside .polaroid-tape {
@@ -883,15 +1382,15 @@ body.envelope-locked .unboxed-content-flow {
 
 /* Responsif Layar Kecil (Mobile) */
 @media (max-width: 480px) {
-    .story-polaroid-aside {
-        width: 120px;
+    .story-polaroid-aside.polaroid-card {
+        width: 115px !important;
         padding: 6px 6px 10px 6px;
     }
     .story-polaroid-aside.float-right {
-        margin-left: 10px;
+        margin-left: 8px;
     }
     .story-polaroid-aside.float-left {
-        margin-right: 10px;
+        margin-right: 8px;
     }
     .story-polaroid-aside .polaroid-caption {
         font-size: 0.62rem;
@@ -929,211 +1428,6 @@ body.envelope-locked .unboxed-content-flow {
     color: var(--color-coffee-muted);
     letter-spacing: 0.04em;
     margin-top: 2px;
-}
-
-/* ==========================================================================
-   ITEM 1: STRUK KASIR THERMAL (SAWTOOTH TEAR EDGES)
-   ========================================================================== */
-.receipt-wrapper {
-    position: relative;
-    width: 100%;
-    transform: rotate(0.6deg);
-}
-
-/* Cap Stempel Basah Kasir "LUNAS / SAH SEUMUR HIDUP" */
-.stamp-lunas-wrap {
-    position: absolute;
-    bottom: 95px;
-    right: 18px;
-    transform: rotate(-13deg);
-    border: 3.5px double var(--color-jnt-red);
-    border-radius: 8px;
-    padding: 5px 12px;
-    color: var(--color-jnt-red);
-    font-family: var(--font-mono);
-    text-align: center;
-    line-height: 1.1;
-    pointer-events: none;
-    opacity: 0.88;
-    background: rgba(253, 251, 247, 0.45);
-    box-shadow: 0 0 0 1px rgba(227, 6, 19, 0.25), inset 0 0 4px rgba(227, 6, 19, 0.2);
-    z-index: 10;
-}
-
-.stamp-lunas-main {
-    font-size: 1.12rem;
-    font-weight: 900;
-    letter-spacing: 0.16em;
-    display: block;
-    text-transform: uppercase;
-}
-
-.stamp-lunas-date {
-    font-size: 0.58rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    border-top: 1.5px dashed var(--color-jnt-red);
-    padding-top: 3px;
-    margin-top: 2px;
-}
-
-/* Efek Sobekan Bergerigi Kasir Atas & Bawah */
-.receipt-tear-top, .receipt-tear-bottom {
-    width: 100%;
-    height: 12px;
-    background-color: var(--color-thermal-paper);
-}
-
-.receipt-tear-top {
-    clip-path: polygon(
-        0% 100%, 2% 0%, 4% 100%, 6% 0%, 8% 100%, 10% 0%, 12% 100%, 14% 0%, 16% 100%, 18% 0%, 20% 100%,
-        22% 0%, 24% 100%, 26% 0%, 28% 100%, 30% 0%, 32% 100%, 34% 0%, 36% 100%, 38% 0%, 40% 100%,
-        42% 0%, 44% 100%, 46% 0%, 48% 100%, 50% 0%, 52% 100%, 54% 0%, 56% 100%, 58% 0%, 60% 100%,
-        62% 0%, 64% 100%, 66% 0%, 68% 100%, 70% 0%, 72% 100%, 74% 0%, 76% 100%, 78% 0%, 80% 100%,
-        82% 0%, 84% 100%, 86% 0%, 88% 100%, 90% 0%, 92% 100%, 94% 0%, 96% 100%, 98% 0%, 100% 100%
-    );
-}
-
-.receipt-tear-bottom {
-    clip-path: polygon(
-        0% 0%, 2% 100%, 4% 0%, 6% 100%, 8% 0%, 10% 100%, 12% 0%, 14% 100%, 16% 0%, 18% 100%, 20% 0%,
-        22% 100%, 24% 0%, 26% 100%, 28% 0%, 30% 100%, 32% 0%, 34% 100%, 36% 0%, 38% 100%, 40% 0%,
-        42% 100%, 44% 0%, 46% 100%, 48% 0%, 50% 100%, 52% 0%, 54% 100%, 56% 0%, 58% 100%, 60% 0%,
-        62% 100%, 64% 0%, 66% 100%, 68% 0%, 70% 100%, 72% 0%, 74% 100%, 76% 0%, 78% 100%, 80% 0%,
-        82% 100%, 84% 0%, 86% 100%, 88% 0%, 90% 100%, 92% 0%, 94% 100%, 96% 0%, 98% 100%, 100% 0%
-    );
-}
-
-.receipt-content {
-    background-color: var(--color-thermal-paper);
-    padding: 16px 20px;
-    font-family: var(--font-mono);
-    color: var(--color-coffee-dark);
-}
-
-.receipt-header-center {
-    text-align: center;
-    border-bottom: 1px dashed var(--color-coffee-dark);
-    padding-bottom: 12px;
-    margin-bottom: 14px;
-}
-
-.receipt-store-title {
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    color: var(--color-coffee-dark);
-}
-
-.receipt-store-subtitle {
-    font-size: 0.72rem;
-    color: var(--color-coffee-muted);
-    margin-top: 2px;
-}
-
-.receipt-meta {
-    font-size: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid var(--color-thermal-border);
-    padding-bottom: 10px;
-}
-
-.receipt-meta-row {
-    display: flex;
-    justify-content: space-between;
-}
-
-.receipt-divider {
-    border-top: 1px dashed var(--color-coffee-dark);
-    margin: 12px 0;
-}
-
-.receipt-table {
-    width: 100%;
-    font-size: 0.76rem;
-    margin-bottom: 12px;
-}
-
-.receipt-table-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    line-height: 1.35;
-}
-
-.receipt-item-name {
-    flex: 1;
-    padding-right: 12px;
-}
-
-.receipt-item-price {
-    font-weight: 700;
-    text-align: right;
-    white-space: nowrap;
-}
-
-.receipt-totals {
-    font-size: 0.8rem;
-    border-top: 1px dashed var(--color-coffee-dark);
-    border-bottom: 2px solid var(--color-coffee-dark);
-    padding: 8px 0;
-    margin-bottom: 14px;
-}
-
-.receipt-total-highlight {
-    font-size: 0.92rem;
-    font-weight: 800;
-    color: var(--color-jnt-red);
-}
-
-/* Rincian Akad & Resepsi di Struk */
-.receipt-event-section {
-    background: #F7F2E9;
-    border: 1px dashed var(--color-coffee-muted);
-    border-radius: 6px;
-    padding: 12px 14px;
-    margin-bottom: 14px;
-}
-
-.receipt-event-title {
-    font-size: 0.82rem;
-    font-weight: 800;
-    color: var(--color-jnt-red);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.receipt-event-desc {
-    font-size: 0.74rem;
-    line-height: 1.45;
-    color: var(--color-coffee-dark);
-}
-
-.receipt-event-desc strong {
-    color: var(--color-coffee-dark);
-}
-
-.receipt-barcode-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 14px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--color-coffee-muted);
-}
-
-.receipt-footer-text {
-    font-size: 0.68rem;
-    text-align: center;
-    color: var(--color-coffee-muted);
-    margin-top: 6px;
 }
 
 /* ==========================================================================
@@ -1245,40 +1539,290 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 /* ==========================================================================
-   ITEM 3: LEMBAR SURAT JALAN & RENDER PETA SIMPEL (WAYBILL MAP)
+   ITEM 3: LEMBAR SURAT JALAN & JADWAL RESEPSI LENGKAP (WAYBILL MAP & EVENT HERO)
    ========================================================================== */
 .waybill-route-card {
-    background: var(--color-thermal-paper);
-    border: 2px solid var(--color-kraft-accent);
-    border-radius: 6px;
-    padding: 18px 16px;
+    background: #FCF9F2;
+    border: none;
+    border-radius: 4px;
+    padding: 22px 18px 24px 18px;
     position: relative;
     overflow: hidden;
-    transform: rotate(-0.5deg);
+    --doc-tilt: -0.4deg;
+    box-shadow: 
+        0 1px 3px rgba(46, 30, 18, 0.08),
+        0 8px 24px rgba(46, 30, 18, 0.14),
+        0 18px 42px -10px rgba(46, 30, 18, 0.12);
 }
 
-.waybill-route-card::before {
-    content: "SURAT JALAN / WAYBILL RUTE";
-    position: absolute;
-    top: 8px;
-    right: -24px;
-    background: var(--color-jnt-red);
-    color: #FFFFFF;
-    font-size: 0.55rem;
-    font-weight: 800;
-    padding: 3px 28px;
-    transform: rotate(45deg);
-    letter-spacing: 0.08em;
+.waybill-route-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(110, 93, 79, 0.3);
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .route-card-title {
-    font-size: 0.95rem;
+    font-size: 0.96rem;
     font-weight: 800;
     color: var(--color-coffee-dark);
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-bottom: 0;
+}
+
+.route-header-tag {
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #F59E0B;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+}
+
+/* Hero Jadwal & Waktu Resepsi (Printed Manifest Grid) */
+.waybill-event-hero {
+    background: transparent;
+    border: 1.5px solid rgba(110, 93, 79, 0.35);
+    border-radius: 4px;
+    padding: 14px;
+    margin-bottom: 14px;
+    box-shadow: none;
+}
+
+.event-hero-date-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
     margin-bottom: 12px;
+}
+
+.calendar-card {
+    flex-shrink: 0;
+    width: 82px;
+    background: #FFFFFF;
+    border: 1.5px solid var(--color-jnt-red);
+    border-radius: 4px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: none;
+}
+
+.calendar-month {
+    background: var(--color-jnt-red);
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 2px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.calendar-day-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-coffee-dark);
+    line-height: 1.05;
+    padding: 4px 0 2px 0;
+    font-family: var(--font-sans);
+}
+
+.calendar-day-name {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--color-coffee-muted);
+    letter-spacing: 0.12em;
+    padding-bottom: 3px;
+}
+
+.event-time-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-coffee-dark);
+}
+
+.time-badge svg {
+    color: var(--color-jnt-red);
+}
+
+.time-sub {
+    font-size: 0.74rem;
+    color: var(--color-coffee-muted);
+    font-weight: 500;
+}
+
+.status-pill-pulse {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #DCFCE7;
+    color: #166534;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2.5px 7px;
+    border-radius: 12px;
+    width: fit-content;
+    margin-top: 3px;
+}
+
+.pulse-dot {
+    width: 6.5px;
+    height: 6.5px;
+    border-radius: 50%;
+    background: #16A34A;
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+    animation: pulse-green 1.8s infinite;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 5px rgba(22, 163, 74, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+    }
+}
+
+/* Live Countdown Box (Printed Manifest Grid) */
+.countdown-container {
+    background: rgba(246, 239, 229, 0.65);
+    border: 1px dashed rgba(110, 93, 79, 0.4);
+    border-radius: 4px;
+    padding: 10px 8px;
+    margin-bottom: 10px;
+}
+
+.countdown-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--color-coffee-muted);
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.countdown-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3px;
+    width: 100%;
+}
+
+.countdown-unit {
+    flex: 1 1 0;
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(110, 93, 79, 0.3);
+    border-radius: 3px;
+    padding: 5px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+}
+
+.countdown-number {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-jnt-red);
+    line-height: 1;
+}
+
+.countdown-text {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--color-coffee-muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.countdown-colon-unit {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-coffee-muted);
+    line-height: 1;
+    margin-bottom: 8px;
+    padding: 0 1px;
+}
+
+/* Tombol Kalender Fisik (Stempel Cap Ekspedisi) */
+.btn-hero-calendar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 14px;
+    background: var(--color-coffee-dark);
+    color: #FFFFFF;
+    border: 1.5px solid #180F08;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #180F08;
+    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-hero-calendar:hover {
+    background: #180F08;
+}
+
+.btn-hero-calendar:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #180F08;
+}
+
+/* Divider Antara Jadwal & Peta */
+.route-section-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 12px 0;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-coffee-light);
+    opacity: 0.35;
+}
+
+.divider-text {
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: var(--color-coffee-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 /* Render Simple Map Container */
@@ -1287,7 +1831,7 @@ body.envelope-locked .unboxed-content-flow {
     background: #F4EFE6;
     border: 1px solid var(--color-thermal-border);
     border-radius: 6px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     overflow: hidden;
     position: relative;
 }
@@ -1298,130 +1842,193 @@ body.envelope-locked .unboxed-content-flow {
     display: block;
 }
 
-/* Live Countdown Box */
-.countdown-container {
-    background: #F4ECE1;
-    border: 1px dashed var(--color-coffee-light);
-    border-radius: 6px;
-    padding: 10px;
-    margin-bottom: 14px;
-}
-
-.countdown-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    color: var(--color-coffee-muted);
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
-}
-
-.countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-}
-
-.countdown-unit {
-    background: #FFFFFF;
-    border: 1px solid var(--color-thermal-border);
+/* Detail Lokasi & Alamat di Bawah Peta (Printed Manifest Grid) */
+.waybill-venue-details {
+    background: transparent;
+    border: 1.5px solid rgba(110, 93, 79, 0.35);
     border-radius: 4px;
-    padding: 6px 4px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: none;
+}
+
+.venue-title-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.venue-pin-icon {
+    font-size: 1.15rem;
+    line-height: 1.1;
+}
+
+.venue-info-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-.countdown-number {
-    font-family: var(--font-mono);
-    font-size: 1.15rem;
+.venue-title-text {
+    font-size: 0.88rem;
+    color: var(--color-coffee-dark);
     font-weight: 800;
-    color: var(--color-jnt-red);
-    line-height: 1;
+    line-height: 1.25;
 }
 
-.countdown-text {
-    font-size: 0.58rem;
-    font-weight: 600;
+.venue-address-text {
+    font-size: 0.75rem;
     color: var(--color-coffee-muted);
-    text-transform: uppercase;
+    line-height: 1.4;
     margin-top: 2px;
 }
 
-/* Quick Action Navigation Buttons */
-.nav-actions-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 10px;
+.venue-gate-notice {
+    background: rgba(254, 242, 242, 0.7);
+    border: 1px dashed rgba(227, 6, 19, 0.4);
+    border-left: 3px solid var(--color-jnt-red);
+    padding: 6px 8px;
+    border-radius: 3px;
+    font-size: 0.72rem;
+    color: #991B1B;
+    line-height: 1.4;
 }
 
-.nav-btn {
+.gate-tag {
+    font-weight: 800;
+    margin-right: 4px;
+}
+
+/* Tombol Navigasi Google Maps (Cap Label Stiker Ekspedisi Fisik) */
+.nav-single-action {
+    width: 100%;
+}
+
+.nav-btn-hero-maps {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 9px 12px;
-    border-radius: 6px;
-    font-size: 0.76rem;
-    font-weight: 700;
+    gap: 8px;
+    padding: 11px 16px;
+    background: var(--color-jnt-red);
+    color: #FFFFFF;
+    border: 1.5px solid #A8000A;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
     text-decoration: none;
-    transition: transform 0.15s ease, filter 0.2s ease;
-    cursor: pointer;
-    border: none;
+    box-shadow: 0 3px 0 #8B0000;
+    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.nav-btn:active {
-    transform: scale(0.96);
+.nav-btn-hero-maps:hover {
+    background: var(--color-jnt-red-hover);
 }
 
-.nav-btn.btn-maps {
-    background: #1A73E8;
-    color: #FFFFFF;
+.nav-btn-hero-maps:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #8B0000;
 }
 
-.nav-btn.btn-waze {
-    background: #33CCFF;
-    color: #0E3A5A;
-}
-
-.nav-btn.btn-cal {
-    grid-column: span 2;
-    background: var(--color-coffee-dark);
-    color: #FFFFFF;
+@media (max-width: 480px) {
+    .event-hero-date-row {
+        gap: 10px;
+    }
+    .calendar-card {
+        width: 72px;
+    }
+    .calendar-day-num {
+        font-size: 1.8rem;
+    }
+    .time-badge {
+        font-size: 0.95rem;
+    }
+    .countdown-number {
+        font-size: 1.15rem;
+    }
+    .nav-btn-hero-maps {
+        padding: 11px 12px;
+        font-size: 0.78rem;
+    }
 }
 
 /* ==========================================================================
-   ITEM 4: SLIP PAKET COD KADO & TANDA KASIH DIGITAL (BEBAS NO REKENING)
+   ITEM 4: DOKUMEN 03: SLIP TITIPAN KHUSUS & TANDA KASIH (CASHLESS & DROPOFF)
    ========================================================================== */
 .gift-slip-card {
-    background: #FAF6EE;
-    border: 2px dashed var(--color-kraft-accent);
-    border-radius: 8px;
-    padding: 18px 16px;
-    transform: rotate(0.4deg);
+    background: #FCF9F3;
+    border: none;
+    border-radius: 4px;
+    padding: 22px 18px 24px 18px;
+    --doc-tilt: 0.6deg;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 1px 3px rgba(46, 30, 18, 0.08),
+        0 8px 24px rgba(46, 30, 18, 0.14),
+        0 18px 42px -10px rgba(46, 30, 18, 0.12);
 }
 
-.gift-slip-header {
-    text-align: center;
-    margin-bottom: 12px;
+.gift-slip-paper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(110, 93, 79, 0.3);
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.gift-badge {
+.slip-meta-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.slip-doc-tag {
     background: var(--color-jnt-red);
     color: #FFFFFF;
     font-size: 0.65rem;
     font-weight: 800;
-    padding: 3px 10px;
-    border-radius: 9999px;
-    display: inline-block;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+}
+
+.slip-serial-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-coffee-muted);
+}
+
+.slip-status-badge {
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #F59E0B;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+}
+
+.gift-slip-inner {
+    width: 100%;
+}
+
+.gift-slip-header {
+    text-align: center;
+    margin-bottom: 14px;
 }
 
 .gift-slip-title {
-    font-size: 0.98rem;
+    font-size: 1.05rem;
     font-weight: 800;
     color: var(--color-coffee-dark);
 }
@@ -1433,17 +2040,17 @@ body.envelope-locked .unboxed-content-flow {
     line-height: 1.45;
 }
 
-/* QRIS Standar Nasional Card */
+/* QRIS Standar Nasional Card (Printed Manifest Grid) */
 .qris-featured-card {
-    background: #FFFFFF;
-    border: 1px solid var(--color-thermal-border);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1.5px dashed rgba(110, 93, 79, 0.45);
+    border-radius: 4px;
     padding: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 12px 0;
-    box-shadow: 0 4px 12px rgba(46, 30, 18, 0.06);
+    box-shadow: none;
 }
 
 .qris-header-row {
@@ -1451,7 +2058,7 @@ body.envelope-locked .unboxed-content-flow {
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    border-bottom: 1px solid #EFE8DC;
+    border-bottom: 1px dashed rgba(110, 93, 79, 0.35);
     padding-bottom: 8px;
     margin-bottom: 12px;
 }
@@ -1468,9 +2075,10 @@ body.envelope-locked .unboxed-content-flow {
     height: 190px;
     display: block;
     cursor: pointer;
-    border-radius: 4px;
-    border: 1px solid var(--color-thermal-border);
-    transition: transform 0.2s ease;
+    border-radius: 3px;
+    border: 1.5px solid rgba(110, 93, 79, 0.35);
+    background: #FFFFFF;
+    transition: transform 0.15s ease;
 }
 
 .qris-display-img:hover {
@@ -1486,10 +2094,13 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 .physical-gift-box {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1.5px dashed rgba(110, 93, 79, 0.45);
+    border-radius: 4px;
+    padding: 14px;
     margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--color-thermal-border);
     font-size: 0.74rem;
+    box-shadow: none;
 }
 
 .physical-gift-title {
@@ -1504,27 +2115,110 @@ body.envelope-locked .unboxed-content-flow {
 .physical-gift-addr {
     color: var(--color-coffee-muted);
     line-height: 1.45;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.btn-copy-acc {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #FAF7F0;
+    color: var(--color-coffee-dark);
+    border: 1.5px solid rgba(110, 93, 79, 0.5);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 0 rgba(110, 93, 79, 0.4);
+    transition: all 0.15s ease;
+}
+
+.btn-copy-acc:hover {
+    background: #F3ECE0;
+    border-color: var(--color-coffee-dark);
+}
+
+.btn-copy-acc:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 transparent;
 }
 
 /* ==========================================================================
-   ITEM 5: FORM RSVP & DINDING DOA RESTU
+   ITEM 5: DOKUMEN 04: LEMBAR BERITA ACARA PENERIMAAN (POD) & BUKU TAMU
    ========================================================================== */
 .rsvp-wishes-card {
-    background: var(--color-thermal-paper);
-    border: 2px solid var(--color-kraft-accent);
-    border-radius: 10px;
-    padding: 18px 16px;
-    box-shadow: 0 10px 24px rgba(46, 30, 18, 0.12);
+    background: #FAF7F0;
+    border: none;
+    border-radius: 4px;
+    padding: 22px 18px 24px 18px;
+    --doc-tilt: -0.3deg;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 1px 3px rgba(46, 30, 18, 0.08),
+        0 8px 24px rgba(46, 30, 18, 0.14),
+        0 18px 42px -10px rgba(46, 30, 18, 0.12);
+}
+
+.pod-paper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(110, 93, 79, 0.3);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pod-meta-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pod-doc-tag {
+    background: var(--color-coffee-dark);
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+}
+
+.pod-serial-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-coffee-muted);
+}
+
+.pod-stamp-tag {
+    background: var(--color-jnt-red-light);
+    color: var(--color-jnt-red);
+    border: 1px solid var(--color-jnt-red);
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+}
+
+.pod-paper-inner {
+    width: 100%;
 }
 
 .section-form-title {
-    font-size: 1rem;
+    font-size: 0.98rem;
     font-weight: 800;
     color: var(--color-coffee-dark);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 4px;
 }
 
@@ -1532,6 +2226,7 @@ body.envelope-locked .unboxed-content-flow {
     font-size: 0.74rem;
     color: var(--color-coffee-muted);
     margin-bottom: 14px;
+    line-height: 1.4;
 }
 
 .rsvp-form-group {
@@ -1542,27 +2237,33 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 .rsvp-label {
-    font-size: 0.74rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 800;
     color: var(--color-coffee-dark);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
+/* Kotak Blok Isian Tanda Tangan / Kolom Resi Ekspedisi */
 .rsvp-input, .rsvp-select, .rsvp-textarea {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--color-thermal-border);
-    border-radius: 6px;
-    background: #FFFFFF;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
+    padding: 9px 11px;
+    border: 1px solid rgba(110, 93, 79, 0.45);
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.65);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
     color: var(--color-coffee-dark);
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: inset 0 1px 2px rgba(46, 30, 18, 0.05);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .rsvp-input:focus, .rsvp-select:focus, .rsvp-textarea:focus {
     border-color: var(--color-jnt-red);
-    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.12);
+    background: #FFFFFF;
+    box-shadow: inset 0 1px 3px rgba(227, 6, 19, 0.08);
 }
 
 .radio-attendance-group {
@@ -1573,17 +2274,18 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 .radio-attendance-card {
-    border: 1px solid var(--color-thermal-border);
-    border-radius: 6px;
-    padding: 9px 10px;
+    border: 1px solid rgba(110, 93, 79, 0.45);
+    border-radius: 3px;
+    padding: 8px 10px;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.76rem;
+    font-size: 0.74rem;
+    font-family: var(--font-mono);
     font-weight: 700;
     cursor: pointer;
-    background: #FFFFFF;
-    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.65);
+    transition: all 0.15s ease;
 }
 
 .radio-attendance-card input[type="radio"] {
@@ -1592,23 +2294,25 @@ body.envelope-locked .unboxed-content-flow {
 
 .radio-attendance-card.active {
     border-color: var(--color-jnt-red);
-    background: var(--color-jnt-red-light);
+    background: #FEE2E2;
     color: var(--color-jnt-red);
 }
 
+/* Tombol Kirim RSVP (Label Stiker Cap Fisik) */
 .btn-submit-rsvp {
     width: 100%;
-    padding: 12px;
+    padding: 11px 14px;
     background: var(--color-jnt-red);
     color: #FFFFFF;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.86rem;
+    border: 1.5px solid #A8000A;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
     font-weight: 800;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(227, 6, 19, 0.3);
-    transition: background 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 3px 0 #8B0000;
+    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
     margin-top: 6px;
 }
 
@@ -1617,13 +2321,14 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 .btn-submit-rsvp:active {
-    transform: scale(0.98);
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #8B0000;
 }
 
-/* Dinding Doa Restu */
+/* Dinding Doa Restu (Buku Tamu Fisik / Guestbook Ledger) */
 .wishes-wall-container {
     margin-top: 24px;
-    border-top: 1px dashed var(--color-coffee-light);
+    border-top: 1.5px dashed rgba(110, 93, 79, 0.4);
     padding-top: 16px;
 }
 
@@ -1631,67 +2336,85 @@ body.envelope-locked .unboxed-content-flow {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(110, 93, 79, 0.25);
 }
 
 .wishes-wall-title {
-    font-size: 0.88rem;
+    font-size: 0.86rem;
+    font-family: var(--font-serif);
     font-weight: 800;
+    font-style: italic;
     color: var(--color-coffee-dark);
 }
 
 .wishes-count-pill {
-    background: #F4ECE1;
-    color: var(--color-coffee-dark);
+    background: transparent;
+    color: var(--color-coffee-muted);
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 9999px;
+    padding: 0;
+    border: none;
 }
 
 .wishes-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-height: 380px;
+    gap: 0;
+    max-height: 420px;
     overflow-y: auto;
     padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(110, 93, 79, 0.2) transparent;
 }
 
-/* Custom Minimal Scrollbar */
+/* Bilah Scrollbar Minimalis & Mulus Tanpa Merusak Kertas */
 .wishes-list::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
+}
+.wishes-list::-webkit-scrollbar-track {
+    background: transparent;
 }
 .wishes-list::-webkit-scrollbar-thumb {
-    background: var(--color-kraft-dark);
-    border-radius: 4px;
+    background: rgba(110, 93, 79, 0.25);
+    border-radius: 2px;
 }
 
+/* Baris Entri Buku Tamu Ledger (Menyatu Langsung di Atas Kertas) */
 .wish-item-card {
-    background: #FFFFFF;
-    border: 1px solid var(--color-thermal-border);
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 0.76rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed rgba(110, 93, 79, 0.35);
+    border-radius: 0;
+    padding: 10px 0 11px 0;
+    font-size: 0.77rem;
+    box-shadow: none;
+}
+
+.wish-item-card:last-child {
+    border-bottom: none;
 }
 
 .wish-item-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .wish-sender-name {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--color-coffee-dark);
+    font-family: var(--font-sans);
 }
 
 .wish-badge-status {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
+    font-family: var(--font-mono);
     font-weight: 700;
-    padding: 2px 6px;
+    padding: 1px 5px;
     border-radius: 4px;
 }
 

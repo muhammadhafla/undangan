@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Tamu Undangan — Hafla & Fifi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="./guests.css">
+</head>
+<body>
+    <!-- PIN OVERLAY -->
+    <div id="pin-overlay" class="pin-screen">
+        <div class="pin-card">
+            <div class="pin-icon">🔐</div>
+            <h2>Admin Security Gate</h2>
+            <p>Masukkan PIN Keamanan untuk membuka Buku Manajemen Tamu.</p>
+            <form id="form-pin" autocomplete="off">
+                <input type="password" id="input-pin" maxlength="6" inputmode="numeric" placeholder="••••••" autofocus required>
+                <button type="submit" id="btn-unlock">Buka Akses</button>
+            </form>
+            <div id="pin-error" class="error-msg"></div>
+            <div class="pin-hint">Default PIN: <code>202620</code></div>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div id="admin-app" class="dashboard-container hidden">
+        <!-- TOP NAVBAR WITH INTEGRATED NAVIGATION -->
+        <header class="admin-header">
+            <div class="brand">
+                <span class="badge-post">J&T WAYBILL GUEST BOOK</span>
+                <h1>Hafla & Fifi <span>• Database Tamu Undangan</span></h1>
+            </div>
+            
+            <!-- NAV MENU -->
+            <nav class="admin-nav-tabs">
+                <a href="./index.html" class="nav-tab-item">🚀 WA Blast & Device Hub</a>
+                <a href="./guests.html" class="nav-tab-item active">👥 Manajemen Tamu</a>
+            </nav>
+
+            <div class="user-meta">
+                <span class="pulse-indicator"></span>
+                <span id="live-clock">--:--:-- WIB</span>
+                <button id="btn-lock" class="btn-secondary btn-sm" title="Kunci Dashboard">🔒 Kunci</button>
+            </div>
+        </header>
+
+        <!-- STAT CARDS ROW -->
+        <section class="guest-stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div>
+                    <span class="stat-val" id="stat-total-guests">0</span>
+                    <span class="stat-desc">Total Tamu Terdaftar</span>
+                </div>
+            </div>
+            <div class="stat-card border-cpp">
+                <div class="stat-icon">👔</div>
+                <div>
+                    <span class="stat-val color-cpp" id="stat-cpp-guests">0</span>
+                    <span class="stat-desc">Pihak Pria (CPP)</span>
+                </div>
+            </div>
+            <div class="stat-card border-cpw">
+                <div class="stat-icon">👗</div>
+                <div>
+                    <span class="stat-val color-cpw" id="stat-cpw-guests">0</span>
+                    <span class="stat-desc">Pihak Wanita (CPW)</span>
+                </div>
+            </div>
+            <div class="stat-card border-attending">
+                <div class="stat-icon">🟢</div>
+                <div>
+                    <span class="stat-val color-green" id="stat-attending-guests">0</span>
+                    <span class="stat-desc">Hadir (<span id="stat-confirmed-pax">0</span> Pax)</span>
+                </div>
+            </div>
+            <div class="stat-card border-unblasted">
+                <div class="stat-icon">✉️</div>
+                <div>
+                    <span class="stat-val color-orange" id="stat-unblasted">0</span>
+                    <span class="stat-desc">Belum Di-blast</span>
+                </div>
+            </div>
+            <div class="stat-card border-opened">
+                <div class="stat-icon">👀</div>
+                <div>
+                    <span class="stat-val color-blue" id="stat-opened">0</span>
+                    <span class="stat-desc">Sudah Buka Link</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLBAR FILTER & SEARCH -->
+        <section class="card filter-card">
+            <div class="filter-row">
+                <!-- Side Filter -->
+                <div class="filter-group">
+                    <label>Pihak:</label>
+                    <div class="pill-group" id="filter-side-group">
+                        <button class="pill-btn active" data-side="all">Semua</button>
+                        <button class="pill-btn" data-side="cpp">👔 CPP (Pria)</button>
+                        <button class="pill-btn" data-side="cpw">👗 CPW (Wanita)</button>
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="filter-group">
+                    <label for="filter-category">Kategori:</label>
+                    <select id="filter-category" class="filter-select">
+                        <option value="all">Semua Kategori</option>
+                    </select>
+                </div>
+
+                <!-- RSVP Filter -->
+                <div class="filter-group">
+                    <label for="filter-rsvp">Status RSVP:</label>
+                    <select id="filter-rsvp" class="filter-select">
+                        <option value="all">Semua Status</option>
+                        <option value="attending">🟢 Konfirmasi Hadir</option>
+                        <option value="declined">🔴 Berhalangan</option>
+                        <option value="pending">🟡 Belum Respon</option>
+                    </select>
+                </div>
+
+                <!-- Blast Filter -->
+                <div class="filter-group">
+                    <label for="filter-blast">Status Blast:</label>
+                    <select id="filter-blast" class="filter-select">
+                        <option value="all">Semua Pengiriman</option>
+                        <option value="unblasted">⚪ Belum Pernah Di-blast</option>
+                        <option value="sent">🟢 Terkirim (Sent)</option>
+                        <option value="queued">🟡 Dalam Antrean</option>
+                        <option value="failed">🔴 Gagal Kirim</option>
+                    </select>
+                </div>
+
+                <!-- Live Search Box -->
+                <div class="filter-group search-group">
+                    <label for="search-input">Cari Tamu:</label>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search-input" placeholder="Ketik nama, nomor HP, resi...">
+                        <button id="btn-clear-search" class="btn-clear hidden" title="Hapus pencarian">×</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTONS ROW -->
+            <div class="action-toolbar">
+                <div class="left-actions">
+                    <button id="btn-open-add-modal" class="btn-primary btn-sm">+ Tambah Tamu Baru</button>
+                    <button id="btn-open-import-modal" class="btn-secondary btn-sm">📥 Import CSV / Massal</button>
+                    <button id="btn-export-csv" class="btn-secondary btn-sm">📤 Export Data (CSV)</button>
+                </div>
+                <div class="right-actions">
+                    <button id="btn-toggle-trash" class="btn-link-subtle btn-sm">🗑️ Lihat Sampah (<span id="trash-count">0</span>)</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FLOATING BULK ACTIONS BAR (HIDDEN BY DEFAULT) -->
+        <div id="bulk-action-bar" class="bulk-action-bar hidden">
+            <div class="bulk-info">
+                <span id="selected-count">0</span> tamu dipilih
+            </div>
+            <div class="bulk-buttons">
+                <button id="btn-bulk-blast-modal" class="btn-primary btn-sm">🚀 Kirim Blast ke Tamu Terpilih</button>
+                <button id="btn-bulk-delete" class="btn-danger btn-sm">🗑️ Pindahkan ke Sampah</button>
+                <button id="btn-clear-selection" class="btn-secondary btn-sm">Batal Pilih</button>
+            </div>
+        </div>
+
+        <!-- GUEST DATA TABLE -->
+        <section class="card table-card">
+            <div class="table-container">
+                <table class="data-table" id="table-guests">
+                    <thead>
+                        <tr>
+                            <th width="40"><input type="checkbox" id="check-all-guests"></th>
+                            <th>Nama Tamu & Resi</th>
+                            <th>No. WhatsApp</th>
+                            <th>Pihak</th>
+                            <th>Kategori</th>
+                            <th width="70">Pax</th>
+                            <th>Status RSVP</th>
+                            <th>Status Blast</th>
+                            <th>Dibuka</th>
+                            <th width="160">Aksi Cepat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guests-tbody">
+                        <tr>
+                            <td colspan="10" class="text-center text-muted">Memuat database tamu...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- MODAL: TAMBAH / EDIT TAMU -->
+    <div id="modal-guest" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-guest-title">Tambah Tamu Baru</h3>
+                <button type="button" class="modal-close" id="btn-close-guest-modal">&times;</button>
+            </div>
+            <form id="form-guest" autocomplete="off">
+                <input type="hidden" id="guest-id">
+                
+                <div class="form-group">
+                    <label for="guest-name">Nama Tamu <span class="text-danger">*</span>:</label>
+                    <input type="text" id="guest-name" placeholder="Contoh: Budi Santoso & Partner" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-phone">No. WhatsApp:</label>
+                    <input type="tel" id="guest-phone" placeholder="081234567890 atau 6281234567890">
+                    <small class="helper-text">Format lokal (08...) otomatis diubah ke E.164 (628...).</small>
+                </div>
+
+                <div class="grid-2col-gap">
+                    <div class="form-group">
+                        <label>Pihak Mempelai:</label>
+                        <div class="side-radio-group">
+                            <label class="side-label active">
+                                <input type="radio" name="modal_side" value="cpp" checked>
+                                👔 Pria (CPP)
+                            </label>
+                            <label class="side-label">
+                                <input type="radio" name="modal_side" value="cpw">
+                                👗 Wanita (CPW)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guest-pax">Kuota Undangan (Pax):</label>
+                        <input type="number" id="guest-pax" min="1" max="10" value="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-category">Kategori Bebas:</label>
+                    <input type="text" id="guest-category" list="category-datalist" placeholder="Ketik kategori (misal: Teman Kantor, Keluarga, Sahabat)">
+                    <datalist id="category-datalist"></datalist>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-notes">Catatan Khusus (Opsional):</label>
+                    <input type="text" id="guest-notes" placeholder="Catatan internal pengantin/panitia">
+                </div>
+
+                <div id="duplicate-warning" class="alert-box-warning hidden"></div>
+
+                <div class="modal-footer">
+                    <button type="button" id="btn-cancel-guest" class="btn-secondary">Batal</button>
+                    <button type="submit" id="btn-save-guest" class="btn-primary">Simpan Tamu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: BULK IMPORT -->
+    <div id="modal-import" class="modal-overlay hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3>📥 Import Massal Daftar Tamu</h3>
+                <button type="button" class="modal-close" id="btn-close-import-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="subtitle" style="margin-bottom: 12px;">
+                    Paste data multiline dari Excel / Google Sheets atau teks. Kolom dipisahkan tanda koma (<code>,</code>) atau tab.
+                </p>
+                <div class="format-sample">
+                    Format: <code>Nama Tamu, NoHP, Kategori, Pihak (cpp/cpw), Pax</code><br>
+                    Contoh:<br>
+                    <code>Budi Santoso, 081234567890, Teman Kantor, cpp, 2</code><br>
+                    <code>Siti Rahma, 085712345678, Rekan J&T, cpw, 1</code>
+                </div>
+
+                <div class="form-group" style="margin-top: 14px;">
+                    <textarea id="import-textarea" rows="8" placeholder="Paste data di sini..."></textarea>
+                </div>
+
+                <div id="import-preview-box" class="import-preview hidden">
+                    <h4>Pratinjau Hasil Parsing:</h4>
+                    <p id="import-preview-count">0 kontak valid siap diimpor.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-cancel-import" class="btn-secondary">Batal</button>
+                <button type="button" id="btn-parse-import" class="btn-secondary">🔍 Periksa Data</button>
+                <button type="button" id="btn-execute-import" class="btn-primary" disabled>Mulai Import</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: BULK BLAST CONFIRMATION -->
+    <div id="modal-bulk-blast" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🚀 Kirim Blast ke Tamu Terpilih</h3>
+                <button type="button" class="modal-close" id="btn-close-blast-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Anda akan mengirimkan undangan WhatsApp ke <strong id="blast-recipient-count">0</strong> tamu terpilih.</p>
+                
+                <div class="form-group" style="margin-top: 14px;">
+                    <label>Pilih Nomor Pengirim WhatsApp:</label>
+                    <div class="side-radio-group">
+                        <label class="side-label active">
+                            <input type="radio" name="blast_sender_role" value="cpp" checked>
+                            👔 Pria (CPP / Hafla)
+                        </label>
+                        <label class="side-label">
+                            <input type="radio" name="blast_sender_role" value="cpw">
+                            👗 Wanita (CPW / Fifi)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Template Pesan:</label>
+                    <textarea id="blast-template-text" rows="6"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-cancel-bulk-blast" class="btn-secondary">Batal</button>
+                <button type="button" id="btn-confirm-bulk-blast" class="btn-primary">Kirim ke Antrean WA Bridge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="admin-toast" class="toast"></div>
+
+    <script type="module" src="./guests.js"></script>
+</body>
+</html>

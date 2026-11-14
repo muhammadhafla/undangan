@@ -1,0 +1,27 @@
+{
+  "name": "undangan-hf-wa-bridge",
+  "version": "1.0.0",
+  "description": "Dual-Session WhatsApp Bridge (CPP & CPW) for Hafla & Fifi Wedding Invitations via Baileys & Supabase",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop ecosystem.config.js",
+    "pm2:restart": "pm2 restart ecosystem.config.js",
+    "pm2:logs": "pm2 logs undangan-hf-wa-bridge"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.109.0",
+    "@whiskeysockets/baileys": "^6.7.18",
+    "better-sqlite3": "^13.0.3",
+    "dotenv": "^16.4.5",
+    "pino": "^9.3.2",
+    "pino-pretty": "^11.2.1",
+    "qrcode": "^1.5.4",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

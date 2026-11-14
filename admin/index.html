@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard & WA Blast — Hafla & Fifi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+    <!-- PIN OVERLAY -->
+    <div id="pin-overlay" class="pin-screen">
+        <div class="pin-card">
+            <div class="pin-icon">🔐</div>
+            <h2>Admin Security Gate</h2>
+            <p>Masukkan PIN Keamanan untuk membuka dashboard dan operasional blast WhatsApp.</p>
+            <form id="form-pin" autocomplete="off">
+                <input type="password" id="input-pin" maxlength="6" inputmode="numeric" placeholder="••••••" autofocus required>
+                <button type="submit" id="btn-unlock">Buka Akses</button>
+            </form>
+            <div id="pin-error" class="error-msg"></div>
+            <div class="pin-hint">Default PIN: <code>202620</code></div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="admin-app" class="dashboard-container hidden">
+        <!-- TOP NAVBAR -->
+        <header class="admin-header">
+            <div class="brand">
+                <span class="badge-post">J&T WAYBILL HUB</span>
+                <h1>Hafla & Fifi <span>• Admin WhatsApp Bridge</span></h1>
+            </div>
+
+            <!-- NAV MENU -->
+            <nav class="admin-nav-tabs">
+                <a href="./index.html" class="nav-tab-item active">🚀 WA Blast & Device Hub</a>
+                <a href="./guests.html" class="nav-tab-item">👥 Manajemen Tamu</a>
+            </nav>
+
+            <div class="user-meta">
+                <span class="pulse-indicator"></span>
+                <span id="live-clock">--:--:-- WIB</span>
+                <button id="btn-lock" class="btn-secondary btn-sm" title="Kunci Dashboard">🔒 Kunci</button>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <!-- 1. DUAL DEVICE HUB (CPP & CPW) -->
+            <section class="card device-hub-card">
+                <div class="card-header">
+                    <div>
+                        <h2>📱 Dual WhatsApp Device Hub</h2>
+                        <p class="subtitle">Kontrol jarak jauh sesi WhatsApp Calon Pengantin Pria (CPP) & Wanita (CPW) tanpa perlu akses server.</p>
+                    </div>
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="cpp">Pria (CPP - Hafla)</button>
+                        <button class="tab-btn" data-tab="cpw">Wanita (CPW - Fifi)</button>
+                    </div>
+                </div>
+
+                <!-- TAB CPP -->
+                <div id="panel-cpp" class="device-panel active">
+                    <div class="device-status-grid">
+                        <div class="status-summary">
+                            <div class="badge-connection" id="cpp-conn-badge">
+                                <span class="dot"></span>
+                                <span id="cpp-conn-text">Memeriksa status...</span>
+                            </div>
+                            <h3 id="cpp-account-name">-</h3>
+                            <p class="phone-number" id="cpp-account-phone">-</p>
+                            <p class="last-sync" id="cpp-last-sync">Terakhir sinkron: -</p>
+                            
+                            <div class="device-actions">
+                                <button id="btn-reset-cpp" class="btn-warning btn-sm">🔄 Ganti Nomor / Scan Ulang</button>
+                                <button id="btn-logout-cpp" class="btn-danger btn-sm">⏹️ Putuskan Sesi</button>
+                            </div>
+                        </div>
+
+                        <div class="qr-container" id="cpp-qr-box">
+                            <div class="qr-placeholder">
+                                <div class="spinner"></div>
+                                <p>Menghubungkan ke Realtime...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB CPW -->
+                <div id="panel-cpw" class="device-panel">
+                    <div class="device-status-grid">
+                        <div class="status-summary">
+                            <div class="badge-connection" id="cpw-conn-badge">
+                                <span class="dot"></span>
+                                <span id="cpw-conn-text">Memeriksa status...</span>
+                            </div>
+                            <h3 id="cpw-account-name">-</h3>
+                            <p class="phone-number" id="cpw-account-phone">-</p>
+                            <p class="last-sync" id="cpw-last-sync">Terakhir sinkron: -</p>
+                            
+                            <div class="device-actions">
+                                <button id="btn-reset-cpw" class="btn-warning btn-sm">🔄 Ganti Nomor / Scan Ulang</button>
+                                <button id="btn-logout-cpw" class="btn-danger btn-sm">⏹️ Putuskan Sesi</button>
+                            </div>
+                        </div>
+
+                        <div class="qr-container" id="cpw-qr-box">
+                            <div class="qr-placeholder">
+                                <div class="spinner"></div>
+                                <p>Menghubungkan ke Realtime...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. BLAST MANAGER -->
+            <section class="grid-2col">
+                <div class="card blast-form-card">
+                    <div class="card-header">
+                        <h2>🚀 Blast Pesan Undangan</h2>
+                        <span class="badge-accent">Open URL Generator</span>
+                    </div>
+
+                    <!-- Pemilih Pengirim -->
+                    <div class="form-group">
+                        <label>Pilih Nomor Pengirim WhatsApp:</label>
+                        <div class="radio-toggle-group">
+                            <label class="radio-card active">
+                                <input type="radio" name="sender_role" value="cpp" checked>
+                                <span class="title">👔 Pria (CPP / Hafla)</span>
+                                <span class="sub">Salam pihak pengantin pria</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="sender_role" value="cpw">
+                                <span class="title">👗 Wanita (CPW / Fifi)</span>
+                                <span class="sub">Salam pihak pengantin wanita</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Template Preset -->
+                    <div class="form-group">
+                        <div class="flex-between">
+                            <label for="template-select">Template Pesan:</label>
+                            <span class="helper-text">Variabel: <code>{{nama}}</code>, <code>{{link}}</code>, <code>{{kode}}</code></span>
+                        </div>
+                        <textarea id="message-template" rows="7" required></textarea>
+                    </div>
+
+                    <!-- Input Daftar Tamu -->
+                    <div class="form-group">
+                        <div class="flex-between">
+                            <label for="recipients-input">Daftar Penerima (Format: <code>Nama, NoHP</code>):</label>
+                            <button id="btn-example-data" type="button" class="btn-link">Isi Contoh Data</button>
+                        </div>
+                        <textarea id="recipients-input" rows="5" placeholder="Budi Santoso, 081234567890&#10;Siti Sarah & Partner, 085712345678&#10;Dimas (Sahabat Semarang), 081398765432"></textarea>
+                    </div>
+
+                    <div class="flex-actions">
+                        <button id="btn-parse-contacts" type="button" class="btn-secondary">🔍 Pratinjau Normalisasi</button>
+                        <button id="btn-submit-blast" type="button" class="btn-primary" disabled>🚀 Kirim Blast Antrean</button>
+                    </div>
+                </div>
+
+                <!-- 3. PREVIEW & LIVE STATS -->
+                <div class="card preview-card">
+                    <div class="card-header">
+                        <h2>📋 Pratinjau & Statistik Tamu</h2>
+                        <span id="preview-count" class="badge-neutral">0 Kontak Siap</span>
+                    </div>
+
+                    <!-- STATS ROW -->
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-num" id="stat-total-guests">0</span>
+                            <span class="stat-label">Total Tamu</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num color-green" id="stat-attending">0</span>
+                            <span class="stat-label">Hadir</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num color-orange" id="stat-total-pax">0</span>
+                            <span class="stat-label">Total Pax</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num color-blue" id="stat-outbox-sent">0</span>
+                            <span class="stat-label">WA Terkirim</span>
+                        </div>
+                    </div>
+
+                    <!-- PREVIEW TABLE -->
+                    <div class="table-container">
+                        <table class="data-table" id="table-preview">
+                            <thead>
+                                <tr>
+                                    <th>Nama Tamu</th>
+                                    <th>No WhatsApp (E.164)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">Belum ada data kontak. Masukkan nama & nomor di sebelah kiri.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. LIVE OUTBOX MONITOR -->
+            <section class="card">
+                <div class="card-header">
+                    <div>
+                        <h2>📊 Live Outbox Monitor</h2>
+                        <p class="subtitle">Antrean pengiriman pesan bertahap dengan jeda anti-ban (5–12 detik per pesan).</p>
+                    </div>
+                    <button id="btn-refresh-dashboard" class="btn-secondary btn-sm">🔄 Segarkan Data</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="table-outbox">
+                        <thead>
+                            <tr>
+                                <th>Waktu</th>
+                                <th>Pengirim</th>
+                                <th>Penerima</th>
+                                <th>No. HP</th>
+                                <th>Status</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">Memuat antrean...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="admin-toast" class="toast"></div>
+
+    <script type="module" src="./admin.js"></script>
+</body>
+</html>

@@ -1,4 +1,17 @@
 import { WEDDING_CONFIG } from '../config.js';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = import.meta.env?.VITE_SUPABASE_URL || '';
+const SUPABASE_ANON_KEY = import.meta.env?.VITE_SUPABASE_ANON_KEY || '';
+
+let supabase = null;
+try {
+    if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+        supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+} catch (e) {
+    console.warn('Supabase client failed to initialize, using local fallback:', e);
+}
 
 // Kamus Doa Default Awal (Mock / Seed Data)
 const INITIAL_WISHES = [
@@ -28,6 +41,8 @@ const INITIAL_WISHES = [
 // Kata-kata terlarang sederhana
 const PROFANITY_WORDS = ['anjing', 'babi', 'bangsat', 'kontol', 'memek', 'kampret', 'tolol'];
 
+let remoteWishes = [];
+
 export function initRSVP() {
     // 1. Inisialisasi Tombol Salin Clipboard
     initClipboardButtons();
@@ -38,8 +53,46 @@ export function initRSVP() {
     // 3. Inisialisasi Form RSVP & Dinding Doa
     initRSVPForm();
 
-    // 4. Render Dinding Doa Pertama Kali
+    // 4. Render Dinding Doa Pertama Kali & Fetch Supabase
     renderWishesWall();
+    fetchRemoteWishes();
+    subscribeWishesRealtime();
+}
+
+async function fetchRemoteWishes() {
+    if (!supabase) return;
+    try {
+        const { data, error } = await supabase
+            .from('wishes')
+            .select('*')
+            .eq('is_visible', true)
+            .order('created_at', { ascending: false })
+            .limit(30);
+
+        if (!error && data && data.length > 0) {
+            remoteWishes = data;
+            renderWishesWall();
+        }
+    } catch (_) {}
+}
+
+function subscribeWishesRealtime() {
+    if (!supabase) return;
+    try {
+        supabase
+            .channel('public_wishes_feed')
+            .on(
+                'postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'wishes' },
+                (payload) => {
+                    if (payload.new && payload.new.is_visible) {
+                        remoteWishes.unshift(payload.new);
+                        renderWishesWall();
+                    }
+                }
+            )
+            .subscribe();
+    } catch (_) {}
 }
 
 /**
@@ -98,9 +151,9 @@ function initClipboardButtons() {
         copyAddrBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(WEDDING_CONFIG.digitalGift.physicalGiftAddress).then(() => {
                 copyAddrBtn.textContent = '✓ Alamat Tersalin!';
-                showToast('Alamat Drop Point J&T berhasil disalin!');
+                showToast('Alamat pengiriman kado berhasil disalin!');
                 setTimeout(() => {
-                    copyAddrBtn.textContent = 'Salin Alamat Lengkap';
+                    copyAddrBtn.textContent = 'Salin Alamat Lengkap Pengiriman';
                 }, 2000);
             });
         });
@@ -191,6 +244,27 @@ function initRSVPForm() {
         // Simpan ke LocalStorage
         saveWishLocally(newWish);
 
+        // Simpan ke Supabase Cloud
+        if (supabase) {
+            supabase.from('wishes').insert({
+                guest_name: name,
+                message: message,
+                attendance_badge: badgeLabel,
+                pax: parseInt(pax, 10) || 1,
+                is_visible: true
+            }).then(() => {}).catch(err => console.warn('Supabase insert wish error:', err));
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestCode = urlParams.get('code') || localStorage.getItem('undangan_guest_code');
+            if (guestCode) {
+                supabase.from('guests').update({
+                    rsvp_status: attendance === 'attending' ? 'attending' : 'declined',
+                    rsvp_pax: attendance === 'attending' ? (parseInt(pax, 10) || 1) : 0,
+                    rsvp_at: new Date().toISOString()
+                }).eq('code', guestCode).then(() => {}).catch(err => console.warn('Supabase guest update error:', err));
+            }
+        }
+
         // Reset form
         if (messageInput) messageInput.value = '';
         showToast('Terima kasih! Doa restu Anda telah tersimpan.');
@@ -264,7 +338,26 @@ function saveWishLocally(wish) {
 
 function getStoredWishes() {
     const saved = localStorage.getItem('undangan_local_wishes');
-    const userWishes = saved ? JSON.parse(saved) : [];
+    let userWishes = saved ? JSON.parse(saved) : [];
+    // Bersihkan entri dummy uji coba lama yang menyebut "Rian"
+    if (userWishes.some(w => w.message?.includes('Rian'))) {
+        userWishes = userWishes.filter(w => !w.message?.includes('Rian'));
+        localStorage.setItem('undangan_local_wishes', JSON.stringify(userWishes));
+    }
+    if (remoteWishes && remoteWishes.length > 0) {
+        // Gabungkan remote wishes dengan user wishes unik
+        const combined = [...userWishes, ...remoteWishes];
+        const unique = [];
+        const seen = new Set();
+        for (const w of combined) {
+            const key = `${w.guest_name}_${w.message}`;
+            if (!seen.has(key)) {
+                seen.add(key);
+                unique.push(w);
+            }
+        }
+        return unique;
+    }
     return [...userWishes, ...INITIAL_WISHES];
 }
 

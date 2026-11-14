@@ -27,3 +27,7 @@ Thumbs.db
 # Baileys session data
 baileys_auth/
 baileys_store.json
+data/
+wa-bridge/data/
+wa-bridge/.env
+wa-bridge/node_modules/

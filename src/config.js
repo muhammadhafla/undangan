@@ -20,26 +20,21 @@ export const WEDDING_CONFIG = {
         origin: "Bermula dari meja kasir toko sandal & sepatu yang membutuhkan uang pecahan untuk kembalian, dan salah satu kantor ekspedisi pengiriman tempat Fifi bertugas. Dari sapaan ramah bertukar receh dan sandal yang terjatuh di kala hujan, tumbuh obrolan hangat, jawaban manis di atas bianglala, hingga ketabahan saling menguatkan dalam duka menuju ikrar suci seumur hidup."
     },
     event: {
-        date: "2026-05-23", // Target hari H di bulan Mei
-        dateFormatted: "Sabtu, 23 Mei 2026",
-        akad: {
-            time: "08:00 - 10:00 WIB",
-            venue: "Kediaman Mempelai Putri",
-            address: "Pacar Barat, Tirto, Kab. Pekalongan (Wajib Masuk dari Titik A: Toko Rak Madura)"
-        },
+        date: "2027-05-07", // Target hari H
+        dateFormatted: "Jumat, 7 Mei 2027",
         resepsi: {
-            time: "11:00 - 14:00 WIB",
+            time: "14:00 WIB",
             venue: "Kediaman Mempelai Putri",
             address: "Pacar Barat, Tirto, Kab. Pekalongan (Wajib Masuk dari Titik A: Toko Rak Madura)"
         },
         mapsUrl: "https://www.google.com/maps/dir/?api=1&waypoints=-6.891577%2C109.637651&destination=-6.891444%2C109.641833&travelmode=driving",
         wazeUrl: "https://waze.com/ul?ll=-6.891444,109.641833&navigate=yes",
         calendarEvent: {
-            title: "Pernikahan Hafla Maulana & Fifi Maghfiroh",
-            description: "Undangan Pernikahan Hafla Maulana & Fifi Maghfiroh",
+            title: "Resepsi Pernikahan Hafla Maulana & Fifi Maghfiroh",
+            description: "Undangan Resepsi Pernikahan Hafla Maulana & Fifi Maghfiroh",
             location: "Kediaman Mempelai Putri, Pacar, Tirto, Kab. Pekalongan (Akses Barat)",
-            startDate: "20260523T080000",
-            endDate: "20260523T140000"
+            startDate: "20270507T140000",
+            endDate: "20270507T170000"
         }
     },
     digitalGift: {
@@ -50,7 +45,7 @@ export const WEDDING_CONFIG = {
         accountNumberSecond: "7192830192",
         accountHolderSecond: "Fifi Maghfiroh",
         qrisImage: "assets/photos/qris.svg",
-        physicalGiftAddress: "Kantor Ekspedisi Pengiriman (u.p. Fifi Maghfiroh / Hafla Maulana), Jl. Palmerah Barat No. 88, Palmerah, Jakarta Barat 11480 (Telp: 0812-3456-7890)"
+        physicalGiftAddress: "Kediaman Mempelai Putri (u.p. Fifi Maghfiroh / Hafla Maulana), Jl. H. Usman, Pacar Barat, Tirto, Kab. Pekalongan"
     },
     admin: {
         pin: "202620"
