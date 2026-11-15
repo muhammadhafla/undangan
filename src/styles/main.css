@@ -35,6 +35,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -1329,6 +1330,18 @@ body.envelope-locked .unboxed-content-flow {
     z-index: 5;
     margin-bottom: 10px;
     box-sizing: border-box;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.story-polaroid-aside:focus,
+.story-polaroid-aside:focus-visible,
+.story-polaroid-aside:active {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 @media (hover: hover) {
@@ -1454,6 +1467,18 @@ body.envelope-locked .unboxed-content-flow {
     width: 96%;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.polaroid-card:focus,
+.polaroid-card:focus-visible,
+.polaroid-card:active {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 @media (hover: hover) {
@@ -1521,6 +1546,10 @@ body.envelope-locked .unboxed-content-flow {
     height: 100%;
     object-fit: cover;
     display: block;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
 }
 
 .polaroid-caption {
