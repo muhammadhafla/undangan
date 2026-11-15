@@ -380,6 +380,11 @@ class AmbienceEngine {
  * Inisialisasi Logika Unboxing & Welcome Screen
  */
 export function initUnboxing() {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     const ambience = new AmbienceEngine();
     ambience.init();
 
