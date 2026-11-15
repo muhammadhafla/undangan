@@ -231,6 +231,7 @@ body.envelope-locked .unboxed-content-flow {
     box-shadow: 0 16px 38px -6px rgba(45, 25, 10, 0.32), 0 2px 6px rgba(0, 0, 0, 0.06);
     overflow: hidden;
     padding: 0;
+    will-change: transform;
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -242,16 +243,16 @@ body.envelope-locked .unboxed-content-flow {
     overflow: visible !important;
 }
 
-/* Animasi Hentakan Halus Saat Dokumen Dimuntahkan Keluar (Recoil Kick) */
+/* Animasi Hentakan Halus Saat Dokumen Dimuntahkan Keluar (Recoil Kick - GPU Accelerated) */
 .envelope-wrapper.ejected {
     animation: envelope-recoil 0.75s cubic-bezier(0.25, 1, 0.4, 1) forwards;
 }
 
 @keyframes envelope-recoil {
-    0%   { transform: translateY(0) scale(1); }
-    30%  { transform: translateY(14px) scale(0.985); }
-    65%  { transform: translateY(4px) scale(0.995); }
-    100% { transform: translateY(0) scale(1); }
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    30%  { transform: translate3d(0, 14px, 0) scale(0.985); }
+    65%  { transform: translate3d(0, 4px, 0) scale(0.995); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
 /* Tekstur Serat Karton Kraft Paket Kurir */
@@ -331,13 +332,14 @@ body.envelope-locked .unboxed-content-flow {
     border: 1px solid #E2D7C3;
     border-top: 3px solid #D8CBB6;
     border-radius: 4px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 14px 30px rgba(46, 30, 18, 0.28);
     box-sizing: border-box;
     padding: 12px 14px;
     transform-origin: center bottom;
     z-index: 50;
     opacity: 0;
-    transform: translateY(24px) scale(0.96);
+    transform: translate3d(0, 24px, 0) scale(0.96);
+    will-change: transform, opacity;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
     pointer-events: none;
 }
@@ -422,50 +424,44 @@ body.envelope-locked .unboxed-content-flow {
 /* FASE 1: DOKUMEN MENYEMBUL DARI DALAM CELAH SOBEKAN COKELAT GELAP (.peeking) */
 .envelope-wrapper.peeking .ejecting-document-card {
     opacity: 1;
-    transform: translateY(-20px) scale(0.98);
+    transform: translate3d(0, -20px, 0) scale(0.98);
 }
 
-/* FASE 2: DOKUMEN MELESAT, MELAYANG & MENDARAT DALAM 1 LINTASAN LENGKUNG FLUID TERPADU (.ejected) */
+/* FASE 2: DOKUMEN MELESAT, MELAYANG & MENDARAT DALAM 1 LINTASAN FLUID TERPADU (.ejected) - 100% GPU Composited */
 .envelope-wrapper.ejected .ejecting-document-card {
     opacity: 1;
     pointer-events: auto;
     cursor: pointer;
-    animation: eject-fluid-arc 1.25s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
+    animation: eject-fluid-arc 0.95s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
 }
 
 @keyframes eject-fluid-arc {
     0% {
-        transform: translateY(-20px) scale(0.98) rotate(0deg);
+        transform: translate3d(0, -20px, 0) scale(0.98) rotate(0deg);
         opacity: 1;
-        box-shadow: 0 4px 16px rgba(46, 30, 18, 0.2);
     }
     22% {
-        transform: translateY(-130px) scale(1.02) rotate(-1deg);
+        transform: translate3d(0, -135px, 0) scale(1.02) rotate(-1deg);
         opacity: 1;
-        box-shadow: 0 16px 32px rgba(46, 30, 18, 0.28);
     }
     44% {
-        transform: translateY(-210px) scale(1.03) rotate(-1.8deg);
+        transform: translate3d(0, -205px, 0) scale(1.03) rotate(-1.6deg);
         opacity: 1;
-        box-shadow: 0 24px 44px rgba(46, 30, 18, 0.35);
     }
     56% {
-        transform: translateY(-195px) scale(1.025) rotate(-1.4deg);
+        transform: translate3d(0, -190px, 0) scale(1.025) rotate(-1.2deg);
         opacity: 1;
-        box-shadow: 0 20px 38px rgba(46, 30, 18, 0.3);
     }
     75% {
-        transform: translateY(-40px) scale(1.015) rotate(-0.5deg);
+        transform: translate3d(0, -35px, 0) scale(1.015) rotate(-0.5deg);
         opacity: 0.95;
-        box-shadow: 0 14px 28px rgba(46, 30, 18, 0.22);
     }
     88% {
-        transform: translateY(45px) scale(1.005) rotate(0deg);
-        opacity: 0.8;
-        box-shadow: 0 8px 18px rgba(46, 30, 18, 0.16);
+        transform: translate3d(0, 45px, 0) scale(1.005) rotate(0deg);
+        opacity: 0.75;
     }
     100% {
-        transform: translateY(115px) scale(1) rotate(0deg);
+        transform: translate3d(0, 115px, 0) scale(1) rotate(0deg);
         opacity: 0;
         visibility: hidden;
     }
@@ -475,7 +471,7 @@ body.envelope-locked .unboxed-content-flow {
 .envelope-wrapper.landing .ejecting-document-card {
     opacity: 1;
     pointer-events: auto;
-    animation: eject-fluid-arc 1.25s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
+    animation: eject-fluid-arc 0.95s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
 }
 
 /* SAAT KELUAR SEMUA / AMPLOP DIBUKA: BERSIH TOTAL TANPA SISA KERTAS MENGGANTUNG */
@@ -649,12 +645,10 @@ body.envelope-locked .unboxed-content-flow {
 
 @keyframes pull-tab-pulse {
     0%, 100% {
-        transform: translateY(-50%) scale(1);
-        box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.15);
+        transform: translateY(-50%) scale(1) translate3d(0, 0, 0);
     }
     50% {
-        transform: translateY(-50%) scale(1.12);
-        box-shadow: 3px 2px 8px rgba(220, 38, 38, 0.35);
+        transform: translateY(-50%) scale(1.1) translate3d(0, 0, 0);
     }
 }
 
@@ -664,6 +658,7 @@ body.envelope-locked .unboxed-content-flow {
     background: #DC2626;
     border-radius: 0 2px 2px 0;
     display: block;
+    box-shadow: 0 0 3px rgba(220, 38, 38, 0.6);
     animation: red-liner-glow 2s infinite ease-in-out;
 }
 
@@ -675,11 +670,10 @@ body.envelope-locked .unboxed-content-flow {
 
 @keyframes red-liner-glow {
     0%, 100% {
-        opacity: 0.85;
+        opacity: 0.75;
     }
     50% {
         opacity: 1;
-        filter: drop-shadow(0 0 3px rgba(220, 38, 38, 0.7));
     }
 }
 

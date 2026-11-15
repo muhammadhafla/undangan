@@ -26,6 +26,61 @@ class AmbienceEngine {
         this.masterGain = null;
         this.isSynthesized = false;
         this.synthNodes = [];
+        this.tearBuffer = null;
+        this.rustleBuffer = null;
+    }
+
+    _ensureAudioContext() {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!this.audioCtx && AudioContext) {
+            this.audioCtx = new AudioContext();
+        }
+        if (this.audioCtx && this.audioCtx.state === 'suspended') {
+            this.audioCtx.resume();
+        }
+        return this.audioCtx;
+    }
+
+    _getOrCreateTearBuffer(ctx) {
+        if (this.tearBuffer) return this.tearBuffer;
+        const duration = 0.58;
+        const sampleRate = ctx.sampleRate;
+        const buffer = ctx.createBuffer(1, Math.floor(sampleRate * duration), sampleRate);
+        const data = buffer.getChannelData(0);
+
+        let b0 = 0, b1 = 0, b2 = 0;
+        for (let i = 0; i < buffer.length; i++) {
+            const progress = i / buffer.length;
+            const white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            const pink = b0 + b1 + b2 + white * 0.5362;
+            const toothSnap = Math.sin(progress * Math.PI * 48) > 0.88 ? (Math.random() - 0.5) * 4.5 : 0;
+            const fiberRip = Math.random() > 0.95 ? (Math.random() - 0.5) * 2.8 : 0;
+            data[i] = (pink * 0.35 + toothSnap + fiberRip) * (1 - Math.pow(progress, 1.8));
+        }
+        this.tearBuffer = buffer;
+        return this.tearBuffer;
+    }
+
+    _getOrCreateRustleBuffer(ctx) {
+        if (this.rustleBuffer) return this.rustleBuffer;
+        const duration = 0.55;
+        const sampleRate = ctx.sampleRate;
+        const buffer = ctx.createBuffer(1, Math.floor(sampleRate * duration), sampleRate);
+        const data = buffer.getChannelData(0);
+
+        let lastSample = 0;
+        for (let i = 0; i < buffer.length; i++) {
+            const white = Math.random() * 2 - 1;
+            lastSample = (lastSample + (0.04 * white)) / 1.04;
+            const rustle = Math.random() > 0.94 ? (Math.random() - 0.5) * 1.8 : 0;
+            const envelope = Math.sin((i / buffer.length) * Math.PI);
+            data[i] = (lastSample * 0.45 + rustle) * envelope;
+        }
+        this.rustleBuffer = buffer;
+        return this.rustleBuffer;
     }
 
     init() {
@@ -38,60 +93,52 @@ class AmbienceEngine {
             // Jika file audio belum ada, otomatis aktifkan synth audio alam
             this.isSynthesized = true;
         });
+
+        // Pre-warm audio buffers saat idle agar tidak membebani main thread saat tap
+        const warmup = () => {
+            try {
+                const ctx = this._ensureAudioContext();
+                if (ctx) {
+                    this._getOrCreateTearBuffer(ctx);
+                    this._getOrCreateRustleBuffer(ctx);
+                }
+            } catch (_) {}
+        };
+        if (typeof window.requestIdleCallback === 'function') {
+            window.requestIdleCallback(warmup, { timeout: 1500 });
+        } else {
+            setTimeout(warmup, 250);
+        }
     }
 
     /**
      * Efek Suara Sobekan Perforasi Kertas Kardus (Cardboard Zipper Tear SFX)
-     * Mensintesis letupan gigi perforasi yang terputus berurutan secara taktil
+     * Menggunakan buffer yang sudah di-precache tanpa kalkulasi loop berat saat tap
      */
     playCardboardTearSFX() {
         try {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!this.audioCtx) {
-                this.audioCtx = new AudioContext();
-            }
-            if (this.audioCtx.state === 'suspended') {
-                this.audioCtx.resume();
-            }
+            const ctx = this._ensureAudioContext();
+            if (!ctx) return;
 
-            const now = this.audioCtx.currentTime;
+            const now = ctx.currentTime;
             const duration = 0.58;
-            const sampleRate = this.audioCtx.sampleRate;
-            const buffer = this.audioCtx.createBuffer(1, Math.floor(sampleRate * duration), sampleRate);
-            const data = buffer.getChannelData(0);
+            const buffer = this._getOrCreateTearBuffer(ctx);
 
-            // Letupan gigi perforasi kardus yang sobek cepat (krrr-riiiip)
-            let b0 = 0, b1 = 0, b2 = 0;
-            for (let i = 0; i < buffer.length; i++) {
-                const progress = i / buffer.length;
-                const white = Math.random() * 2 - 1;
-                b0 = 0.99886 * b0 + white * 0.0555179;
-                b1 = 0.99332 * b1 + white * 0.0750759;
-                b2 = 0.96900 * b2 + white * 0.1538520;
-                const pink = b0 + b1 + b2 + white * 0.5362;
-                
-                // Letupan ritmik gigi perforasi (zipper teeth snaps)
-                const toothSnap = Math.sin(progress * Math.PI * 48) > 0.88 ? (Math.random() - 0.5) * 4.5 : 0;
-                const fiberRip = Math.random() > 0.95 ? (Math.random() - 0.5) * 2.8 : 0;
-                
-                data[i] = (pink * 0.35 + toothSnap + fiberRip) * (1 - Math.pow(progress, 1.8));
-            }
-
-            const noiseSource = this.audioCtx.createBufferSource();
+            const noiseSource = ctx.createBufferSource();
             noiseSource.buffer = buffer;
 
             // Filter frekuensi gesekan sobekan serat kardus
-            const bpFilter = this.audioCtx.createBiquadFilter();
+            const bpFilter = ctx.createBiquadFilter();
             bpFilter.type = 'bandpass';
             bpFilter.frequency.setValueAtTime(1600, now);
             bpFilter.frequency.exponentialRampToValueAtTime(750, now + duration);
             bpFilter.Q.setValueAtTime(2.2, now);
 
-            const hpFilter = this.audioCtx.createBiquadFilter();
+            const hpFilter = ctx.createBiquadFilter();
             hpFilter.type = 'highpass';
             hpFilter.frequency.setValueAtTime(500, now);
 
-            const gain = this.audioCtx.createGain();
+            const gain = ctx.createGain();
             gain.gain.setValueAtTime(0.001, now);
             gain.gain.linearRampToValueAtTime(0.95, now + 0.02);
             gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
@@ -99,7 +146,7 @@ class AmbienceEngine {
             noiseSource.connect(bpFilter);
             bpFilter.connect(hpFilter);
             hpFilter.connect(gain);
-            gain.connect(this.audioCtx.destination);
+            gain.connect(ctx.destination);
 
             noiseSource.start(now);
         } catch (e) {
@@ -144,53 +191,35 @@ class AmbienceEngine {
 
     /**
      * Efek Suara Gesekan Serat Kertas (Paper Rustle SFX)
-     * Diputar saat berkas dokumen fisik meluncur keluar dari mulut amplop
+     * Menggunakan buffer yang sudah di-precache tanpa kalkulasi loop berat
      */
     playPaperRustleSFX() {
         try {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!this.audioCtx) {
-                this.audioCtx = new AudioContext();
-            }
-            if (this.audioCtx.state === 'suspended') {
-                this.audioCtx.resume();
-            }
+            const ctx = this._ensureAudioContext();
+            if (!ctx) return;
 
-            const now = this.audioCtx.currentTime;
+            const now = ctx.currentTime;
             const duration = 0.55;
-            const sampleRate = this.audioCtx.sampleRate;
-            const buffer = this.audioCtx.createBuffer(1, Math.floor(sampleRate * duration), sampleRate);
-            const data = buffer.getChannelData(0);
+            const buffer = this._getOrCreateRustleBuffer(ctx);
 
-            // Suara gemerisik serat kertas halus yang bergeser
-            let lastSample = 0;
-            for (let i = 0; i < buffer.length; i++) {
-                const white = Math.random() * 2 - 1;
-                // Pink noise halus
-                lastSample = (lastSample + (0.04 * white)) / 1.04;
-                const rustle = Math.random() > 0.94 ? (Math.random() - 0.5) * 1.8 : 0;
-                const envelope = Math.sin((i / buffer.length) * Math.PI);
-                data[i] = (lastSample * 0.45 + rustle) * envelope;
-            }
-
-            const noise = this.audioCtx.createBufferSource();
+            const noise = ctx.createBufferSource();
             noise.buffer = buffer;
 
             // Bandpass filter frekuensi gesekan kertas (2.2kHz - 4.5kHz)
-            const filter = this.audioCtx.createBiquadFilter();
+            const filter = ctx.createBiquadFilter();
             filter.type = 'bandpass';
             filter.frequency.setValueAtTime(2800, now);
             filter.frequency.exponentialRampToValueAtTime(1900, now + duration);
             filter.Q.setValueAtTime(1.4, now);
 
-            const gain = this.audioCtx.createGain();
+            const gain = ctx.createGain();
             gain.gain.setValueAtTime(0.001, now);
             gain.gain.linearRampToValueAtTime(0.28, now + 0.08);
             gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
             noise.connect(filter);
             filter.connect(gain);
-            gain.connect(this.audioCtx.destination);
+            gain.connect(ctx.destination);
 
             noise.start(now);
         } catch (e) {
@@ -452,14 +481,14 @@ export function initUnboxing() {
                 cavityEl.style.opacity = '';
             }
 
-            const tearAnimDuration = isInstantTap ? 460 : 220;
+            const tearAnimDuration = isInstantTap ? 440 : 200;
 
             // FASE 1: Mulut sobekan cokelat terbuka & DOKUMEN MENYEMBUL (Peeking dari dalam celah)
             setTimeout(() => {
                 envelopeWrapper.classList.add('peeking');
-            }, Math.max(80, tearAnimDuration - 140));
+            }, Math.max(60, tearAnimDuration - 120));
 
-            // FASE 2: DOKUMEN MELESAT, MELAYANG & MENDARAT DALAM 1 LINTASAN LENGKUNG FLUID TERPADU (Total 1.25s)
+            // FASE 2: DOKUMEN MELESAT, MELAYANG & MENDARAT DALAM 1 LINTASAN FLUID TERPADU (Total 0.95s)
             setTimeout(() => {
                 // Sembunyikan pita sobekan permanen
                 if (peelingStripLayer) {
@@ -485,7 +514,7 @@ export function initUnboxing() {
                     if (audioStatusLabel) audioStatusLabel.textContent = 'Musik';
                 }
 
-                // Saat dokumen mulai meluncur turun di separuh lintasan (~600ms), tampilkan lembar surat
+                // Saat dokumen mulai meluncur turun di separuh lintasan (~420ms), tampilkan lembar surat
                 setTimeout(() => {
                     // Buka kunci scroll agar konten di bawah dapat diakses
                     document.documentElement.classList.remove('envelope-locked');
@@ -496,19 +525,21 @@ export function initUnboxing() {
                     if (unboxedFlow) {
                         unboxedFlow.classList.add('revealed');
                     }
-                }, 600);
+                }, 420);
 
-                // Setelah seluruh gerakan meluncur selesai (1250ms): Amplop bersih & scroll mulus ke surat
+                // Setelah seluruh gerakan meluncur selesai (950ms): Amplop bersih
                 setTimeout(() => {
                     envelopeWrapper.classList.remove('ejected');
                     envelopeWrapper.classList.add('opened');
 
-                    // Scroll perlahan menuju dokumen pertama: Surat Cerita
-                    const storyEl = document.getElementById('story-section');
-                    if (storyEl) {
-                        storyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }, 1250);
+                    // Beri buffer 150ms agar dokumen stabil sebelum smooth scroll dimulai
+                    setTimeout(() => {
+                        const storyEl = document.getElementById('story-section');
+                        if (storyEl) {
+                            storyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 150);
+                }, 950);
 
             }, tearAnimDuration);
         };
@@ -524,7 +555,9 @@ export function initUnboxing() {
             });
         }
 
-        // Pointer Events: Pelacakan Jari Real-Time
+        // Pointer Events: Pelacakan Jari Real-Time dengan rAF Throttling
+        let rafMoveId = null;
+
         sealBtn.addEventListener('pointerdown', (e) => {
             if (isTearCompleted || envelopeWrapper.classList.contains('opened')) return;
             isDragging = true;
@@ -551,15 +584,20 @@ export function initUnboxing() {
             const progress = Math.max(0, Math.min(1, deltaX / width));
             currentProgress = progress;
 
-            // Update bentuk pita dan rongga sobekan secara real-time
-            if (peelingStripLayer) {
-                const pct = (progress * 100).toFixed(1);
-                peelingStripLayer.style.clipPath = `polygon(${pct}% 0%, 100% 0%, 100% 100%, ${pct}% 100%)`;
-                peelingStripLayer.style.transform = `rotate(${-progress * 12}deg) translateY(${-progress * 8}px) translateX(${progress * 14}px) scale(${1 - progress * 0.15})`;
-                peelingStripLayer.style.opacity = progress > 0.85 ? String(1 - (progress - 0.85) / 0.15) : '1';
-            }
-            if (cavityEl) {
-                cavityEl.style.opacity = Math.min(1, progress * 2.2).toFixed(2);
+            // Throttling update DOM pita via requestAnimationFrame
+            if (!rafMoveId) {
+                rafMoveId = requestAnimationFrame(() => {
+                    rafMoveId = null;
+                    if (peelingStripLayer) {
+                        const pct = (currentProgress * 100).toFixed(1);
+                        peelingStripLayer.style.clipPath = `polygon(${pct}% 0%, 100% 0%, 100% 100%, ${pct}% 100%)`;
+                        peelingStripLayer.style.transform = `rotate(${-currentProgress * 12}deg) translate3d(${currentProgress * 14}px, ${-currentProgress * 8}px, 0) scale(${1 - currentProgress * 0.15})`;
+                        peelingStripLayer.style.opacity = currentProgress > 0.85 ? String(1 - (currentProgress - 0.85) / 0.15) : '1';
+                    }
+                    if (cavityEl) {
+                        cavityEl.style.opacity = Math.min(1, currentProgress * 2.2).toFixed(2);
+                    }
+                });
             }
 
             // Suara micro-pop tiap gigi perforasi yang terlewati (interval 0.08 progress)
@@ -571,6 +609,10 @@ export function initUnboxing() {
             // Ambang batas 60%: Jika ditarik >= 60%, otomatis selesaikan robekan
             if (progress >= 0.60) {
                 isDragging = false;
+                if (rafMoveId) {
+                    cancelAnimationFrame(rafMoveId);
+                    rafMoveId = null;
+                }
                 try {
                     sealBtn.releasePointerCapture(e.pointerId);
                 } catch (_) {}
