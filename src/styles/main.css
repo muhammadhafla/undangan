@@ -2450,7 +2450,7 @@ body.envelope-locked .unboxed-content-flow {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(30, 20, 12, 0.92);
+    background: rgba(20, 13, 8, 0.93);
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -2459,12 +2459,14 @@ body.envelope-locked .unboxed-content-flow {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
+    /* Teknik visibility-delay: saat menutup, delay visibility: hidden sampai fade-out selesai */
+    transition: opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0.2s;
     will-change: opacity;
     contain: paint;
 }
 
-@supports (backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px)) {
+/* Hanya aktifkan blur di desktop berspesifikasi grafis tinggi, nonaktif di mobile */
+@media (min-width: 1024px) and (hover: hover) {
     .modal-overlay.open,
     .modal-overlay.active {
         backdrop-filter: blur(4px);
@@ -2477,6 +2479,8 @@ body.envelope-locked .unboxed-content-flow {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    /* Saat membuka, visibility langsung aktif seketika tanpa delay */
+    transition: opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0s;
 }
 
 .modal-box {
@@ -2486,15 +2490,17 @@ body.envelope-locked .unboxed-content-flow {
     max-width: 380px;
     width: 100%;
     position: relative;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-    transform: scale(0.95) translateZ(0);
-    will-change: transform;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: scale(0.96) translate3d(0, 0, 0);
+    will-change: transform, opacity;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
 }
 
 .modal-overlay.open .modal-box,
 .modal-overlay.active .modal-box {
-    transform: scale(1) translateZ(0);
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
 }
 
 .modal-close-btn {
