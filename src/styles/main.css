@@ -2450,22 +2450,32 @@ body.envelope-locked .unboxed-content-flow {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(46, 30, 18, 0.88);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(30, 20, 12, 0.92);
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    will-change: opacity;
+    contain: paint;
+}
+
+@supports (backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px)) {
+    .modal-overlay.open,
+    .modal-overlay.active {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
 }
 
 .modal-overlay.open,
 .modal-overlay.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
 }
 
@@ -2476,14 +2486,15 @@ body.envelope-locked .unboxed-content-flow {
     max-width: 380px;
     width: 100%;
     position: relative;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    transform: scale(0.92);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    transform: scale(0.95) translateZ(0);
+    will-change: transform;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-overlay.open .modal-box,
 .modal-overlay.active .modal-box {
-    transform: scale(1);
+    transform: scale(1) translateZ(0);
 }
 
 .modal-close-btn {
