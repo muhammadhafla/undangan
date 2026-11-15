@@ -690,10 +690,7 @@ function initLightboxModals() {
         if (modalImg && modalImg.src !== imgSrc) {
             modalImg.src = imgSrc;
         }
-        // Gunakan requestAnimationFrame agar browser selesai menyiapkan aset sebelum memicu transisi CSS
-        requestAnimationFrame(() => {
-            modal.classList.add('open');
-        });
+        modal.classList.add('open');
     }
 
     function closeModal() {

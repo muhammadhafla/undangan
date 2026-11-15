@@ -1331,9 +1331,11 @@ body.envelope-locked .unboxed-content-flow {
     box-sizing: border-box;
 }
 
-.story-polaroid-aside:hover {
-    transform: scale(1.05) rotate(0deg) !important;
-    box-shadow: 0 10px 24px rgba(46, 30, 18, 0.25);
+@media (hover: hover) {
+    .story-polaroid-aside:hover {
+        transform: scale(1.05) rotate(0deg) !important;
+        box-shadow: 0 10px 24px rgba(46, 30, 18, 0.25);
+    }
 }
 
 .story-polaroid-aside.float-right {
@@ -1454,9 +1456,11 @@ body.envelope-locked .unboxed-content-flow {
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
-.polaroid-card:hover {
-    transform: translateY(-4px) scale(1.02) !important;
-    box-shadow: 0 16px 36px rgba(46, 30, 18, 0.25);
+@media (hover: hover) {
+    .polaroid-card:hover {
+        transform: translateY(-4px) scale(1.02) !important;
+        box-shadow: 0 16px 36px rgba(46, 30, 18, 0.25);
+    }
 }
 
 /* Masking Tape Washi Kertas di Atas Foto */
@@ -2442,7 +2446,7 @@ body.envelope-locked .unboxed-content-flow {
 }
 
 /* ==========================================================================
-   MODAL LIGHTBOX (POLAROID & QRIS ZOOM)
+   MODAL LIGHTBOX (POLAROID & QRIS ZOOM) - ZERO-JANK INSTANT ARCHITECTURE
    ========================================================================== */
 .modal-overlay {
     position: fixed;
@@ -2450,37 +2454,18 @@ body.envelope-locked .unboxed-content-flow {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(20, 13, 8, 0.93);
+    background: rgba(18, 11, 7, 0.94);
     z-index: 1000;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    /* Teknik visibility-delay: saat menutup, delay visibility: hidden sampai fade-out selesai */
-    transition: opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0.2s;
-    will-change: opacity;
-    contain: paint;
-}
-
-/* Hanya aktifkan blur di desktop berspesifikasi grafis tinggi, nonaktif di mobile */
-@media (min-width: 1024px) and (hover: hover) {
-    .modal-overlay.open,
-    .modal-overlay.active {
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-    }
+    touch-action: manipulation;
 }
 
 .modal-overlay.open,
 .modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    /* Saat membuka, visibility langsung aktif seketika tanpa delay */
-    transition: opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0s;
+    display: flex;
 }
 
 .modal-box {
@@ -2491,16 +2476,20 @@ body.envelope-locked .unboxed-content-flow {
     width: 100%;
     position: relative;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-    opacity: 0;
-    transform: scale(0.96) translate3d(0, 0, 0);
-    will-change: transform, opacity;
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+    transform: translate3d(0, 0, 0);
+    animation: modalPopIn 0.12s cubic-bezier(0, 0, 0.2, 1);
+    touch-action: manipulation;
 }
 
-.modal-overlay.open .modal-box,
-.modal-overlay.active .modal-box {
-    opacity: 1;
-    transform: scale(1) translate3d(0, 0, 0);
+@keyframes modalPopIn {
+    from {
+        opacity: 0.8;
+        transform: scale(0.96) translate3d(0, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translate3d(0, 0, 0);
+    }
 }
 
 .modal-close-btn {
