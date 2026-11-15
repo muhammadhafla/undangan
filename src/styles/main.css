@@ -2505,20 +2505,9 @@ body.envelope-locked .unboxed-content-flow {
     width: 100%;
     position: relative;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-    transform: translate3d(0, 0, 0);
-    animation: modalPopIn 0.12s cubic-bezier(0, 0, 0.2, 1);
     touch-action: manipulation;
-}
-
-@keyframes modalPopIn {
-    from {
-        opacity: 0.8;
-        transform: scale(0.96) translate3d(0, 0, 0);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translate3d(0, 0, 0);
-    }
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .modal-close-btn {
@@ -2536,12 +2525,22 @@ body.envelope-locked .unboxed-content-flow {
     font-size: 1rem;
     color: var(--color-coffee-dark);
     cursor: pointer;
+    touch-action: manipulation;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 .modal-image-view {
     width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     border-radius: 4px;
     margin-top: 14px;
+    display: block;
+    background: #F7F3EE;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .modal-caption-text {
@@ -2551,6 +2550,7 @@ body.envelope-locked .unboxed-content-flow {
     color: var(--color-coffee-dark);
     text-align: center;
     margin-top: 10px;
+    min-height: 1.4em;
 }
 
 /* ==========================================================================
