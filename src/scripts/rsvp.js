@@ -1,5 +1,6 @@
 import { WEDDING_CONFIG } from '../config.js';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { triggerHaptic } from './unboxing.js';
 
 const SUPABASE_URL = import.meta.env?.VITE_SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = import.meta.env?.VITE_SUPABASE_ANON_KEY || '';
@@ -118,6 +119,7 @@ function initClipboardButtons() {
     if (copyBcaBtn) {
         copyBcaBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(WEDDING_CONFIG.digitalGift.accountNumber).then(() => {
+                triggerHaptic(20);
                 copyBcaBtn.classList.add('copied');
                 copyBcaBtn.innerHTML = `✓ Tersalin`;
                 showToast('Nomor Rekening BCA berhasil disalin!');
@@ -134,6 +136,7 @@ function initClipboardButtons() {
     if (copyBsiBtn) {
         copyBsiBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(WEDDING_CONFIG.digitalGift.accountNumberSecond).then(() => {
+                triggerHaptic(20);
                 copyBsiBtn.classList.add('copied');
                 copyBsiBtn.innerHTML = `✓ Tersalin`;
                 showToast('Nomor Rekening BSI berhasil disalin!');
@@ -150,6 +153,7 @@ function initClipboardButtons() {
     if (copyAddrBtn) {
         copyAddrBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(WEDDING_CONFIG.digitalGift.physicalGiftAddress).then(() => {
+                triggerHaptic(20);
                 copyAddrBtn.textContent = '✓ Alamat Tersalin!';
                 showToast('Alamat pengiriman kado berhasil disalin!');
                 setTimeout(() => {
@@ -194,6 +198,7 @@ function initRSVPForm() {
     // Interactive radio styling
     radioCards.forEach(card => {
         card.addEventListener('click', () => {
+            triggerHaptic(10);
             radioCards.forEach(c => c.classList.remove('active'));
             card.classList.add('active');
             const radio = card.querySelector('input[type="radio"]');
@@ -213,11 +218,13 @@ function initRSVPForm() {
         const message = messageInput ? messageInput.value.trim() : '';
 
         if (!name) {
+            triggerHaptic([25, 40, 25]);
             showToast('Mohon masukkan nama Anda.');
             return;
         }
 
         if (!message) {
+            triggerHaptic([25, 40, 25]);
             showToast('Mohon tuliskan doa atau ucapan selamat.');
             return;
         }
@@ -226,6 +233,7 @@ function initRSVPForm() {
         const lowerMsg = message.toLowerCase();
         const containsProfanity = PROFANITY_WORDS.some(badWord => lowerMsg.includes(badWord));
         if (containsProfanity) {
+            triggerHaptic([25, 40, 25]);
             showToast('Mohon gunakan bahasa yang sopan dan santun.');
             return;
         }
@@ -240,6 +248,9 @@ function initRSVPForm() {
             pax: pax,
             created_at: new Date().toISOString()
         };
+
+        // Haptic sukses submit RSVP
+        triggerHaptic([30, 40, 35]);
 
         // Simpan ke LocalStorage
         saveWishLocally(newWish);

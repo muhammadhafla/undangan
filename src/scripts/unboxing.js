@@ -14,6 +14,19 @@ try {
 }
 
 /**
+ * Haptic Feedback Engine (Getaran Taktil)
+ * Menggunakan Web Vibration API untuk sensasi taktil fisik yang responsif & realistis.
+ * Fail-safe dan aman di semua platform (Android, iOS Safari, & Desktop).
+ */
+export function triggerHaptic(pattern = 10) {
+    try {
+        if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+            navigator.vibrate(pattern);
+        }
+    } catch (_) {}
+}
+
+/**
  * Audio Ambience Engine
  * Mendukung audio file (HTML5 Audio) dan Generative Web Audio API Fallback
  * (Suara Lo-Fi chord hangat + gemercik air alam mengalir)
@@ -419,6 +432,7 @@ export function initUnboxing() {
 
     if (audioBtn) {
         audioBtn.addEventListener('click', () => {
+            triggerHaptic(12);
             const playing = ambience.toggle();
             if (playing) {
                 audioBtn.classList.add('playing');
@@ -465,6 +479,9 @@ export function initUnboxing() {
             isTearCompleted = true;
             isDragging = false;
 
+            // Haptic konfirmasi tuntasnya robekan pita kardus: [20ms getar, 30ms jeda, 25ms getar]
+            triggerHaptic([20, 30, 25]);
+
             envelopeWrapper.classList.remove('dragging');
             envelopeWrapper.classList.add('tearing');
 
@@ -503,6 +520,9 @@ export function initUnboxing() {
                 envelopeWrapper.classList.remove('tearing', 'peeking');
                 envelopeWrapper.classList.add('ejected');
                 envelopeStage.classList.add('unboxed');
+
+                // Haptic recoil thump saat lembar dokumen melesat keluar
+                triggerHaptic(30);
 
                 // Bunyikan gesekan serat kertas (paper rustle & whoosh)
                 ambience.playPaperRustleSFX();
@@ -548,6 +568,7 @@ export function initUnboxing() {
         const ejectCard = document.getElementById('ejecting-document-card');
         if (ejectCard) {
             ejectCard.addEventListener('click', () => {
+                triggerHaptic(15);
                 const storyEl = document.getElementById('story-section');
                 if (storyEl) {
                     storyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -566,6 +587,7 @@ export function initUnboxing() {
             lastPopProgress = 0;
             hasMovedSignificant = false;
             envelopeWrapper.classList.add('dragging');
+            triggerHaptic(8);
 
             try {
                 sealBtn.setPointerCapture(e.pointerId);
@@ -600,9 +622,10 @@ export function initUnboxing() {
                 });
             }
 
-            // Suara micro-pop tiap gigi perforasi yang terlewati (interval 0.08 progress)
+            // Suara micro-pop & getaran taktil mikro tiap gigi perforasi yang terlewati (interval 0.08 progress)
             if (progress - lastPopProgress >= 0.08) {
                 ambience.playTearPop(progress);
+                triggerHaptic(12);
                 lastPopProgress = progress;
             }
 
@@ -728,6 +751,7 @@ function initLightboxModals() {
     if (!modal) return;
 
     function openModal(imgSrc, caption) {
+        triggerHaptic(15);
         if (modalCaption) modalCaption.textContent = caption || '';
         if (modalImg && modalImg.src !== imgSrc) {
             modalImg.src = imgSrc;
@@ -736,6 +760,7 @@ function initLightboxModals() {
     }
 
     function closeModal() {
+        triggerHaptic(10);
         modal.classList.remove('open');
     }
 
