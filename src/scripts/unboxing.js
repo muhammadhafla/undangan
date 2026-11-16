@@ -100,10 +100,19 @@ class AmbienceEngine {
         // Coba inisialisasi audio element jika ada file
         this.audioEl = new Audio();
         this.audioEl.loop = true;
-        this.audioEl.src = 'assets/audio/ambience.opus';
+        this.audioEl.preload = 'auto';
+
+        // Utamakan Opus untuk kompresi ultra-ringan, cadangkan MP3 untuk kompatibilitas
+        const canPlayOpus = this.audioEl.canPlayType('audio/ogg; codecs="opus"') || this.audioEl.canPlayType('audio/opus');
+        this.audioEl.src = canPlayOpus ? 'assets/audio/ambience.opus' : 'assets/audio/ambience.mp3';
 
         this.audioEl.addEventListener('error', () => {
-            // Jika file audio belum ada, otomatis aktifkan synth audio alam
+            // Jika opus gagal dimuat pada platform tertentu, coba fallback ke MP3
+            if (this.audioEl && this.audioEl.src && this.audioEl.src.endsWith('.opus')) {
+                this.audioEl.src = 'assets/audio/ambience.mp3';
+                return;
+            }
+            // Jika file audio tidak ditemukan, otomatis aktifkan synth audio alam
             this.isSynthesized = true;
         });
 
